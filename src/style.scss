@@ -1,0 +1,102 @@
+@font-face {
+	font-family: "Feature Mono";
+	src: url("./static/fonts/FeatureMono-Regular.woff2") format("woff2"), url("./static/fonts/FeatureMono-Regular.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Feature Mono";
+	src: url("./static/fonts/FeatureMono-Medium.woff2") format("woff2"), url("./static/fonts/FeatureMono-Medium.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+$backgroundColor: rgb(0, 0, 225);
+$secondaryColor: #d9d9d9;
+
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-color: $backgroundColor;
+	color: $secondaryColor;
+	font-family: "Feature Mono";
+	padding: 0px 10px;
+	margin-top: -5px;
+}
+
+.webgl {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	// width: 100dvw;
+	// height: 100dvh;
+	pointer-events: none;
+	z-index: -9;
+}
+
+.logo {
+	font-size: 24px;
+	color: $secondaryColor;
+}
+
+.startAProject {
+	font-size: 24px;
+	color: $secondaryColor;
+	text-decoration: none !important;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.linkWrapper {
+		display: flex;
+		flex-direction: column;
+		height: 32px;
+		overflow: hidden;
+		span {
+			margin: 0px;
+			padding: 0px;
+		}
+	}
+}
+.homeMain {
+	.copyWrapper {
+		height: 90dvh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+		p {
+			line-height: 18px;
+		}
+
+		.break {
+			font-weight: bold;
+			margin: 0px 5px;
+		}
+
+		.leftSide {
+			margin-bottom: 400px;
+			text-align: center;
+			max-width: 50%;
+		}
+
+		.rightSide {
+			text-align: right;
+			max-width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
