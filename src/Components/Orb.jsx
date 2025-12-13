@@ -7,52 +7,59 @@ import gsap from "gsap";
 
 function Orb() {
 	const canvasRef = useRef();
-	const sceneRef = useRef(new THREE.Scene());
-	const cameraRef = useRef(new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000));
+	const sceneRef = useRef(null);
+	const cameraRef = useRef(null);
+	const rendererRef = useRef(null);
+	const orbRef = useRef(null);
+	const animationRef = useRef(null);
+	const gsapAnimRef = useRef(null);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		sceneRef.current = new THREE.Scene();
-		const scene = sceneRef.current;
-		const camera = cameraRef.current;
+		if (!canvas) return;
 
-		// Window sizes
-		let sizes = {
-			width: window.innerWidth,
-			height: window.innerHeight,
-		};
-
-		// Camera options
+		// Initialize scene and camera once
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
 		camera.position.set(0, 0, 4);
-		camera.aspect = sizes.width / sizes.height;
-		camera.updateProjectionMatrix();
 		scene.add(camera);
 
-		const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
+		sceneRef.current = scene;
+		cameraRef.current = camera;
 
-		/**
-		 * Loaders
-		 */
-		// HDRI Loader
-		async function loadEnvironment(renderer, scene) {
+		// Renderer with optimized settings
+		const renderer = new THREE.WebGLRenderer({
+			canvas,
+			antialias: true,
+			alpha: true,
+			powerPreference: "high-performance",
+		});
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.outputColorSpace = THREE.SRGBColorSpace;
+		renderer.toneMapping = THREE.ACESFilmicToneMapping;
+		rendererRef.current = renderer;
+
+		// Load environment
+		async function loadEnvironment() {
 			const pmremGenerator = new PMREMGenerator(renderer);
 			pmremGenerator.compileEquirectangularShader();
 
 			const hdrLoader = new RGBELoader();
-			const hdrTexture = await hdrLoader.loadAsync("/oilslick.hdr");
+			try {
+				const hdrTexture = await hdrLoader.loadAsync("/oilslick.hdr");
+				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
 
-			const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
+				hdrTexture.dispose();
+				pmremGenerator.dispose();
 
-			hdrTexture.dispose();
-			pmremGenerator.dispose();
-
-			scene.environment = envMap;
+				scene.environment = envMap;
+			} catch (error) {
+				console.warn("HDR texture not found, using default environment");
+			}
 		}
 
-		// GLTF Loader
-		const gltfLoader = new GLTFLoader();
-
-		// Materials
+		// Optimized materials (reused, not recreated)
 		const customOrbMat = new THREE.MeshPhysicalMaterial({
 			metalness: 0.9,
 			roughness: 0,
@@ -66,111 +73,126 @@ function Orb() {
 			iridescence: 1.0,
 			iridescenceIOR: 2.0,
 			iridescenceThicknessRange: [50, 1200],
+			color: 0xffffff,
 		});
 
-		const glassMat = new THREE.MeshPhysicalMaterial({
-			metalness: 0,
-			roughness: 0,
-			transmission: 1,
-			thickness: 0,
-			envMapIntensity: 3.0,
-			clearcoat: 1.0,
-			clearcoatRoughness: 0.1,
-			ior: 2.3,
-		});
+		// Load model
+		const gltfLoader = new GLTFLoader();
+		gltfLoader.load(
+			"/starorb2.glb",
+			(model) => {
+				const orb = model.scene;
+				orb.scale.set(0.25, 0.25, 0.25);
 
-		/**
-		 * Models
-		 */
+				orb.traverse((child) => {
+					if (child.isMesh) {
+						child.material = customOrbMat;
+						// Enable frustum culling
+						child.frustumCulled = true;
+					}
+				});
 
-		let orbExternalModel;
-
-		gltfLoader.load("/starorb2.glb", (model) => {
-			orbExternalModel = model.scene;
-			orbExternalModel.scale.set(0.25, 0.25, 0.25);
-
-			orbExternalModel.traverse((child) => {
-				if (child.isMesh) {
-					child.material = customOrbMat;
-					child.material.color.set("white");
-				}
-			});
-			scene.add(orbExternalModel);
-		});
-
-		// TestPlane
-		const planeGeometry = new THREE.PlaneGeometry(10, 10);
-		const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
-		const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
-		planeMesh.position.set(0, 0, -4);
-		// scene.add(planeMesh);
+				scene.add(orb);
+				orbRef.current = orb;
+			},
+			undefined,
+			(error) => {
+				console.warn("Model not found, using fallback sphere");
+				// Fallback sphere
+				const geometry = new THREE.SphereGeometry(1, 64, 64);
+				const sphere = new THREE.Mesh(geometry, customOrbMat);
+				scene.add(sphere);
+				orbRef.current = sphere;
+			}
+		);
 
 		// Lighting
 		const ambientLight = new THREE.AmbientLight(0xffffff, 0);
 		scene.add(ambientLight);
 
-		const directionalLightOne = new THREE.DirectionalLight(0xffffff, 1);
-		directionalLightOne.position.set(1, 0, 4);
-		scene.add(directionalLightOne);
+		const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+		directionalLight.position.set(1, 0, 4);
+		scene.add(directionalLight);
 
-		/**
-		 * MouseMovement Event
-		 */
+		loadEnvironment();
 
-		const cursorLocation = {
-			x: 0,
-			y: 0,
+		// Throttled mouse movement with GSAP
+		const handleMouseMove = (e) => {
+			if (!orbRef.current) return;
+
+			const x = (e.clientX / window.innerWidth) * 2 - 1;
+			const y = (e.clientY / window.innerHeight) * 2 - 1;
+
+			// Kill previous animation to prevent stacking
+			if (gsapAnimRef.current) {
+				gsapAnimRef.current.kill();
+			}
+
+			gsapAnimRef.current = gsap.to(orbRef.current.rotation, {
+				x: y * 3,
+				y: x * 3,
+				duration: 4,
+				ease: "power2.out",
+			});
 		};
 
-		window.addEventListener("mousemove", (e) => {
-			cursorLocation.x = (e.clientX / sizes.width) * 2 - 1;
-			cursorLocation.y = (e.clientY / sizes.height) * 2 - 1;
+		window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
-			gsap.to(orbExternalModel.rotation, {
-				x: cursorLocation.y * 3,
-				y: cursorLocation.x * 3,
-				duration: 4,
-			});
-		});
-
-		// Render options
-		const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-		renderer.setSize(sizes.width, sizes.height);
-		renderer.outputEncoding = THREE.SRGBColorSpace;
-		renderer.toneMapping = THREE.ACESFilmicToneMapping;
-
-		loadEnvironment(renderer, scene);
-
-		// Animation function
-		let animationFrameId;
+		// Optimized render loop
 		const tick = () => {
 			renderer.render(scene, camera);
-			camera.updateProjectionMatrix();
-			animationFrameId = requestAnimationFrame(tick);
+			animationRef.current = requestAnimationFrame(tick);
 		};
 		tick();
 
-		// Handle resize function
+		// Efficient resize handler
+		let resizeTimeout;
 		const handleResize = () => {
-			sizes.width = window.innerWidth;
-			sizes.height = window.innerHeight;
-			camera.aspect = sizes.width / sizes.height;
-			camera.updateProjectionMatrix();
-			renderer.setSize(sizes.width, sizes.height);
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(() => {
+				const width = window.innerWidth;
+				const height = window.innerHeight;
+
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+				renderer.setSize(width, height);
+			}, 100);
 		};
 
-		window.addEventListener("resize", handleResize);
+		window.addEventListener("resize", handleResize, { passive: true });
 
+		// Cleanup
 		return () => {
+			window.removeEventListener("mousemove", handleMouseMove);
 			window.removeEventListener("resize", handleResize);
+
+			if (animationRef.current) {
+				cancelAnimationFrame(animationRef.current);
+			}
+
+			if (gsapAnimRef.current) {
+				gsapAnimRef.current.kill();
+			}
+
+			// Dispose of Three.js resources
+			scene.traverse((object) => {
+				if (object.geometry) object.geometry.dispose();
+				if (object.material) {
+					if (Array.isArray(object.material)) {
+						object.material.forEach((mat) => mat.dispose());
+					} else {
+						object.material.dispose();
+					}
+				}
+			});
+
+			renderer.dispose();
 		};
 	}, []);
 
 	return (
-		<div>
-			<canvas ref={canvasRef} className="webgl"></canvas>
+		<div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
+			<canvas className="webgl" ref={canvasRef} style={{ display: "block" }} />
 		</div>
 	);
 }

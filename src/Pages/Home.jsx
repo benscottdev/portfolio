@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Components/Header";
 import Orb from "../Components/Orb";
+import ProjectsBlock from "../Components/ProjectsBlock";
 
 function Home() {
 	return (
@@ -10,7 +11,7 @@ function Home() {
 				<div className="copyWrapper">
 					<div className="copy leftSide">
 						<p>
-							I AM A 25 YEAR OLD GUY AND <br /> I WANT TO CREATE COOL SH*T
+							I AM A 25 YEAR OLD GUY AND <br /> I LOVE TO CREATE EXPERIENCES
 						</p>
 					</div>
 					<div className="copy rightSide">
@@ -25,6 +26,7 @@ function Home() {
 						<p>APP DEVELOPMENT</p>
 					</div>
 				</div>
+				<ProjectsBlock />
 			</div>
 			<Orb />
 		</div>

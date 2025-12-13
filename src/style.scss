@@ -28,7 +28,7 @@ body {
 	color: $secondaryColor;
 	font-family: "Feature Mono";
 	padding: 0px 10px;
-	margin-top: -5px;
+	// margin-top: -5px;
 }
 
 .webgl {
@@ -50,12 +50,22 @@ body {
 	font-size: 24px;
 	color: $secondaryColor;
 	text-decoration: none !important;
+
+	#bottom {
+		margin-top: -15px;
+	}
 }
 
 .header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100dvw;
+	padding: 0px 5px;
+	margin-top: -10px;
 
 	.linkWrapper {
 		display: flex;
@@ -70,10 +80,11 @@ body {
 }
 .homeMain {
 	.copyWrapper {
-		height: 90dvh;
+		height: 100dvh;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		padding: 15% 0px;
+		justify-content: space-between;
 		flex-direction: column;
 
 		p {
@@ -86,7 +97,7 @@ body {
 		}
 
 		.leftSide {
-			margin-bottom: 400px;
+			// margin-bottom: 400px;
 			text-align: center;
 			max-width: 50%;
 		}
@@ -97,6 +108,27 @@ body {
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+	}
+}
+
+.projects {
+	display: flex;
+	justify-content: space-between;
+
+	.project {
+		width: 49.6%;
+		aspect-ratio: 1 / 1;
+
+		.projectImageWrapper {
+			position: relative;
+			overflow: hidden;
+		}
+
+		/* Dissipate on hover */
+		.project:hover .pixelOverlay {
+			background-size: 1px 1px;
+			opacity: 0;
 		}
 	}
 }

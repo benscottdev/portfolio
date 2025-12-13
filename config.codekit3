@@ -150,6 +150,17 @@
       "sC" : 3,
       "tS" : 0
     },
+    "\/src\/Components\/ProjectsBlock.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/ProjectsBlock-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
     "\/src\/main-min.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -214,6 +225,19 @@
       "oA" : 0,
       "oAP" : "\/src\/static\/fonts\/FeatureMono-Regular.woff2",
       "oF" : 0
+    },
+    "\/src\/static\/images\/overbeerpong.jpg" : {
+      "ft" : 16384,
+      "iS" : 163881,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/overbeerpong.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
     },
     "\/src\/style.css" : {
       "aP" : 1,

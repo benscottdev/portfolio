@@ -13,15 +13,15 @@ function Header() {
 		gsap.killTweensOf([top, bottom]);
 
 		gsap.to(top, {
-			y: "120%",
-			scale: 0.4,
-			duration: 0.5,
+			y: "-78%",
+			duration: 0.4,
 			ease: "power3.out",
 		});
 
 		gsap.to(bottom, {
-			y: "-105%",
-			duration: 0.2,
+			y: "-78%",
+			duration: 0.4,
+			scale: 1,
 			ease: "power3.out",
 		});
 	};
@@ -37,13 +37,13 @@ function Header() {
 			y: 0,
 			x: 0,
 			scale: 1,
-			duration: 0.3,
+			duration: 0.35,
 			ease: "power3.out",
 		});
 
 		gsap.to(bottom, {
 			y: 0,
-			duration: 0.3,
+			duration: 0.35,
 			ease: "power3.out",
 		});
 	};
@@ -54,7 +54,7 @@ function Header() {
 			<Link className="startAProject">
 				<div className="linkWrapper" ref={linkWrapperRef} onMouseEnter={() => handleHover(linkWrapperRef)} onMouseLeave={() => handleLeave(linkWrapperRef)}>
 					<span id="top">START A PROJECT</span>
-					<span id="bottom">LET'S CREATE</span>
+					<span id="bottom">START A PROJECT</span>
 				</div>
 			</Link>
 		</div>
