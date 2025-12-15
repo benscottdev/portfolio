@@ -14,6 +14,14 @@
 	font-display: swap;
 }
 
+@font-face {
+	font-family: "Akira";
+	src: url("./static/fonts/AkiraExpanded-SuperBold.woff2") format("woff2"), url("./static/fonts/AkiraExpanded-SuperBold.woff") format("woff");
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
 $backgroundColor: rgb(0, 0, 225);
 $secondaryColor: #d9d9d9;
 
@@ -31,14 +39,62 @@ body {
 	// margin-top: -5px;
 }
 
+h1 {
+	text-align: center;
+	color: $secondaryColor;
+}
+
 .webgl {
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	left: 0px;
-	// width: 100dvw;
-	// height: 100dvh;
 	pointer-events: none;
 	z-index: -9;
+}
+
+.loader {
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100dvw;
+	height: 100dvh;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	background-color: $secondaryColor;
+
+	.loaderInner {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+		.percent {
+			font-size: 30px;
+			color: $backgroundColor;
+		}
+
+		.bar {
+			height: 10px;
+			width: 200px;
+			border: 1px solid $backgroundColor;
+			position: relative;
+			z-index: -1;
+
+			.barFill {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				background-color: $backgroundColor;
+				z-index: 1;
+				height: 100%;
+			}
+		}
+	}
 }
 
 .logo {
@@ -46,26 +102,68 @@ body {
 	color: $secondaryColor;
 }
 
+.clockWrapper {
+	position: fixed;
+	top: 0px;
+	left: 5px;
+}
+
+.logoOverlay {
+	height: 100dvh;
+	width: 100dvw;
+
+	div {
+		width: 100%;
+		height: 100%;
+
+		span {
+			width: 100%;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 10dvw;
+			text-align: center;
+			letter-spacing: -10px;
+			font-family: "Akira" !important;
+		}
+
+		.fill {
+			z-index: -100;
+			color: white;
+		}
+
+		.stroke {
+			-webkit-text-stroke: 2px white;
+			-webkit-text-fill-color: transparent;
+			color: transparent;
+			z-index: -8;
+		}
+	}
+}
+
 .startAProject {
+	margin-top: -5px;
 	font-size: 24px;
 	color: $secondaryColor;
 	text-decoration: none !important;
+	background-color: black;
 
 	#bottom {
-		margin-top: -15px;
+		margin-top: -12.5px;
 	}
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	position: fixed;
 	top: 0px;
 	left: 0px;
 	width: 100dvw;
 	padding: 0px 5px;
-	margin-top: -10px;
+	margin-top: -7.5px;
 
 	.linkWrapper {
 		display: flex;
@@ -78,14 +176,20 @@ body {
 		}
 	}
 }
+
+.overtop {
+	z-index: 230;
+}
 .homeMain {
 	.copyWrapper {
 		height: 100dvh;
+		width: 100dvw;
 		display: flex;
 		align-items: center;
 		padding: 15% 0px;
 		justify-content: space-between;
 		flex-direction: column;
+		z-index: -9;
 
 		p {
 			line-height: 18px;
@@ -112,23 +216,120 @@ body {
 	}
 }
 
+.selectedProjects {
+	border-radius: 20px;
+}
+
+.pixelOverlay {
+	@media (max-width: 800px) {
+		display: none;
+	}
+}
+
 .projects {
+	margin-top: 20px;
 	display: flex;
+	position: relative;
 	justify-content: space-between;
 
 	.project {
-		width: 49.6%;
+		width: 33%;
 		aspect-ratio: 1 / 1;
+		position: relative;
 
 		.projectImageWrapper {
-			position: relative;
 			overflow: hidden;
+			.projectImage {
+				aspect-ratio: 1 / 1;
+				object-fit: cover !important;
+			}
+
+			// border-radius: 10px 10px 0 0;
 		}
 
-		/* Dissipate on hover */
+		.projectTitle {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: flex;
+			justify-content: space-between;
+			background-color: black;
+			text-transform: uppercase;
+			pointer-events: none; // so it doesn't block hover
+			opacity: 0; // initially hidden
+			padding: 5px 10px;
+			transition: opacity 0.2s ease;
+			z-index: 99;
+		}
+
 		.project:hover .pixelOverlay {
 			background-size: 1px 1px;
 			opacity: 0;
 		}
 	}
+}
+
+.skills {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	padding: 20px 10px;
+	margin: 20px 0px 80px 0px;
+
+	.tableHead {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		margin-bottom: 20px;
+
+		span {
+			width: 33%;
+			font-size: 24px;
+		}
+	}
+
+	.third {
+		width: 33.666%;
+	}
+
+	.skillData {
+		text-transform: uppercase;
+	}
+
+	.skillItemWrapper {
+		display: flex;
+		margin-bottom: 10px;
+		transition: 0.2s ease;
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			background-color: black;
+		}
+	}
+
+	.skillLevelWrapper {
+		background-color: navy;
+		height: 5px;
+		width: 33%;
+		position: relative;
+
+		.skillLevel {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			background-color: $secondaryColor;
+			// width: 50%;
+			height: 5px;
+			z-index: 1;
+		}
+	}
+}
+
+.radarWrapper {
+	width: 100dvw;
+	height: 500px;
+	margin: 50px 0px;
 }

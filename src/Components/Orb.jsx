@@ -34,7 +34,11 @@ function Orb() {
 			alpha: true,
 			powerPreference: "high-performance",
 		});
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+		if (window.innerWidth > 2400) {
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+		} else {
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+		}
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
 		renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -76,6 +80,10 @@ function Orb() {
 			color: 0xffffff,
 		});
 
+		// Orb Group for transforms
+		const orbGroup = new THREE.Group();
+		scene.add(orbGroup);
+
 		// Load model
 		const gltfLoader = new GLTFLoader();
 		gltfLoader.load(
@@ -92,7 +100,7 @@ function Orb() {
 					}
 				});
 
-				scene.add(orb);
+				orbGroup.add(orb);
 				orbRef.current = orb;
 			},
 			undefined,
@@ -128,10 +136,16 @@ function Orb() {
 				gsapAnimRef.current.kill();
 			}
 
-			gsapAnimRef.current = gsap.to(orbRef.current.rotation, {
+			gsapAnimRef.current = gsap.to(orbGroup.rotation, {
 				x: y * 3,
 				y: x * 3,
 				duration: 4,
+				ease: "power2.out",
+			});
+			gsapAnimRef.current = gsap.to(orbGroup.position, {
+				x: x * 0.25,
+				y: -y * 0.1,
+				duration: 1,
 				ease: "power2.out",
 			});
 		};
@@ -142,6 +156,8 @@ function Orb() {
 		const tick = () => {
 			renderer.render(scene, camera);
 			animationRef.current = requestAnimationFrame(tick);
+			orbGroup.rotation.z += 0.003;
+			orbGroup.rotation.y += 0.003;
 		};
 		tick();
 

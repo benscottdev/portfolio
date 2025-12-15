@@ -12,6 +12,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Akira";
+  src: url("./static/fonts/AkiraExpanded-SuperBold.woff2") format("woff2"), url("./static/fonts/AkiraExpanded-SuperBold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -25,12 +32,58 @@ body {
   padding: 0px 10px;
 }
 
+h1 {
+  text-align: center;
+  color: #d9d9d9;
+}
+
 .webgl {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   pointer-events: none;
   z-index: -9;
+}
+
+.loader {
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  background-color: #d9d9d9;
+}
+.loader .loaderInner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.loader .loaderInner .percent {
+  font-size: 30px;
+  color: rgb(0, 0, 225);
+}
+.loader .loaderInner .bar {
+  height: 10px;
+  width: 200px;
+  border: 1px solid rgb(0, 0, 225);
+  position: relative;
+  z-index: -1;
+}
+.loader .loaderInner .bar .barFill {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgb(0, 0, 225);
+  z-index: 1;
+  height: 100%;
 }
 
 .logo {
@@ -38,25 +91,63 @@ body {
   color: #d9d9d9;
 }
 
+.clockWrapper {
+  position: fixed;
+  top: 0px;
+  left: 5px;
+}
+
+.logoOverlay {
+  height: 100dvh;
+  width: 100dvw;
+}
+.logoOverlay div {
+  width: 100%;
+  height: 100%;
+}
+.logoOverlay div span {
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10dvw;
+  text-align: center;
+  letter-spacing: -10px;
+  font-family: "Akira" !important;
+}
+.logoOverlay div .fill {
+  z-index: -100;
+  color: white;
+}
+.logoOverlay div .stroke {
+  -webkit-text-stroke: 2px white;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  z-index: -8;
+}
+
 .startAProject {
+  margin-top: -5px;
   font-size: 24px;
   color: #d9d9d9;
   text-decoration: none !important;
+  background-color: black;
 }
 .startAProject #bottom {
-  margin-top: -15px;
+  margin-top: -12.5px;
 }
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100dvw;
   padding: 0px 5px;
-  margin-top: -10px;
+  margin-top: -7.5px;
 }
 .header .linkWrapper {
   display: flex;
@@ -69,13 +160,19 @@ body {
   padding: 0px;
 }
 
+.overtop {
+  z-index: 230;
+}
+
 .homeMain .copyWrapper {
   height: 100dvh;
+  width: 100dvw;
   display: flex;
   align-items: center;
   padding: 15% 0px;
   justify-content: space-between;
   flex-direction: column;
+  z-index: -9;
 }
 .homeMain .copyWrapper p {
   line-height: 18px;
@@ -96,20 +193,105 @@ body {
   justify-content: center;
 }
 
+.selectedProjects {
+  border-radius: 20px;
+}
+
+@media (max-width: 800px) {
+  .pixelOverlay {
+    display: none;
+  }
+}
+
 .projects {
+  margin-top: 20px;
   display: flex;
+  position: relative;
   justify-content: space-between;
 }
 .projects .project {
-  width: 49.6%;
+  width: 33%;
   aspect-ratio: 1/1;
-  /* Dissipate on hover */
+  position: relative;
 }
 .projects .project .projectImageWrapper {
-  position: relative;
   overflow: hidden;
+}
+.projects .project .projectImageWrapper .projectImage {
+  aspect-ratio: 1/1;
+  object-fit: cover !important;
+}
+.projects .project .projectTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  padding: 5px 10px;
+  transition: opacity 0.2s ease;
+  z-index: 99;
 }
 .projects .project .project:hover .pixelOverlay {
   background-size: 1px 1px;
   opacity: 0;
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  padding: 20px 10px;
+  margin: 20px 0px 80px 0px;
+}
+.skills .tableHead {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.skills .tableHead span {
+  width: 33%;
+  font-size: 24px;
+}
+.skills .third {
+  width: 33.666%;
+}
+.skills .skillData {
+  text-transform: uppercase;
+}
+.skills .skillItemWrapper {
+  display: flex;
+  margin-bottom: 10px;
+  transition: 0.2s ease;
+  align-items: center;
+  justify-content: center;
+}
+.skills .skillItemWrapper:hover {
+  background-color: black;
+}
+.skills .skillLevelWrapper {
+  background-color: navy;
+  height: 5px;
+  width: 33%;
+  position: relative;
+}
+.skills .skillLevelWrapper .skillLevel {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #d9d9d9;
+  height: 5px;
+  z-index: 1;
+}
+
+.radarWrapper {
+  width: 100dvw;
+  height: 500px;
+  margin: 50px 0px;
 }

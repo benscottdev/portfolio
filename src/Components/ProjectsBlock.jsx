@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import overBeerPong from "../static/images/overbeerpong.jpg";
+import gsap from "gsap";
+import overBeerPongImage from "../static/images/overbeerpong.jpg";
+import jerryCanCreativeImage from "../static/images/jerrycancreative.png";
 
 function PixelatedImage({ src, pixelSize }) {
 	const canvasRef = useRef(null);
@@ -10,22 +12,12 @@ function PixelatedImage({ src, pixelSize }) {
 		const ctx = canvas.getContext("2d");
 		const img = imgRef.current;
 
-		if (!img.complete) {
-			img.onload = () => drawPixelated();
-		} else {
-			drawPixelated();
-		}
-
-		function drawPixelated() {
+		const drawPixelated = () => {
 			canvas.width = img.width;
 			canvas.height = img.height;
-
 			ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-			// If pixelSize is 1 or less, just show the original image
-			if (pixelSize <= 1) {
-				return;
-			}
+			if (pixelSize <= 9) return;
 
 			for (let y = 0; y < canvas.height; y += pixelSize) {
 				for (let x = 0; x < canvas.width; x += pixelSize) {
@@ -49,6 +41,12 @@ function PixelatedImage({ src, pixelSize }) {
 					ctx.fillRect(x, y, pixelSize, pixelSize);
 				}
 			}
+		};
+
+		if (!img.complete) {
+			img.onload = drawPixelated;
+		} else {
+			drawPixelated();
 		}
 	}, [src, pixelSize]);
 
@@ -63,12 +61,12 @@ function PixelatedImage({ src, pixelSize }) {
 					width: "100%",
 					height: "100%",
 					transition: "opacity 0.4s ease",
-					scale: 1.1,
+					scale: 1.05,
 					opacity: pixelSize <= 1 ? 0 : 1,
 				}}
 				className="pixelOverlay"
 			/>
-			<img ref={imgRef} src={src} alt="" style={{ width: "100%", height: "100%", display: "block" }} />
+			<img ref={imgRef} src={src} alt="" className="projectImage" style={{ width: "100%", height: "100%", display: "block" }} />
 		</div>
 	);
 }
@@ -82,18 +80,24 @@ export default function ProjectsBlock() {
 			title: "Over Beer Pong",
 			created: "2025",
 			link: "/",
-			image: overBeerPong,
+			image: overBeerPongImage,
 		},
 		{
-			slug: "overbeerpong2",
-			title: "Over Beer Pong 2",
+			slug: "jerrycancreative",
+			title: "Jerry Can Creative",
 			created: "2025",
 			link: "/",
-			image: overBeerPong,
+			image: jerryCanCreativeImage,
+		},
+		{
+			slug: "overbeerpong3",
+			title: "Over Beer Pong 3",
+			created: "2025",
+			link: "/",
+			image: overBeerPongImage,
 		},
 	];
 
-	// Initialize pixel sizes for all projects
 	const [pixelSizes, setPixelSizes] = useState(
 		projects.reduce((acc, project) => {
 			acc[project.slug] = 36;
@@ -101,8 +105,7 @@ export default function ProjectsBlock() {
 		}, {})
 	);
 
-	const disapatePixels = (slug) => {
-		// Clear any existing interval for this image
+	const dissipatePixels = (slug) => {
 		if (intervalsRef.current[slug]) {
 			clearInterval(intervalsRef.current[slug]);
 		}
@@ -120,12 +123,10 @@ export default function ProjectsBlock() {
 	};
 
 	const rePixelate = (slug) => {
-		// Clear the dissipation interval
 		if (intervalsRef.current[slug]) {
 			clearInterval(intervalsRef.current[slug]);
 		}
 
-		// Animate back to pixelated state
 		intervalsRef.current[slug] = setInterval(() => {
 			setPixelSizes((prev) => {
 				const currentSize = prev[slug];
@@ -138,7 +139,6 @@ export default function ProjectsBlock() {
 		}, 25);
 	};
 
-	// Cleanup intervals on unmount
 	useEffect(() => {
 		return () => {
 			Object.values(intervalsRef.current).forEach((interval) => {
@@ -150,8 +150,43 @@ export default function ProjectsBlock() {
 	return (
 		<div className="projects">
 			{projects.map((project) => (
-				<div key={project.slug} className={`project ${project.slug}`} onMouseEnter={() => disapatePixels(project.slug)} onMouseLeave={() => rePixelate(project.slug)}>
+				<div
+					key={project.slug}
+					className={`project ${project.slug}`}
+					onMouseEnter={() => dissipatePixels(project.slug)}
+					onMouseLeave={(e) => {
+						rePixelate(project.slug);
+						const titleEl = e.currentTarget.querySelector(".projectTitle");
+						if (titleEl) {
+							gsap.to(titleEl, {
+								xPercent: 0,
+								yPercent: 0,
+								opacity: 0,
+								duration: 0.4,
+							});
+						}
+					}}
+					onMouseMove={(e) => {
+						const titleEl = e.currentTarget.querySelector(".projectTitle");
+						if (!titleEl) return;
+
+						const bounds = e.currentTarget.getBoundingClientRect();
+						const offsetX = e.clientX - bounds.left + 10;
+						const offsetY = e.clientY - bounds.top;
+
+						gsap.to(titleEl, {
+							x: offsetX,
+							y: offsetY,
+							opacity: 1,
+							duration: 0.2,
+							ease: "power2.out",
+						});
+					}}>
 					<PixelatedImage src={project.image} pixelSize={pixelSizes[project.slug]} />
+					<div className="projectTitle">
+						<p>{project.title}</p>
+						<p>{project.created}</p>
+					</div>
 				</div>
 			))}
 		</div>

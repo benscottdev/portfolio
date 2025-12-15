@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+
 import gsap from "gsap";
 
 function Header() {
@@ -19,7 +20,7 @@ function Header() {
 		});
 
 		gsap.to(bottom, {
-			y: "-78%",
+			y: "-70%",
 			duration: 0.4,
 			scale: 1,
 			ease: "power3.out",
@@ -50,7 +51,7 @@ function Header() {
 
 	return (
 		<div className="header">
-			<span className="logo">BEN SCOTT</span>
+			{/* <span className="logo">BEN SCOTT</span> */}
 			<Link className="startAProject">
 				<div className="linkWrapper" ref={linkWrapperRef} onMouseEnter={() => handleHover(linkWrapperRef)} onMouseLeave={() => handleLeave(linkWrapperRef)}>
 					<span id="top">START A PROJECT</span>

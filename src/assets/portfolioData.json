@@ -1,0 +1,62 @@
+{
+	"HTML": {
+		"skillTitle": "HTML",
+		"projectCount": "50+",
+		"skillLevel": 90
+	},
+	"CSS3 & SCSS": {
+		"skillTitle": "CSS3 & SCSS",
+		"projectCount": "50+",
+		"skillLevel": 80
+	},
+	"JavaScript": {
+		"skillTitle": "JavaScript",
+		"projectCount": "50+",
+		"skillLevel": 75
+	},
+	"ReactJS": {
+		"skillTitle": "ReactJS",
+		"projectCount": "15-25",
+		"skillLevel": 69
+	},
+	"THREEJS": {
+		"skillTitle": "THREEJS",
+		"projectCount": "10-20",
+		"skillLevel": 69
+	},
+	"PHP": {
+		"skillTitle": "PHP",
+		"projectCount": "50+",
+		"skillLevel": 75
+	},
+	"Wordpress": {
+		"skillTitle": "Wordpress",
+		"projectCount": "10-20",
+		"skillLevel": 70
+	},
+	"React Native": {
+		"skillTitle": "React Native",
+		"projectCount": "3",
+		"skillLevel": 35
+	},
+	"Unity": {
+		"skillTitle": "Unity",
+		"projectCount": "5-10",
+		"skillLevel": 35
+	},
+	"Figma": {
+		"skillTitle": "Figma",
+		"projectCount": "30-40",
+		"skillLevel": 65
+	},
+	"Adobe Suite": {
+		"skillTitle": "Adobe Suite",
+		"projectCount": "50+",
+		"skillLevel": 65
+	},
+	"Blender": {
+		"skillTitle": "Blender",
+		"projectCount": "50+",
+		"skillLevel": 75
+	}
+}

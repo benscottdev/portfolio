@@ -128,6 +128,14 @@
       "sC" : 3,
       "tS" : 0
     },
+    "\/src\/assets\/portfolioData.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/assets\/portfolioData-min.json",
+      "oF" : 0,
+      "oO" : 1,
+      "oS" : 1
+    },
     "\/src\/Components\/Header.jsx" : {
       "bF" : 0,
       "ft" : 64,
@@ -135,6 +143,17 @@
       "mi" : 1,
       "oA" : 0,
       "oAP" : "\/src\/Components\/Header-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/src\/Components\/Loader.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/Loader-min.js",
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
@@ -161,13 +180,35 @@
       "sC" : 3,
       "tS" : 0
     },
-    "\/src\/main-min.js" : {
+    "\/src\/Components\/RadarChart.jsx" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
       "mi" : 1,
       "oA" : 0,
-      "oAP" : "\/src\/main-min-min.js",
+      "oAP" : "\/src\/Components\/RadarChart-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/src\/Components\/Skills.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/Skills-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/src\/Components\/SydneyTime.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/SydneyTime-min.js",
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
@@ -193,6 +234,22 @@
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
+    },
+    "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff2",
+      "oF" : 0
     },
     "\/src\/static\/fonts\/FeatureMono-Medium.woff" : {
       "cB" : 0,
@@ -225,6 +282,39 @@
       "oA" : 0,
       "oAP" : "\/src\/static\/fonts\/FeatureMono-Regular.woff2",
       "oF" : 0
+    },
+    "\/src\/static\/images\/jerrycancreative.png" : {
+      "ft" : 32768,
+      "iS" : 372871,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/jerrycancreative.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/loader-noloop.gif" : {
+      "ft" : 4194304,
+      "iS" : 1206934,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/loader-noloop.gif",
+      "oF" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "rq" : 75
+    },
+    "\/src\/static\/images\/Loader.gif" : {
+      "ft" : 4194304,
+      "iS" : 7677086,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/Loader.gif",
+      "oF" : 0,
+      "opt" : 1,
+      "ou" : "lpckwebp-none",
+      "rq" : 75
     },
     "\/src\/static\/images\/overbeerpong.jpg" : {
       "ft" : 16384,
