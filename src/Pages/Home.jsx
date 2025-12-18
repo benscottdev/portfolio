@@ -3,10 +3,11 @@ import Header from "../Components/Header";
 import Orb from "../Components/Orb";
 import SydneyTime from "../Components/SydneyTime";
 import ProjectsBlock from "../Components/ProjectsBlock";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loader from "../Components/Loader";
 import RadarChart from "../Components/RadarChart";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,32 +46,34 @@ function Home() {
 
 		gsap.fromTo(
 			copyWrapperTop,
-			{ opacity: 0, scale: 0 },
+			{ opacity: 0, x: -100 },
 			{
 				opacity: 1,
-				scale: 1,
-				ease: "power2.out",
+				x: 0,
+				ease: "power2.inOut",
 				scrollTrigger: {
 					trigger: copyWrapper,
-					start: "top 30%",
+					start: "top center",
 					end: "bottom bottom",
 					scrub: 1,
+					// markers: true,
 				},
 			}
 		);
 
 		gsap.fromTo(
 			copyWrapperBottom,
-			{ opacity: 0, scale: 4 },
+			{ opacity: 0, x: 100 },
 			{
 				opacity: 1,
-				scale: 1,
-				ease: "power2.out",
+				x: 0,
+				ease: "power2.inOut",
 				scrollTrigger: {
 					trigger: copyWrapper,
-					start: "top 30%",
+					start: "top center",
 					end: "bottom bottom",
 					scrub: 1,
+					// markers: true,
 				},
 			}
 		);
@@ -78,7 +81,11 @@ function Home() {
 
 	return (
 		<div>
+			<Orb />
 			<Loader />
+			<Header />
+			<SydneyTime />
+
 			<div className="homeMain headerAdjustment">
 				<div className="logoOverlay">
 					<div className="overlayStroke">
@@ -95,10 +102,10 @@ function Home() {
 
 				<div className="copyWrapper" ref={copyWrapperRef}>
 					<div className="copy leftSide" ref={copyWrapperTopRef}>
-						<p>[ I'M A 25 YEAR OLD, SYDNEY BASED DIGITAL CREATOR ]</p>
+						<p>[ I'M A 25 YEAR OLD, SYDNEY BASED, DIGITAL CREATOR ]</p>
 					</div>
 					<div className="copy rightSide" ref={copyWrapperBottomRef}>
-						<p>[ I LOVE TO MAKE COOL SHIT ]</p>
+						<p>[ I LOVE TO BUILD, CREATE AND IMAGINE ]</p>
 					</div>
 				</div>
 
@@ -107,16 +114,12 @@ function Home() {
 						<h1>[ SELECTED ]</h1>
 						<ProjectsBlock />
 					</div>
-
-					{/* <div className="skillLevels">
+					<div className="skillLevels">
 						<h1>[ ABILITY ]</h1>
 						<RadarChart />
-					</div> */}
+					</div>
 				</div>
 			</div>
-			<SydneyTime />
-			<Orb />
-			<Header />
 		</div>
 	);
 }

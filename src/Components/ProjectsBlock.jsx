@@ -184,8 +184,9 @@ export default function ProjectsBlock() {
 					}}>
 					<PixelatedImage src={project.image} pixelSize={pixelSizes[project.slug]} />
 					<div className="projectTitle">
-						<p>{project.title}</p>
-						<p>{project.created}</p>
+						<p>{project.title} / </p>
+
+						<p>/ {project.created}</p>
 					</div>
 				</div>
 			))}

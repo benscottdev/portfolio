@@ -17,7 +17,7 @@ function Loader({ onComplete }) {
 
 			if (percent === 100) {
 				gsap.to(".loader", {
-					borderRadius: 20,
+					borderRadius: 5,
 					width: "0px",
 					height: "0px",
 					delay: 0.3,
@@ -39,9 +39,11 @@ function Loader({ onComplete }) {
 			<div className="loaderInner">
 				<div className="percent">{progress}%</div>
 
-				<div className="bar">
-					<div className="barFill" style={{ width: `${progress}%` }} />
-				</div>
+				{progress < 100 && (
+					<div className="bar">
+						<div className="barFill" style={{ width: `${progress}%` }} />
+					</div>
+				)}
 			</div>
 		</div>
 	);

@@ -30,11 +30,16 @@ body {
   color: #d9d9d9;
   font-family: "Feature Mono";
   padding: 0px 10px;
+  overflow-x: hidden;
 }
 
 h1 {
   text-align: center;
   color: #d9d9d9;
+}
+
+.app {
+  position: relative;
 }
 
 .webgl {
@@ -46,7 +51,7 @@ h1 {
 }
 
 .loader {
-  z-index: 999;
+  z-index: 9999999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,16 +99,11 @@ h1 {
 .clockWrapper {
   position: fixed;
   top: 0px;
-  left: 5px;
+  left: 10px;
 }
 
-.logoOverlay {
-  height: 100dvh;
-  width: 100dvw;
-}
 .logoOverlay div {
   width: 100%;
-  height: 100%;
 }
 .logoOverlay div span {
   width: 100%;
@@ -127,17 +127,6 @@ h1 {
   z-index: -8;
 }
 
-.startAProject {
-  margin-top: -5px;
-  font-size: 24px;
-  color: #d9d9d9;
-  text-decoration: none !important;
-  background-color: black;
-}
-.startAProject #bottom {
-  margin-top: -12.5px;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -148,6 +137,18 @@ h1 {
   width: 100dvw;
   padding: 0px 5px;
   margin-top: -7.5px;
+  z-index: 999;
+}
+.header .startAProject {
+  margin-top: -5px;
+  font-size: 24px;
+  color: #d9d9d9;
+  text-decoration: none !important;
+  background-color: black;
+  z-index: 999;
+}
+.header .startAProject #bottom {
+  margin-top: -12.5px;
 }
 .header .linkWrapper {
   display: flex;
@@ -160,19 +161,18 @@ h1 {
   padding: 0px;
 }
 
-.overtop {
-  z-index: 230;
-}
-
 .homeMain .copyWrapper {
   height: 100dvh;
   width: 100dvw;
   display: flex;
   align-items: center;
-  padding: 15% 0px;
+  padding-right: 20px;
+  margin: 0px 0px 100px 0px;
   justify-content: space-between;
-  flex-direction: column;
-  z-index: -9;
+  z-index: 100;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
 }
 .homeMain .copyWrapper p {
   line-height: 18px;
@@ -191,10 +191,6 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.selectedProjects {
-  border-radius: 20px;
 }
 
 @media (max-width: 800px) {

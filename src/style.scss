@@ -36,12 +36,17 @@ body {
 	color: $secondaryColor;
 	font-family: "Feature Mono";
 	padding: 0px 10px;
+	overflow-x: hidden;
 	// margin-top: -5px;
 }
 
 h1 {
 	text-align: center;
 	color: $secondaryColor;
+}
+
+.app {
+	position: relative;
 }
 
 .webgl {
@@ -53,7 +58,7 @@ h1 {
 }
 
 .loader {
-	z-index: 999;
+	z-index: 9999999;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -105,16 +110,12 @@ h1 {
 .clockWrapper {
 	position: fixed;
 	top: 0px;
-	left: 5px;
+	left: 10px;
 }
 
 .logoOverlay {
-	height: 100dvh;
-	width: 100dvw;
-
 	div {
 		width: 100%;
-		height: 100%;
 
 		span {
 			width: 100%;
@@ -142,18 +143,6 @@ h1 {
 	}
 }
 
-.startAProject {
-	margin-top: -5px;
-	font-size: 24px;
-	color: $secondaryColor;
-	text-decoration: none !important;
-	background-color: black;
-
-	#bottom {
-		margin-top: -12.5px;
-	}
-}
-
 .header {
 	display: flex;
 	align-items: center;
@@ -164,6 +153,20 @@ h1 {
 	width: 100dvw;
 	padding: 0px 5px;
 	margin-top: -7.5px;
+	z-index: 999;
+
+	.startAProject {
+		margin-top: -5px;
+		font-size: 24px;
+		color: $secondaryColor;
+		text-decoration: none !important;
+		background-color: black;
+		z-index: 999;
+
+		#bottom {
+			margin-top: -12.5px;
+		}
+	}
 
 	.linkWrapper {
 		display: flex;
@@ -177,19 +180,19 @@ h1 {
 	}
 }
 
-.overtop {
-	z-index: 230;
-}
 .homeMain {
 	.copyWrapper {
 		height: 100dvh;
 		width: 100dvw;
 		display: flex;
 		align-items: center;
-		padding: 15% 0px;
+		padding-right: 20px;
+		margin: 0px 0px 100px 0px;
 		justify-content: space-between;
-		flex-direction: column;
-		z-index: -9;
+		z-index: 100;
+		position: relative;
+		opacity: 1;
+		visibility: visible;
 
 		p {
 			line-height: 18px;
@@ -214,10 +217,6 @@ h1 {
 			justify-content: center;
 		}
 	}
-}
-
-.selectedProjects {
-	border-radius: 20px;
 }
 
 .pixelOverlay {

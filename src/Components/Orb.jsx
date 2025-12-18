@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { HDRLoader } from "three/examples/jsm/loaders/HDRLoader.js";
 import { PMREMGenerator } from "three";
 import gsap from "gsap";
 
@@ -49,7 +49,7 @@ function Orb() {
 			const pmremGenerator = new PMREMGenerator(renderer);
 			pmremGenerator.compileEquirectangularShader();
 
-			const hdrLoader = new RGBELoader();
+			const hdrLoader = new HDRLoader();
 			try {
 				const hdrTexture = await hdrLoader.loadAsync("/oilslick.hdr");
 				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
@@ -143,7 +143,7 @@ function Orb() {
 				ease: "power2.out",
 			});
 			gsapAnimRef.current = gsap.to(orbGroup.position, {
-				x: x * 0.25,
+				x: x * 0.4,
 				y: -y * 0.1,
 				duration: 1,
 				ease: "power2.out",

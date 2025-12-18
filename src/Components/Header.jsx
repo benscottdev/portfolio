@@ -52,12 +52,16 @@ function Header() {
 	return (
 		<div className="header">
 			{/* <span className="logo">BEN SCOTT</span> */}
-			<Link className="startAProject">
+			<div className="startAProject">
 				<div className="linkWrapper" ref={linkWrapperRef} onMouseEnter={() => handleHover(linkWrapperRef)} onMouseLeave={() => handleLeave(linkWrapperRef)}>
-					<span id="top">START A PROJECT</span>
-					<span id="bottom">START A PROJECT</span>
+					<a id="top" href="mailto:benscott.dev@gmail.com" target="_blank" style={{ textDecoration: "none", color: "inherit" }}>
+						<span>START A PROJECT</span>
+					</a>
+					<a id="bottom" href="mailto:benscott.dev@gmail.com" target="_blank" style={{ textDecoration: "none", color: "inherit" }}>
+						<span>START A PROJECT</span>
+					</a>
 				</div>
-			</Link>
+			</div>
 		</div>
 	);
 }
