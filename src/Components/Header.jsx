@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import SydneyTime from "./SydneyTime";
 
 import gsap from "gsap";
 
@@ -14,15 +14,15 @@ function Header() {
 		gsap.killTweensOf([top, bottom]);
 
 		gsap.to(top, {
-			y: "-78%",
-			duration: 0.4,
+			y: "-100%",
+			duration: 0.2,
 			ease: "power3.out",
 		});
 
 		gsap.to(bottom, {
-			y: "-70%",
-			duration: 0.4,
-			scale: 1,
+			y: "-100%",
+			duration: 0.2,
+
 			ease: "power3.out",
 		});
 	};
@@ -51,6 +51,7 @@ function Header() {
 
 	return (
 		<div className="header">
+			<SydneyTime />
 			{/* <span className="logo">BEN SCOTT</span> */}
 			<div className="startAProject">
 				<div className="linkWrapper" ref={linkWrapperRef} onMouseEnter={() => handleHover(linkWrapperRef)} onMouseLeave={() => handleLeave(linkWrapperRef)}>

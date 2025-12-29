@@ -16,12 +16,17 @@ function Loader({ onComplete }) {
 			setProgress(percent);
 
 			if (percent === 100) {
-				gsap.to(".loader", {
-					borderRadius: 5,
+				const tl = gsap.timeline();
+				tl.to(".loader", {
+					height: "10%",
+					ease: "power2.out",
+				});
+				tl.to(".loader", {
 					width: "0px",
-					height: "0px",
-					delay: 0.3,
-					duration: 0.5,
+					duration: 0.35,
+				});
+				tl.to(".loader", {
+					display: "none",
 				});
 
 				document.querySelector(".percent").innerHTML = ":)";

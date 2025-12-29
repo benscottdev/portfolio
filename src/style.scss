@@ -13,6 +13,21 @@
 	font-style: normal;
 	font-display: swap;
 }
+@font-face {
+	font-family: "Nohemi";
+	src: url("./static/fonts/Nohemi-Light.woff2") format("woff2"), url("./static/fonts/Nohemi-Light.woff") format("woff");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Nohemi";
+	src: url("Nohemi-Regular.woff2") format("woff2"), url("Nohemi-Regular.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
 
 @font-face {
 	font-family: "Akira";
@@ -22,39 +37,42 @@
 	font-display: swap;
 }
 
+@font-face {
+	font-family: "Instrument Serif";
+	src: url("./static/fonts/InstrumentSerif-Regular.woff2") format("woff2"), url("./static/fonts/InstrumentSerif-Regular.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+// $backgroundColor: #ff7301;
 $backgroundColor: rgb(0, 0, 225);
-$secondaryColor: #d9d9d9;
+$secondaryColor: #fff;
+
+$secondaryFont: "Instrument Serif";
+$primaryFont: "Feature Mono";
 
 * {
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
 }
-
 body {
-	background-color: $backgroundColor;
+	// background-color: $backgroundColor;
 	color: $secondaryColor;
-	font-family: "Feature Mono";
-	padding: 0px 10px;
+	font-family: "Nohemi";
+
 	overflow-x: hidden;
 	// margin-top: -5px;
 }
 
 h1 {
 	text-align: center;
-	color: $secondaryColor;
+	color: $backgroundColor;
 }
 
 .app {
 	position: relative;
-}
-
-.webgl {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	pointer-events: none;
-	z-index: -9;
 }
 
 .loader {
@@ -69,7 +87,7 @@ h1 {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	overflow: hidden;
-	background-color: $secondaryColor;
+	background-color: white;
 
 	.loaderInner {
 		width: 100%;
@@ -102,24 +120,64 @@ h1 {
 	}
 }
 
+.sectionHeading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
+
+	h1 {
+		white-space: nowrap;
+		text-align: left;
+		font-size: 8dvw;
+		font-family: $secondaryFont;
+		font-weight: normal;
+	}
+
+	.keyline {
+		width: 100%;
+		height: 1px;
+		background-color: $backgroundColor;
+	}
+
+	.keylineLeft {
+		transform-origin: left;
+	}
+
+	.keylineRight {
+		transform-origin: right;
+	}
+}
+
 .logo {
 	font-size: 24px;
 	color: $secondaryColor;
 }
 
-.clockWrapper {
-	position: fixed;
-	top: 0px;
-	left: 10px;
+.section {
+	margin: 15% 0px;
+	height: 100dvh !important;
+	// display: flex;
+	// align-items: center;
+	// justify-content: center;
 }
 
 .logoOverlay {
+	position: relative;
+	// padding: 5% 0px;
+	.webgl {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		pointer-events: none;
+		z-index: -9;
+	}
 	div {
 		width: 100%;
 
 		span {
 			width: 100%;
-			position: fixed;
+			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
@@ -146,41 +204,48 @@ h1 {
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
 	position: fixed;
 	top: 0px;
 	left: 0px;
 	width: 100dvw;
-	padding: 0px 5px;
-	margin-top: -7.5px;
 	z-index: 999;
+	background-color: black;
+	padding: 3px 0px;
+
+	.clockWrapper {
+		margin-bottom: -2px;
+		display: flex;
+		align-items: center;
+		z-index: 999;
+		.clock {
+			font-size: 18px;
+		}
+	}
 
 	.startAProject {
-		margin-top: -5px;
-		font-size: 24px;
+		margin-bottom: -2px;
+		display: flex;
+		align-items: center;
+		font-size: 22px;
 		color: $secondaryColor;
 		text-decoration: none !important;
-		background-color: black;
 		z-index: 999;
-
-		#bottom {
-			margin-top: -12.5px;
-		}
 	}
 
 	.linkWrapper {
 		display: flex;
 		flex-direction: column;
-		height: 32px;
+		height: 20px;
+		align-items: center;
+		justify-content: flex-start;
 		overflow: hidden;
-		span {
-			margin: 0px;
-			padding: 0px;
-		}
 	}
 }
 
 .homeMain {
+	position: relative;
+	// padding: 0px 20px;
 	.copyWrapper {
 		height: 100dvh;
 		width: 100dvw;
@@ -204,7 +269,6 @@ h1 {
 		}
 
 		.leftSide {
-			// margin-bottom: 400px;
 			text-align: center;
 			max-width: 50%;
 		}
@@ -217,6 +281,10 @@ h1 {
 			justify-content: center;
 		}
 	}
+}
+
+.scrollTriggerSection {
+	background-color: $backgroundColor;
 }
 
 .pixelOverlay {
@@ -238,97 +306,99 @@ h1 {
 
 		.projectImageWrapper {
 			overflow: hidden;
+			// aspect-ratio: 4 / 5 !important;
+			object-fit: cover;
 			.projectImage {
-				aspect-ratio: 1 / 1;
-				object-fit: cover !important;
+				width: 100%;
+				object-fit: cover;
+				object-position: center;
+				aspect-ratio: 4/5;
 			}
-
-			// border-radius: 10px 10px 0 0;
 		}
 
 		.projectTitle {
-			position: absolute;
-			top: 0;
-			left: 0;
 			display: flex;
 			justify-content: space-between;
-			background-color: black;
+			background-color: $backgroundColor;
 			text-transform: uppercase;
-			pointer-events: none; // so it doesn't block hover
-			opacity: 0; // initially hidden
+			pointer-events: none;
 			padding: 5px 10px;
 			transition: opacity 0.2s ease;
 			z-index: 99;
-		}
-
-		.project:hover .pixelOverlay {
-			background-size: 1px 1px;
-			opacity: 0;
 		}
 	}
 }
 
 .skills {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
+	flex-direction: row;
 	width: 100%;
-	border-top: 1px solid white;
-	border-bottom: 1px solid white;
-	padding: 20px 10px;
-	margin: 20px 0px 80px 0px;
 
-	.tableHead {
-		display: flex;
+	.keyline {
+		display: block;
 		width: 100%;
-		justify-content: space-between;
-		margin-bottom: 20px;
-
-		span {
-			width: 33%;
-			font-size: 24px;
-		}
-	}
-
-	.third {
-		width: 33.666%;
-	}
-
-	.skillData {
-		text-transform: uppercase;
-	}
-
-	.skillItemWrapper {
-		display: flex;
+		height: 1px;
+		background-color: white;
 		margin-bottom: 10px;
-		transition: 0.2s ease;
-		align-items: center;
-		justify-content: center;
-
-		&:hover {
-			background-color: black;
-		}
 	}
 
-	.skillLevelWrapper {
-		background-color: navy;
-		height: 5px;
-		width: 33%;
-		position: relative;
+	.skillColumn {
+		width: 32.8%;
 
-		.skillLevel {
-			position: absolute;
-			top: 0px;
-			left: 0px;
-			background-color: $secondaryColor;
-			// width: 50%;
-			height: 5px;
-			z-index: 1;
+		h2 {
+			font-size: 34px;
+			font-weight: 300;
+			font-family: $secondaryFont;
+			background-color: $backgroundColor;
+			color: $secondaryColor;
+			padding: 0px 10px;
+			display: flex;
+			width: 100%;
+			margin-bottom: 10px;
+			transform-origin: left;
+		}
+
+		h3 {
+			font-weight: 300;
+			text-transform: uppercase;
+			font-size: 22px;
+			color: $backgroundColor;
+		}
+
+		.skill {
+			display: flex;
+			align-items: flex-end;
+			justify-content: flex-end;
+			flex-direction: column;
 		}
 	}
 }
 
-.radarWrapper {
-	width: 100dvw;
-	height: 500px;
-	margin: 50px 0px;
+.aboutMe {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0px 20px;
+
+	p {
+		text-align: center;
+		max-width: 95%;
+		color: rgb(236, 236, 236);
+		line-height: 60px;
+		font-size: 50px !important;
+		display: block;
+
+		// SplitText creates divs for each character
+		> div {
+			display: inline-block !important;
+			position: relative;
+			font-size: inherit !important;
+			line-height: inherit !important;
+			color: inherit !important;
+			white-space: pre;
+			will-change: color;
+		}
+	}
 }

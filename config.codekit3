@@ -74,6 +74,14 @@
       "oAP" : "\/public\/orb_external.glb",
       "oF" : 0
     },
+    "\/public\/orb_shapekeyed.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/orb_shapekeyed.glb",
+      "oF" : 0
+    },
     "\/public\/starorb.glb" : {
       "cB" : 0,
       "ft" : 8192,
@@ -180,17 +188,6 @@
       "sC" : 3,
       "tS" : 0
     },
-    "\/src\/Components\/RadarChart.jsx" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 1,
-      "oA" : 0,
-      "oAP" : "\/src\/Components\/RadarChart-min.js",
-      "oF" : 0,
-      "sC" : 3,
-      "tS" : 0
-    },
     "\/src\/Components\/Skills.jsx" : {
       "bF" : 0,
       "ft" : 64,
@@ -228,10 +225,10 @@
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
-      "mi" : 1,
-      "oA" : 0,
+      "mi" : 0,
+      "oA" : 1,
       "oAP" : "\/src\/Pages\/Home-min.js",
-      "oF" : 0,
+      "oF" : 1,
       "sC" : 3,
       "tS" : 0
     },
@@ -283,6 +280,54 @@
       "oAP" : "\/src\/static\/fonts\/FeatureMono-Regular.woff2",
       "oF" : 0
     },
+    "\/src\/static\/fonts\/InstrumentSerif-Regular.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/InstrumentSerif-Regular.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/InstrumentSerif-Regular.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/InstrumentSerif-Regular.woff2",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/Nohemi-Light.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/Nohemi-Light.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/Nohemi-Light.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/Nohemi-Light.woff2",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/Nohemi-Regular.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/Nohemi-Regular.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff2",
+      "oF" : 0
+    },
     "\/src\/static\/images\/jerrycancreative.png" : {
       "ft" : 32768,
       "iS" : 372871,
@@ -294,26 +339,6 @@
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/loader-noloop.gif" : {
-      "ft" : 4194304,
-      "iS" : 1206934,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/loader-noloop.gif",
-      "oF" : 0,
-      "opt" : 0,
-      "ou" : "lpckwebp-none",
-      "rq" : 75
-    },
-    "\/src\/static\/images\/Loader.gif" : {
-      "ft" : 4194304,
-      "iS" : 7677086,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/Loader.gif",
-      "oF" : 0,
-      "opt" : 1,
-      "ou" : "lpckwebp-none",
       "rq" : 75
     },
     "\/src\/static\/images\/overbeerpong.jpg" : {

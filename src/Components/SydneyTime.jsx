@@ -24,7 +24,7 @@ function SydneyTime() {
 
 	return (
 		<div className="clockWrapper">
-			<div className="clock">[ SYD {time} ]</div>
+			<div className="clock">SYD {time}</div>
 		</div>
 	);
 }

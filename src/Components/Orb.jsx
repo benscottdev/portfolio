@@ -4,6 +4,8 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { HDRLoader } from "three/examples/jsm/loaders/HDRLoader.js";
 import { PMREMGenerator } from "three";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 function Orb() {
 	const canvasRef = useRef();
@@ -45,6 +47,8 @@ function Orb() {
 		rendererRef.current = renderer;
 
 		// Load environment
+
+		// Load environment map
 		async function loadEnvironment() {
 			const pmremGenerator = new PMREMGenerator(renderer);
 			pmremGenerator.compileEquirectangularShader();
@@ -87,7 +91,7 @@ function Orb() {
 		// Load model
 		const gltfLoader = new GLTFLoader();
 		gltfLoader.load(
-			"/starorb2.glb",
+			"/orb_shapekeyed.glb",
 			(model) => {
 				const orb = model.scene;
 				orb.scale.set(0.25, 0.25, 0.25);
@@ -131,6 +135,23 @@ function Orb() {
 			const x = (e.clientX / window.innerWidth) * 2 - 1;
 			const y = (e.clientY / window.innerHeight) * 2 - 1;
 
+			if (!orbRef.current) return;
+
+			// Normalized X (-1 to 1)
+			const xNorm = (e.clientX / window.innerWidth) * 2 - 1;
+			// console.log(xNorm);
+			// Remap: middle = 0, sides = 1
+			const morphTarget = Math.abs(xNorm); // 0 at center, 1 at sides
+
+			orbRef.current.traverse((child) => {
+				if (!child.isMesh) return;
+
+				gsap.to(child.morphTargetInfluences, {
+					0: morphTarget,
+					duration: 0.8,
+					ease: "power2.out",
+				});
+			});
 			// Kill previous animation to prevent stacking
 			if (gsapAnimRef.current) {
 				gsapAnimRef.current.kill();
@@ -139,11 +160,11 @@ function Orb() {
 			gsapAnimRef.current = gsap.to(orbGroup.rotation, {
 				x: y * 3,
 				y: x * 3,
-				duration: 4,
+				duration: 2,
 				ease: "power2.out",
 			});
 			gsapAnimRef.current = gsap.to(orbGroup.position, {
-				x: x * 0.4,
+				x: x * 0.1,
 				y: -y * 0.1,
 				duration: 1,
 				ease: "power2.out",
@@ -158,6 +179,7 @@ function Orb() {
 			animationRef.current = requestAnimationFrame(tick);
 			orbGroup.rotation.z += 0.003;
 			orbGroup.rotation.y += 0.003;
+			scene.environmentRotation -= 0.03;
 		};
 		tick();
 
@@ -207,7 +229,7 @@ function Orb() {
 	}, []);
 
 	return (
-		<div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
+		<div style={{ width: "100dvw", height: "100dvh", overflow: "hidden" }}>
 			<canvas className="webgl" ref={canvasRef} style={{ display: "block" }} />
 		</div>
 	);

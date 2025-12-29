@@ -1,125 +1,199 @@
 import { useRef, useEffect } from "react";
-import Header from "../Components/Header";
 import Orb from "../Components/Orb";
-import SydneyTime from "../Components/SydneyTime";
 import ProjectsBlock from "../Components/ProjectsBlock";
-import Loader from "../Components/Loader";
-import RadarChart from "../Components/RadarChart";
-
+import Skills from "../Components/Skills";
+import Header from "../Components/Header";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
-	const fillRef = useRef(null);
-	const strokeRef = useRef(null);
-
-	const copyWrapperRef = useRef(null);
-	const copyWrapperTopRef = useRef(null);
-	const copyWrapperBottomRef = useRef(null);
+	const heroRef = useRef(null);
+	const aboutRef = useRef(null);
+	const aboutTextRef = useRef(null);
+	const workRef = useRef(null);
+	const stackRef = useRef(null);
 
 	useEffect(() => {
-		const fillEl = fillRef.current;
-		const strokeEl = strokeRef.current;
+		const ctx = gsap.context(() => {
+			/**
+			 * HERO — Pin + Logo Fade
+			 */
+			gsap.to([".logoOverlay", ".scrollTriggerSection"], {
+				opacity: 0,
+				ease: "none",
+				scrollTrigger: {
+					trigger: heroRef.current,
+					start: "top top",
+					end: "bottom center",
+					pin: true,
+					scrub: true,
+					anticipatePin: 1,
+				},
+			});
 
-		const copyWrapper = copyWrapperRef.current;
-		const copyWrapperTop = copyWrapperTopRef.current;
-		const copyWrapperBottom = copyWrapperBottomRef.current;
+			/**
+			 * ABOUT SECTION — Pin + Letter Color Animation
+			 */
+			// Manually split text into characters
+			if (aboutTextRef.current) {
+				const text = aboutTextRef.current.textContent;
+				aboutTextRef.current.innerHTML = text
+					.split("")
+					.map((char) => (char === " " ? " " : `<span class="char">${char}</span>`))
+					.join("");
+			}
 
-		if (!fillEl) return;
-		if (!strokeEl) return;
-		if (!copyWrapper) return;
-		if (!copyWrapperTop) return;
-		if (!copyWrapperBottom) return;
-
-		gsap.to([fillEl, strokeEl], {
-			opacity: 0,
-			ease: "power2.out",
-			scrollTrigger: {
-				trigger: fillEl,
+			// Pin the about section
+			ScrollTrigger.create({
+				trigger: aboutRef.current,
 				start: "top top",
-				end: "bottom bottom",
-				scrub: 2,
-			},
+				end: "+=200%",
+				pin: true,
+				anticipatePin: 1,
+			});
+
+			// Animate each letter with stagger
+			const chars = aboutTextRef.current?.querySelectorAll(".char");
+			if (chars) {
+				gsap.to(chars, {
+					color: "rgb(0, 0, 225)",
+					duration: 0.01,
+					stagger: {
+						each: 2 / chars.length,
+						ease: "none",
+					},
+					ease: "none",
+					scrollTrigger: {
+						trigger: aboutRef.current,
+						start: "top top",
+						end: "+=200%",
+						scrub: 0,
+					},
+				});
+			}
+
+			/**
+			 * WORK SECTION — Keylines, Heading, Items
+			 */
+			const workTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: workRef.current,
+					start: "top center",
+					once: true,
+				},
+			});
+
+			// keylines
+			workTl.fromTo(
+				".selectedProjects .keyline",
+				{ scaleX: 0 },
+				{
+					scaleX: 1,
+					duration: 0.4,
+					ease: "power2.out",
+				}
+			);
+
+			// heading
+			workTl.fromTo(
+				".selectedProjects h1",
+				{ autoAlpha: 0, y: 20 },
+				{
+					autoAlpha: 1,
+					y: 0,
+					duration: 0.3,
+					ease: "power2.out",
+				},
+				"-=0.3"
+			);
+
+			/**
+			 * STACK SECTION — Keylines, Heading, Items
+			 */
+			const stackTl = gsap.timeline({
+				scrollTrigger: {
+					trigger: stackRef.current,
+					start: "top center",
+					once: true,
+				},
+			});
+
+			// keylines
+			stackTl.fromTo(
+				".skillLevels .keyline",
+				{ scaleX: 0 },
+				{
+					scaleX: 1,
+					duration: 0.4,
+					ease: "power2.out",
+				}
+			);
+
+			// heading
+			stackTl.fromTo(
+				".skillLevels h1",
+				{ autoAlpha: 0, y: 20 },
+				{
+					autoAlpha: 1,
+					y: 0,
+					duration: 0.3,
+					ease: "power2.out",
+				},
+				"-=0.3"
+			);
+
+			ScrollTrigger.refresh();
 		});
 
-		gsap.fromTo(
-			copyWrapperTop,
-			{ opacity: 0, x: -100 },
-			{
-				opacity: 1,
-				x: 0,
-				ease: "power2.inOut",
-				scrollTrigger: {
-					trigger: copyWrapper,
-					start: "top center",
-					end: "bottom bottom",
-					scrub: 1,
-					// markers: true,
-				},
-			}
-		);
-
-		gsap.fromTo(
-			copyWrapperBottom,
-			{ opacity: 0, x: 100 },
-			{
-				opacity: 1,
-				x: 0,
-				ease: "power2.inOut",
-				scrollTrigger: {
-					trigger: copyWrapper,
-					start: "top center",
-					end: "bottom bottom",
-					scrub: 1,
-					// markers: true,
-				},
-			}
-		);
+		return () => ctx.revert();
 	}, []);
 
 	return (
 		<div>
-			<Orb />
-			<Loader />
-			<Header />
-			<SydneyTime />
-
 			<div className="homeMain headerAdjustment">
-				<div className="logoOverlay">
-					<div className="overlayStroke">
-						<span ref={fillRef} className="fill">
-							BEN SCOTT
-						</span>
+				<Header />
+				<section ref={heroRef} className="scrollTriggerSection" style={{ height: "100vh", position: "relative" }}>
+					<div className="logoOverlay">
+						<Orb scrollSectionRef={heroRef} />
+						<div className="overlayStroke">
+							<span className="fill">BEN SCOTT</span>
+							<span className="stroke">BEN SCOTT</span>
+						</div>
 					</div>
-					<div className="overlayFill">
-						<span ref={strokeRef} className="stroke">
-							BEN SCOTT
-						</span>
-					</div>
-				</div>
+				</section>
 
-				<div className="copyWrapper" ref={copyWrapperRef}>
-					<div className="copy leftSide" ref={copyWrapperTopRef}>
-						<p>[ I'M A 25 YEAR OLD, SYDNEY BASED, DIGITAL CREATOR ]</p>
-					</div>
-					<div className="copy rightSide" ref={copyWrapperBottomRef}>
-						<p>[ I LOVE TO BUILD, CREATE AND IMAGINE ]</p>
-					</div>
+				<div ref={aboutRef} className="aboutMe section">
+					<p className="splitMe" ref={aboutTextRef}>
+						I design and build immersive websites that don't just look good, they move, respond, and feel alive. From smooth interactions to real-time 3D experiences, I turn ideas into digital spaces people actually want to explore. I work across design, development, and motion to create sites that are fast, expressive, and technically solid. Whether it's a bold marketing site, an interactive product experience, or something a bit experimental, I focus on clarity, performance, and detail. The goal is simple: make the web feel less static, and a lot more memorable.
+					</p>
 				</div>
 
 				<div className="overtop">
-					<div className="selectedProjects">
-						<h1>[ SELECTED ]</h1>
+					{/* ===== WORK ===== */}
+					<section className="selectedProjects section" ref={workRef}>
+						<div className="sectionHeading">
+							<span className="keyline keylineLeft"></span>
+							<h1>The Work</h1>
+							<span className="keyline keylineRight"></span>
+						</div>
 						<ProjectsBlock />
-					</div>
-					<div className="skillLevels">
-						<h1>[ ABILITY ]</h1>
-						<RadarChart />
-					</div>
+					</section>
+
+					{/* ===== STACK ===== */}
+					<section className="skillLevels section" ref={stackRef}>
+						<div className="sectionHeading">
+							<span className="keyline keylineLeft"></span>
+							<h1>The Stack</h1>
+							<span className="keyline keylineRight"></span>
+						</div>
+						<Skills />
+					</section>
 				</div>
 			</div>
+
+			{/* <div style={{ height: "200vh" }} /> */}
 		</div>
 	);
 }
