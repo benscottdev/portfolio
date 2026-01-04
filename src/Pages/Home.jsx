@@ -21,12 +21,12 @@ function Home() {
 			 * HERO — Pin + Logo Fade
 			 */
 			gsap.to([".logoOverlay", ".scrollTriggerSection"], {
-				opacity: 0,
+				autoAlpha: 0,
 				ease: "none",
 				scrollTrigger: {
 					trigger: heroRef.current,
 					start: "top top",
-					end: "bottom center",
+					end: "bottom 75%",
 					pin: true,
 					scrub: true,
 					anticipatePin: 1,
@@ -34,15 +34,15 @@ function Home() {
 			});
 
 			/**
-			 * ABOUT SECTION — Pin + Letter Color Animation
+			 * ABOUT SECTION — Pin + Word Color Animation
 			 */
-			// Manually split text into characters
+			// Manually split text into words
 			if (aboutTextRef.current) {
 				const text = aboutTextRef.current.textContent;
 				aboutTextRef.current.innerHTML = text
-					.split("")
-					.map((char) => (char === " " ? " " : `<span class="char">${char}</span>`))
-					.join("");
+					.split(" ")
+					.map((word) => `<span class="word">${word}</span>`)
+					.join(" ");
 			}
 
 			// Pin the about section
@@ -54,14 +54,14 @@ function Home() {
 				anticipatePin: 1,
 			});
 
-			// Animate each letter with stagger
-			const chars = aboutTextRef.current?.querySelectorAll(".char");
-			if (chars) {
-				gsap.to(chars, {
+			// Animate each word with stagger
+			const words = aboutTextRef.current?.querySelectorAll(".word");
+			if (words) {
+				gsap.to(words, {
 					color: "rgb(0, 0, 225)",
-					duration: 0.01,
+					duration: 0.0001,
 					stagger: {
-						each: 2 / chars.length,
+						each: 2 / words.length,
 						ease: "none",
 					},
 					ease: "none",
@@ -69,7 +69,7 @@ function Home() {
 						trigger: aboutRef.current,
 						start: "top top",
 						end: "+=200%",
-						scrub: 0,
+						scrub: true,
 					},
 				});
 			}
@@ -115,7 +115,7 @@ function Home() {
 			const stackTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: stackRef.current,
-					start: "top center",
+					start: "top 75%",
 					once: true,
 				},
 			});
@@ -158,8 +158,8 @@ function Home() {
 					<div className="logoOverlay">
 						<Orb scrollSectionRef={heroRef} />
 						<div className="overlayStroke">
-							<span className="fill">BEN SCOTT</span>
-							<span className="stroke">BEN SCOTT</span>
+							<div className="fill">BEN SCOTT</div>
+							<div className="stroke">BEN SCOTT</div>
 						</div>
 					</div>
 				</section>
@@ -182,7 +182,7 @@ function Home() {
 					</section>
 
 					{/* ===== STACK ===== */}
-					<section className="skillLevels section" ref={stackRef}>
+					<section className="skillLevels" ref={stackRef}>
 						<div className="sectionHeading">
 							<span className="keyline keylineLeft"></span>
 							<h1>The Stack</h1>

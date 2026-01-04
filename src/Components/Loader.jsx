@@ -17,19 +17,21 @@ function Loader({ onComplete }) {
 
 			if (percent === 100) {
 				const tl = gsap.timeline();
-				tl.to(".loader", {
-					height: "10%",
-					ease: "power2.out",
+				tl.to(".percent", {
+					opacity: 0,
 				});
-				tl.to(".loader", {
-					width: "0px",
-					duration: 0.35,
+
+				tl.to(".loaderPixel", {
+					autoAlpha: 0,
+					duration: 0.2,
+					ease: "power1.in",
+					stagger: 0.1,
 				});
 				tl.to(".loader", {
 					display: "none",
 				});
 
-				document.querySelector(".percent").innerHTML = ":)";
+				// document.querySelector(".percent").innerHTML = "";
 
 				clearInterval(interval);
 				onComplete?.();
@@ -41,14 +43,21 @@ function Loader({ onComplete }) {
 
 	return (
 		<div className="loader">
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
+			<div className="loaderPixel"></div>
 			<div className="loaderInner">
 				<div className="percent">{progress}%</div>
-
-				{progress < 100 && (
-					<div className="bar">
-						<div className="barFill" style={{ width: `${progress}%` }} />
-					</div>
-				)}
+				<div className="bar">
+					<div className="barFill" style={{ height: `${progress}%` }} />
+				</div>
 			</div>
 		</div>
 	);

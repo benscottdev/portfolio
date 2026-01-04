@@ -1,18 +1,4 @@
 @font-face {
-  font-family: "Feature Mono";
-  src: url("./static/fonts/FeatureMono-Regular.woff2") format("woff2"), url("./static/fonts/FeatureMono-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Feature Mono";
-  src: url("./static/fonts/FeatureMono-Medium.woff2") format("woff2"), url("./static/fonts/FeatureMono-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "Nohemi";
   src: url("./static/fonts/Nohemi-Light.woff2") format("woff2"), url("./static/fonts/Nohemi-Light.woff") format("woff");
   font-weight: 300;
@@ -27,16 +13,16 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "Akira";
-  src: url("./static/fonts/AkiraExpanded-SuperBold.woff2") format("woff2"), url("./static/fonts/AkiraExpanded-SuperBold.woff") format("woff");
-  font-weight: bold;
+  font-family: "Instrument Serif";
+  src: url("./static/fonts/InstrumentSerif-Regular.woff2") format("woff2"), url("./static/fonts/InstrumentSerif-Regular.woff") format("woff");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Instrument Serif";
-  src: url("./static/fonts/InstrumentSerif-Regular.woff2") format("woff2"), url("./static/fonts/InstrumentSerif-Regular.woff") format("woff");
-  font-weight: normal;
+  font-family: "Monument Extended";
+  src: url("./static/fonts/MonumentExtended-Ultrabold.woff2") format("woff2"), url("./static/fonts/MonumentExtended-Ultrabold.woff") format("woff");
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
@@ -63,33 +49,36 @@ h1 {
 
 .loader {
   z-index: 9999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100dvw;
   height: 100dvh;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0px;
+  left: 0px;
   overflow: hidden;
+  display: flex;
+}
+.loader .loaderPixel {
+  position: relative;
+  width: 50%;
+  z-index: 9999;
   background-color: white;
 }
 .loader .loaderInner {
   width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 .loader .loaderInner .percent {
   font-size: 30px;
-  color: rgb(0, 0, 225);
+  color: black;
 }
 .loader .loaderInner .bar {
-  height: 10px;
-  width: 200px;
-  border: 1px solid rgb(0, 0, 225);
   position: relative;
   z-index: -1;
 }
@@ -111,9 +100,15 @@ h1 {
 .sectionHeading h1 {
   white-space: nowrap;
   text-align: left;
-  font-size: 8dvw;
-  font-family: "Instrument Serif";
+  font-size: 10dvw;
+  font-family: "Monument Extended";
   font-weight: normal;
+  text-transform: uppercase;
+}
+@media (max-width: 800px) {
+  .sectionHeading h1 {
+    font-size: 10dvw;
+  }
 }
 .sectionHeading .keyline {
   width: 100%;
@@ -128,13 +123,13 @@ h1 {
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 30px;
   color: #fff;
 }
 
 .section {
   margin: 15% 0px;
-  height: 100dvh !important;
+  height: 70dvh !important;
 }
 
 .logoOverlay {
@@ -150,16 +145,15 @@ h1 {
 .logoOverlay div {
   width: 100%;
 }
-.logoOverlay div span {
+.logoOverlay div div {
   width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 10dvw;
+  font-size: 11dvw;
   text-align: center;
-  letter-spacing: -10px;
-  font-family: "Akira" !important;
+  font-family: "Monument Extended" !important;
 }
 .logoOverlay div .fill {
   z-index: -100;
@@ -170,6 +164,11 @@ h1 {
   -webkit-text-fill-color: transparent;
   color: transparent;
   z-index: -8;
+}
+@media (max-width: 800px) {
+  .logoOverlay div .stroke {
+    -webkit-text-stroke: 1px white;
+  }
 }
 
 .header {
@@ -182,7 +181,7 @@ h1 {
   width: 100dvw;
   z-index: 999;
   background-color: black;
-  padding: 3px 0px;
+  padding: 0.25% 5px;
 }
 .header .clockWrapper {
   margin-bottom: -2px;
@@ -191,7 +190,12 @@ h1 {
   z-index: 999;
 }
 .header .clockWrapper .clock {
-  font-size: 18px;
+  font-size: 22px;
+}
+@media (max-width: 800px) {
+  .header .clockWrapper .clock {
+    font-size: 18px;
+  }
 }
 .header .startAProject {
   margin-bottom: -2px;
@@ -201,6 +205,12 @@ h1 {
   color: #fff;
   text-decoration: none !important;
   z-index: 999;
+}
+@media (max-width: 800px) {
+  .header .startAProject {
+    font-size: 18px;
+    margin-top: 4px;
+  }
 }
 .header .linkWrapper {
   display: flex;
@@ -250,87 +260,8 @@ h1 {
   background-color: rgb(0, 0, 225);
 }
 
-@media (max-width: 800px) {
-  .pixelOverlay {
-    display: none;
-  }
-}
-
-.projects {
-  margin-top: 20px;
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-}
-.projects .project {
-  width: 33%;
-  aspect-ratio: 1/1;
-  position: relative;
-}
-.projects .project .projectImageWrapper {
-  overflow: hidden;
-  object-fit: cover;
-}
-.projects .project .projectImageWrapper .projectImage {
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  aspect-ratio: 4/5;
-}
-.projects .project .projectTitle {
-  display: flex;
-  justify-content: space-between;
-  background-color: rgb(0, 0, 225);
-  text-transform: uppercase;
-  pointer-events: none;
-  padding: 5px 10px;
-  transition: opacity 0.2s ease;
-  z-index: 99;
-}
-
-.skills {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  width: 100%;
-}
-.skills .keyline {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: white;
-  margin-bottom: 10px;
-}
-.skills .skillColumn {
-  width: 32.8%;
-}
-.skills .skillColumn h2 {
-  font-size: 34px;
-  font-weight: 300;
-  font-family: "Instrument Serif";
-  background-color: rgb(0, 0, 225);
-  color: #fff;
-  padding: 0px 10px;
-  display: flex;
-  width: 100%;
-  margin-bottom: 10px;
-  transform-origin: left;
-}
-.skills .skillColumn h3 {
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 22px;
-  color: rgb(0, 0, 225);
-}
-.skills .skillColumn .skill {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  flex-direction: column;
-}
-
 .aboutMe {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -344,6 +275,12 @@ h1 {
   font-size: 50px !important;
   display: block;
 }
+@media (max-width: 1200px) {
+  .aboutMe p {
+    line-height: 32px;
+    font-size: 22px !important;
+  }
+}
 .aboutMe p > div {
   display: inline-block !important;
   position: relative;
@@ -352,4 +289,106 @@ h1 {
   color: inherit !important;
   white-space: pre;
   will-change: color;
+}
+
+.projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 25px 5px 0px 5px;
+}
+.projects .project {
+  border-bottom: 1px dashed rgb(0, 0, 225);
+  padding: 5px 0px 0px 0px;
+  width: 100%;
+  transition: 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+.projects .project .backgroundHover {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 225);
+  z-index: -99;
+}
+.projects .project a {
+  text-decoration: none !important;
+}
+.projects .project:first-child {
+  border-top: 1px dashed rgb(0, 0, 225);
+}
+.projects .project .projectCopy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0px;
+}
+.projects .project .projectCopy p {
+  color: rgb(0, 0, 225);
+  font-size: 30px;
+  z-index: 99;
+}
+.projects .project .imageContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 300px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.projects .project .imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.skills {
+  margin-bottom: 0px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 40px 20px 0px 20px;
+  position: relative;
+}
+.skills .skills-canvas-container {
+  width: 100%;
+  height: 400px;
+  min-height: 400px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.skills .skills-canvas-container canvas {
+  overflow: hidden;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: pan-y;
+}
+@media (max-width: 768px) {
+  .skills {
+    padding: 20px 10px;
+  }
+  .skills .skills-canvas-container {
+    height: 300px;
+    min-height: 30px;
+  }
+}
+@media (max-width: 480px) {
+  .skills {
+    padding: 20px 5px;
+  }
+  .skills .skills-canvas-container {
+    height: 400px;
+    min-height: 300px;
+  }
 }

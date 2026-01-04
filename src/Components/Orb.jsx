@@ -23,7 +23,13 @@ function Orb() {
 		// Initialize scene and camera once
 		const scene = new THREE.Scene();
 		const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
-		camera.position.set(0, 0, 4);
+
+		if (window.innerWidth > 1000) {
+			camera.position.set(0, 0, 4);
+		} else {
+			camera.position.set(0, 0, 6);
+		}
+
 		scene.add(camera);
 
 		sceneRef.current = scene;
@@ -85,6 +91,7 @@ function Orb() {
 		});
 
 		// Orb Group for transforms
+		let orb;
 		const orbGroup = new THREE.Group();
 		scene.add(orbGroup);
 
@@ -93,7 +100,7 @@ function Orb() {
 		gltfLoader.load(
 			"/orb_shapekeyed.glb",
 			(model) => {
-				const orb = model.scene;
+				orb = model.scene;
 				orb.scale.set(0.25, 0.25, 0.25);
 
 				orb.traverse((child) => {
@@ -139,7 +146,7 @@ function Orb() {
 
 			// Normalized X (-1 to 1)
 			const xNorm = (e.clientX / window.innerWidth) * 2 - 1;
-			// console.log(xNorm);
+
 			// Remap: middle = 0, sides = 1
 			const morphTarget = Math.abs(xNorm); // 0 at center, 1 at sides
 
@@ -147,8 +154,8 @@ function Orb() {
 				if (!child.isMesh) return;
 
 				gsap.to(child.morphTargetInfluences, {
-					0: morphTarget,
-					duration: 0.8,
+					0: morphTarget - 0.2,
+					duration: 0.3,
 					ease: "power2.out",
 				});
 			});
@@ -177,8 +184,10 @@ function Orb() {
 		const tick = () => {
 			renderer.render(scene, camera);
 			animationRef.current = requestAnimationFrame(tick);
-			orbGroup.rotation.z += 0.003;
-			orbGroup.rotation.y += 0.003;
+			if (orb) {
+				orb.rotation.z += 0.003;
+				orb.rotation.y += 0.003;
+			}
 			scene.environmentRotation -= 0.03;
 		};
 		tick();

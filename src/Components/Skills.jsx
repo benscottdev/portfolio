@@ -1,160 +1,296 @@
-import React, { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import React, { useEffect, useRef, useState } from "react";
+import Matter from "matter-js";
 
 function Skills() {
+	const sceneRef = useRef(null);
+	const engineRef = useRef(null);
+	const renderRef = useRef(null);
+	const [isDragging, setIsDragging] = useState(false);
+
+	// ====== EASY SIZING CONTROLS ======
+	// Adjust these values to scale text and pills together
+	// fontSize: Text size inside pills
+	// pillHeight: Height of each pill
+	// paddingX: Space on left/right of text (makes pills wider)
+	const SIZING = {
+		desktop: {
+			fontSize: 48,
+			pillHeight: 70,
+			paddingX: 60,
+		},
+		tablet: {
+			fontSize: 20,
+			pillHeight: 45,
+			paddingX: 50,
+		},
+		mobile: {
+			fontSize: 16,
+			pillHeight: 40,
+			paddingX: 40,
+		},
+	};
+	// ===================================
+
 	const skillsArray = [
-		{
-			skillName: "React",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "JavaScript",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "HTML",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "CSS",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "Three.js",
-			skillTypes: ["development", "3D"],
-		},
-		{
-			skillName: "SQL",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "GSAP",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "PHP",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "Wordpress",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "C#",
-			skillTypes: ["development"],
-		},
-		{
-			skillName: "Unity",
-			skillTypes: ["development", "3D"],
-		},
-		{
-			skillName: "Blender",
-			skillTypes: ["3D"],
-		},
-		{
-			skillName: "After Effects",
-			skillTypes: ["3D"],
-		},
-		{
-			skillName: "Figma",
-			skillTypes: ["design"],
-		},
-		{
-			skillName: "Photoshop",
-			skillTypes: ["design"],
-		},
-		{
-			skillName: "Illustrator",
-			skillTypes: ["design"],
-		},
-		{
-			skillName: "React Native",
-			skillTypes: ["development"],
-		},
+		{ skillName: "REACT JS", skillTypes: ["development"], color: "#1e3a8a" },
+		{ skillName: "JAVASCRIPT", skillTypes: ["development"], color: "#2563eb" },
+		{ skillName: "HTML", skillTypes: ["development"], color: "#3b82f6" },
+		{ skillName: "CSS", skillTypes: ["development"], color: "#60a5fa" },
+		{ skillName: "THREE.JS", skillTypes: ["development", "3D"], color: "#93c5fd" },
+		{ skillName: "SQL", skillTypes: ["development"], color: "#1e40af" },
+		{ skillName: "GSAP", skillTypes: ["development"], color: "#1d4ed8" },
+		{ skillName: "PHP", skillTypes: ["development"], color: "#2563eb" },
+		{ skillName: "WORDPRESS", skillTypes: ["development"], color: "#3b82f6" },
+		{ skillName: "C#", skillTypes: ["development"], color: "#60a5fa" },
+		{ skillName: "UNITY", skillTypes: ["development", "3D"], color: "#93c5fd" },
+		{ skillName: "BLENDER", skillTypes: ["3D"], color: "#1e40af" },
+		{ skillName: "AFTER EFFECTS", skillTypes: ["3D"], color: "#1d4ed8" },
+		{ skillName: "FIGMA", skillTypes: ["design"], color: "#2563eb" },
+		{ skillName: "PHOTOSHOP", skillTypes: ["design"], color: "#3b82f6" },
+		{ skillName: "ILLUSTRATOR", skillTypes: ["design"], color: "#60a5fa" },
+		{ skillName: "REACT NATIVE", skillTypes: ["development"], color: "#93c5fd" },
 	];
 
 	useEffect(() => {
-		const ctx = gsap.context(() => {
-			// Wait for next tick to ensure ScrollSmoother is initialized
-			gsap.delayedCall(0.1, () => {
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: ".skills",
-						start: "top center",
-						end: "bottom top",
-					},
+		const { Engine, Render, Runner, Bodies, World, Mouse, MouseConstraint, Events } = Matter;
+
+		// Create engine
+		const engine = Engine.create({
+			gravity: { x: 0, y: 1.25 },
+		});
+		engineRef.current = engine;
+
+		// Get container dimensions
+		const container = sceneRef.current;
+		const width = container.clientWidth;
+		const height = container.clientHeight || 300;
+
+		// Get device pixel ratio for sharp rendering
+		const pixelRatio = window.devicePixelRatio || 2;
+
+		// Create renderer
+		const render = Render.create({
+			element: container,
+			engine: engine,
+			options: {
+				width: width,
+				height: height,
+				wireframes: false,
+				background: "transparent",
+				pixelRatio: pixelRatio,
+			},
+		});
+		renderRef.current = render;
+
+		// Scale canvas for high DPI displays
+		render.canvas.style.width = width + "px";
+		render.canvas.style.height = height + "px";
+
+		// Create boundaries (all four sides)
+		const thickness = 50;
+		const boundaries = [
+			// Bottom
+			Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, {
+				isStatic: true,
+				render: { fillStyle: "transparent" },
+			}),
+			// Top
+			Bodies.rectangle(width / 2, -thickness / 2, width, thickness, {
+				isStatic: true,
+				render: { fillStyle: "transparent" },
+			}),
+			// Left
+			Bodies.rectangle(-thickness / 2, height / 2, thickness, height, {
+				isStatic: true,
+				render: { fillStyle: "transparent" },
+			}),
+			// Right
+			Bodies.rectangle(width + thickness / 2, height / 2, thickness, height, {
+				isStatic: true,
+				render: { fillStyle: "transparent" },
+			}),
+		];
+
+		// Get current sizing based on viewport width
+		const currentSize = width < 480 ? SIZING.mobile : width < 768 ? SIZING.tablet : SIZING.desktop;
+
+		// Measure text to size pills correctly
+		const tempCanvas = document.createElement("canvas");
+		const tempContext = tempCanvas.getContext("2d");
+		tempContext.font = `normal ${currentSize.fontSize}px Nohemi, sans-serif`;
+
+		// Create skill bubbles (pill-shaped) with proper text sizing
+		const bubbles = skillsArray.map((skill, index) => {
+			// Measure text width
+			const textWidth = tempContext.measureText(skill.skillName).width;
+			const pillWidth = textWidth + currentSize.paddingX;
+			const pillHeight = currentSize.pillHeight;
+
+			// Random starting position near the top
+			const x = pillWidth + Math.random() * (width - pillWidth * 2);
+			const y = 100 + Math.random() * 100;
+
+			const bubble = Bodies.rectangle(x, y, pillWidth, pillHeight, {
+				restitution: 0.6,
+				friction: 1,
+				density: 1,
+				chamfer: { radius: 15 }, // Makes it pill-shaped
+				render: {
+					fillStyle: skill.color,
+					strokeStyle: "#fff",
+					lineWidth: 0,
+				},
+				label: skill.skillName,
+			});
+
+			return bubble;
+		});
+
+		// Add all bodies to the world
+		World.add(engine.world, [...boundaries, ...bubbles]);
+
+		// Create mouse control
+		const mouse = Mouse.create(render.canvas);
+		const mouseConstraint = MouseConstraint.create(engine, {
+			mouse: mouse,
+			constraint: {
+				stiffness: 0.2,
+				render: { visible: false },
+			},
+		});
+
+		World.add(engine.world, mouseConstraint);
+
+		// Track dragging state
+		Events.on(mouseConstraint, "startdrag", () => {
+			setIsDragging(true);
+			// Prevent scrolling only when actively dragging
+			document.body.style.overflow = "hidden";
+		});
+
+		Events.on(mouseConstraint, "enddrag", () => {
+			setIsDragging(false);
+			// Re-enable scrolling when not dragging
+			document.body.style.overflow = "";
+		});
+
+		// Keep the mouse in sync with rendering
+		render.mouse = mouse;
+
+		// Override mouse element's event listeners to allow scroll when not dragging
+		mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+		mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+		mouse.element.removeEventListener("touchstart", mouse.mousedown);
+		mouse.element.removeEventListener("touchmove", mouse.mousemove);
+		mouse.element.removeEventListener("touchend", mouse.mouseup);
+
+		// Run the engine and renderer
+		const runner = Runner.create();
+		Runner.run(runner, engine);
+		Render.run(render);
+
+		// Render labels on canvas
+		const renderLabels = () => {
+			const context = render.canvas.getContext("2d");
+			// Get current sizing for text rendering
+			const renderSize = width < 480 ? SIZING.mobile : width < 768 ? SIZING.tablet : SIZING.desktop;
+
+			bubbles.forEach((bubble) => {
+				context.save();
+				// Matter.js Render with pixelRatio already scales the context
+				// so we use the logical coordinates directly
+				context.translate(bubble.position.x, bubble.position.y);
+				context.rotate(bubble.angle);
+				context.textAlign = "center";
+				context.textBaseline = "middle";
+
+				// Add shadow for better readability
+				context.shadowColor = "rgba(0, 0, 0, 0.3)";
+				context.shadowBlur = 2;
+
+				context.fillStyle = "#fff";
+				context.font = `normal ${renderSize.fontSize}px Nohemi, sans-serif`;
+				context.fillText(bubble.label, 0, 0);
+				context.restore();
+			});
+		};
+
+		Events.on(render, "afterRender", renderLabels);
+
+		// Handle window resize
+		let resizeTimeout;
+		const handleResize = () => {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(() => {
+				const newWidth = container.clientWidth;
+				const newHeight = container.clientHeight || 600;
+
+				// Update canvas size
+				render.canvas.width = newWidth * pixelRatio;
+				render.canvas.height = newHeight * pixelRatio;
+				render.canvas.style.width = newWidth + "px";
+				render.canvas.style.height = newHeight + "px";
+				render.options.width = newWidth;
+				render.options.height = newHeight;
+
+				// Update boundaries
+				const widthScale = newWidth / width;
+				const heightScale = newHeight / height;
+
+				// Remove old boundaries
+				World.remove(engine.world, boundaries);
+
+				// Create new boundaries
+				boundaries[0] = Bodies.rectangle(newWidth / 2, newHeight + thickness / 2, newWidth, thickness, {
+					isStatic: true,
+					render: { fillStyle: "transparent" },
+				});
+				boundaries[1] = Bodies.rectangle(newWidth / 2, -thickness / 2, newWidth, thickness, {
+					isStatic: true,
+					render: { fillStyle: "transparent" },
+				});
+				boundaries[2] = Bodies.rectangle(-thickness / 2, newHeight / 2, thickness, newHeight, {
+					isStatic: true,
+					render: { fillStyle: "transparent" },
+				});
+				boundaries[3] = Bodies.rectangle(newWidth + thickness / 2, newHeight / 2, thickness, newHeight, {
+					isStatic: true,
+					render: { fillStyle: "transparent" },
 				});
 
-				tl.fromTo(
-					".skillColumn h2",
-					{ scaleX: 0 },
-					{
-						delay: 0.4,
-						scaleX: 1,
-						duration: 0.5,
-						ease: "power2.out",
-						stagger: 0.1,
-					}
-				);
+				World.add(engine.world, boundaries);
 
-				tl.fromTo(
-					".skill",
-					{ opacity: 0 },
-					{
-						opacity: 1,
-						duration: 0.1,
-						stagger: 0.05,
-						ease: "none",
-					}
-				);
-			});
-		});
-		return () => ctx.revert();
+				// Reposition bubbles proportionally
+				bubbles.forEach((bubble) => {
+					const newX = bubble.position.x * widthScale;
+					const newY = bubble.position.y * heightScale;
+					Matter.Body.setPosition(bubble, { x: newX, y: newY });
+				});
+			}, 100);
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		// Cleanup
+		return () => {
+			clearTimeout(resizeTimeout);
+			document.body.style.overflow = ""; // Restore scrolling
+			window.removeEventListener("resize", handleResize);
+			Events.off(mouseConstraint, "startdrag");
+			Events.off(mouseConstraint, "enddrag");
+			Events.off(render, "afterRender", renderLabels);
+			Render.stop(render);
+			Runner.stop(runner);
+			World.clear(engine.world);
+			Engine.clear(engine);
+			render.canvas.remove();
+			render.textures = {};
+		};
 	}, []);
 
 	return (
 		<div className="skills">
-			<div className="skillColumn third skillsDevelopment">
-				{/* <span className="keyline"></span> */}
-				<h2>Development</h2>
-				{skillsArray.map((skill) => {
-					if (skill.skillTypes.includes("development")) {
-						return (
-							<div className="skill" key={skill.skillName}>
-								<h3>{skill.skillName}</h3>
-							</div>
-						);
-					}
-				})}
-			</div>
-			<div className="skillColumn third skills3d">
-				{/* <span className="keyline"></span> */}
-				<h2>3D</h2>
-				{skillsArray.map((skill) => {
-					if (skill.skillTypes.includes("3D")) {
-						return (
-							<div className="skill" key={skill.skillName}>
-								<h3>{skill.skillName}</h3>
-							</div>
-						);
-					}
-				})}
-			</div>
-			<div className="skillColumn third skillsDesign">
-				{/* <span className="keyline"></span> */}
-				<h2>Design</h2>
-				{skillsArray.map((skill) => {
-					if (skill.skillTypes.includes("design")) {
-						return (
-							<div className="skill" key={skill.skillName}>
-								<h3>{skill.skillName}</h3>
-							</div>
-						);
-					}
-				})}
-			</div>
+			<div ref={sceneRef} className="skills-canvas-container" style={{ cursor: isDragging ? "grabbing" : "grab" }} />
 		</div>
 	);
 }

@@ -66,44 +66,12 @@
       "oAP" : "\/public\/oilslick.hdr",
       "oF" : 0
     },
-    "\/public\/orb_external.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/orb_external.glb",
-      "oF" : 0
-    },
     "\/public\/orb_shapekeyed.glb" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/public\/orb_shapekeyed.glb",
-      "oF" : 0
-    },
-    "\/public\/starorb.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/starorb.glb",
-      "oF" : 0
-    },
-    "\/public\/starorb1.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/starorb1.glb",
-      "oF" : 0
-    },
-    "\/public\/starorb2.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/starorb2.glb",
       "oF" : 0
     },
     "\/README.md" : {
@@ -143,6 +111,28 @@
       "oF" : 0,
       "oO" : 1,
       "oS" : 1
+    },
+    "\/src\/Components\/About.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/About-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/src\/Components\/Footer.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/Footer-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
     },
     "\/src\/Components\/Header.jsx" : {
       "bF" : 0,
@@ -248,38 +238,6 @@
       "oAP" : "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff2",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/FeatureMono-Medium.woff" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/FeatureMono-Medium.woff",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/FeatureMono-Medium.woff2" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/FeatureMono-Medium.woff2",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/FeatureMono-Regular.woff" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/FeatureMono-Regular.woff",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/FeatureMono-Regular.woff2" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/FeatureMono-Regular.woff2",
-      "oF" : 0
-    },
     "\/src\/static\/fonts\/InstrumentSerif-Regular.woff" : {
       "cB" : 0,
       "ft" : 8192,
@@ -294,6 +252,22 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/src\/static\/fonts\/InstrumentSerif-Regular.woff2",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff2",
       "oF" : 0
     },
     "\/src\/static\/fonts\/Nohemi-Light.woff" : {
@@ -328,11 +302,11 @@
       "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff2",
       "oF" : 0
     },
-    "\/src\/static\/images\/jerrycancreative.png" : {
+    "\/src\/static\/images\/dexter.png" : {
       "ft" : 32768,
-      "iS" : 372871,
+      "iS" : 4223136,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/jerrycancreative.png",
+      "oAP" : "\/src\/static\/images\/dexter.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -341,17 +315,43 @@
       "q" : 90,
       "rq" : 75
     },
-    "\/src\/static\/images\/overbeerpong.jpg" : {
-      "ft" : 16384,
-      "iS" : 163881,
-      "jF" : 0,
+    "\/src\/static\/images\/jerryCanCreative.png" : {
+      "ft" : 32768,
+      "iS" : 454206,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/overbeerpong.jpg",
+      "oAP" : "\/src\/static\/images\/jerryCanCreative.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
+      "oT" : 1,
       "ou" : "lpckwebp-none",
-      "q" : 100,
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/overBeerPongImage.png" : {
+      "ft" : 32768,
+      "iS" : 216771,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/overBeerPongImage.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/songworks.png" : {
+      "ft" : 32768,
+      "iS" : 7359605,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/songworks.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
       "rq" : 75
     },
     "\/src\/style.css" : {

@@ -6,48 +6,53 @@ import gsap from "gsap";
 function Header() {
 	const linkWrapperRef = useRef();
 
-	const handleHover = (ref) => {
-		const top = ref.current.querySelector("#top");
-		const bottom = ref.current.querySelector("#bottom");
+	let handleHover;
+	let handleLeave;
 
-		// end previous tweens before the next anim starts
-		gsap.killTweensOf([top, bottom]);
+	if (window.innerWidth > 800) {
+		handleHover = (ref) => {
+			const top = ref.current.querySelector("#top");
+			const bottom = ref.current.querySelector("#bottom");
 
-		gsap.to(top, {
-			y: "-100%",
-			duration: 0.2,
-			ease: "power3.out",
-		});
+			// end previous tweens before the next anim starts
+			gsap.killTweensOf([top, bottom]);
 
-		gsap.to(bottom, {
-			y: "-100%",
-			duration: 0.2,
+			gsap.to(top, {
+				y: "-100%",
+				duration: 0.2,
+				ease: "power3.out",
+			});
 
-			ease: "power3.out",
-		});
-	};
+			gsap.to(bottom, {
+				y: "-100%",
+				duration: 0.2,
 
-	const handleLeave = (ref) => {
-		const top = ref.current.querySelector("#top");
-		const bottom = ref.current.querySelector("#bottom");
+				ease: "power3.out",
+			});
+		};
 
-		// end previous tweens before the next anim starts
-		gsap.killTweensOf([top, bottom]);
+		handleLeave = (ref) => {
+			const top = ref.current.querySelector("#top");
+			const bottom = ref.current.querySelector("#bottom");
 
-		gsap.to(top, {
-			y: 0,
-			x: 0,
-			scale: 1,
-			duration: 0.35,
-			ease: "power3.out",
-		});
+			// end previous tweens before the next anim starts
+			gsap.killTweensOf([top, bottom]);
 
-		gsap.to(bottom, {
-			y: 0,
-			duration: 0.35,
-			ease: "power3.out",
-		});
-	};
+			gsap.to(top, {
+				y: 0,
+				x: 0,
+				scale: 1,
+				duration: 0.35,
+				ease: "power3.out",
+			});
+
+			gsap.to(bottom, {
+				y: 0,
+				duration: 0.35,
+				ease: "power3.out",
+			});
+		};
+	}
 
 	return (
 		<div className="header">
@@ -56,11 +61,13 @@ function Header() {
 			<div className="startAProject">
 				<div className="linkWrapper" ref={linkWrapperRef} onMouseEnter={() => handleHover(linkWrapperRef)} onMouseLeave={() => handleLeave(linkWrapperRef)}>
 					<a id="top" href="mailto:benscott.dev@gmail.com" target="_blank" style={{ textDecoration: "none", color: "inherit" }}>
-						<span>START A PROJECT</span>
+						<span>LET'S CHAT</span>
 					</a>
-					<a id="bottom" href="mailto:benscott.dev@gmail.com" target="_blank" style={{ textDecoration: "none", color: "inherit" }}>
-						<span>START A PROJECT</span>
-					</a>
+					{window.innerWidth > 800 && (
+						<a id="bottom" href="mailto:benscott.dev@gmail.com" target="_blank" style={{ textDecoration: "none", color: "inherit" }}>
+							<span>LET'S CHAT</span>
+						</a>
+					)}
 				</div>
 			</div>
 		</div>
