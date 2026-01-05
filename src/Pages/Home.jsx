@@ -83,7 +83,7 @@ function Home() {
 		<div>
 			<div className="homeMain headerAdjustment" id="homeMain">
 				<Header />
-				<section ref={heroRef} className="scrollTriggerSection" style={{ height: "100dvh !important", position: "relative" }}>
+				<section ref={heroRef} className="scrollTriggerSection">
 					<div className="logoOverlay">
 						<Orb />
 						<div className="overlayStroke">

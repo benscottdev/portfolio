@@ -308,12 +308,12 @@ h1 {
 
 .scrollTriggerSection {
 	background-color: $backgroundColor;
-	min-height: 100vh;
+	min-height: 100dvh !important;
 	min-height: -webkit-fill-available;
 
 	@media (max-width: 768px) {
-		height: 100vh !important;
-		min-height: 100vh;
+		height: 100dvh !important;
+		min-height: 100dvh !important;
 		position: relative;
 	}
 }
