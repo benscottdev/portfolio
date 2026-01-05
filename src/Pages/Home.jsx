@@ -25,16 +25,18 @@ function Home() {
 				/**
 				 * HERO — Pin + Logo Fade
 				 */
+				const isMobile = window.innerWidth <= 768;
+
 				gsap.to([".logoOverlay", ".scrollTriggerSection"], {
 					autoAlpha: 0,
 					ease: "none",
 					scrollTrigger: {
 						trigger: heroRef.current,
 						start: "top top",
-						end: "bottom 75%",
-						pin: true,
+						end: isMobile ? "bottom 50%" : "bottom 75%",
+						pin: !isMobile,
 						scrub: true,
-						anticipatePin: 1,
+						anticipatePin: isMobile ? 0 : 1,
 					},
 				});
 			});
