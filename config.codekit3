@@ -17,6 +17,45 @@
       "oAP" : "\/.gitignore",
       "oF" : 0
     },
+    "\/android-chrome-192x192.png" : {
+      "ft" : 32768,
+      "iS" : 20997,
+      "oA" : 0,
+      "oAP" : "\/android-chrome-192x192.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/android-chrome-512x512.png" : {
+      "ft" : 32768,
+      "iS" : 141894,
+      "oA" : 0,
+      "oAP" : "\/android-chrome-512x512.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/apple-touch-icon.png" : {
+      "ft" : 32768,
+      "iS" : 18603,
+      "oA" : 0,
+      "oAP" : "\/apple-touch-icon.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
     "\/eslint.config.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -27,6 +66,40 @@
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
+    },
+    "\/favicon-16x16.png" : {
+      "ft" : 32768,
+      "iS" : 403,
+      "oA" : 0,
+      "oAP" : "\/favicon-16x16.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/favicon-32x32.png" : {
+      "ft" : 32768,
+      "iS" : 978,
+      "oA" : 0,
+      "oAP" : "\/favicon-32x32.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/favicon.ico" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/favicon.ico",
+      "oF" : 0
     },
     "\/index.html" : {
       "cB" : 0,
@@ -74,6 +147,14 @@
       "oAP" : "\/public\/orb_shapekeyed.glb",
       "oF" : 0
     },
+    "\/README.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/README.html",
+      "oF" : 0
+    },
     "\/README.md" : {
       "cB" : 0,
       "cS" : 0,
@@ -103,14 +184,6 @@
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
-    },
-    "\/src\/assets\/portfolioData.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/src\/assets\/portfolioData-min.json",
-      "oF" : 0,
-      "oO" : 1,
-      "oS" : 1
     },
     "\/src\/Components\/About.jsx" : {
       "bF" : 0,
@@ -178,6 +251,17 @@
       "sC" : 3,
       "tS" : 0
     },
+    "\/src\/Components\/SectionHeading.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/SectionHeading-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
     "\/src\/Components\/Skills.jsx" : {
       "bF" : 0,
       "ft" : 64,
@@ -221,38 +305,6 @@
       "oF" : 1,
       "sC" : 3,
       "tS" : 0
-    },
-    "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff2" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/AkiraExpanded-SuperBold.woff2",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/InstrumentSerif-Regular.woff" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/InstrumentSerif-Regular.woff",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/InstrumentSerif-Regular.woff2" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/InstrumentSerif-Regular.woff2",
-      "oF" : 0
     },
     "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff" : {
       "cB" : 0,
@@ -401,7 +453,7 @@
     "creationDate" : 787220420.51247394,
     "displayValue" : "portfolio",
     "displayValueWasSetByUser" : 0,
-    "iconImageName" : "brackets_gray",
+    "iconImageName" : "\/apple-touch-icon.png",
     "iconImageWasSetByUser" : 0
   },
   "projectSettings" : {

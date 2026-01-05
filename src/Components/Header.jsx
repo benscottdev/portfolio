@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import SydneyTime from "./SydneyTime";
 
 import gsap from "gsap";
@@ -57,7 +57,6 @@ function Header() {
 	return (
 		<div className="header">
 			<SydneyTime />
-			{/* <span className="logo">BEN SCOTT</span> */}
 			<div className="startAProject">
 				<div className="linkWrapper" ref={linkWrapperRef} onMouseEnter={() => handleHover(linkWrapperRef)} onMouseLeave={() => handleLeave(linkWrapperRef)}>
 					<a id="top" href="mailto:benscott.dev@gmail.com" target="_blank" style={{ textDecoration: "none", color: "inherit" }}>

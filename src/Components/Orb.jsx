@@ -1,17 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { HDRLoader } from "three/examples/jsm/loaders/HDRLoader.js";
 import { PMREMGenerator } from "three";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
 function Orb() {
 	const canvasRef = useRef();
-	const sceneRef = useRef(null);
-	const cameraRef = useRef(null);
-	const rendererRef = useRef(null);
 	const orbRef = useRef(null);
 	const animationRef = useRef(null);
 	const gsapAnimRef = useRef(null);
@@ -32,9 +27,6 @@ function Orb() {
 
 		scene.add(camera);
 
-		sceneRef.current = scene;
-		cameraRef.current = camera;
-
 		// Renderer with optimized settings
 		const renderer = new THREE.WebGLRenderer({
 			canvas,
@@ -50,9 +42,6 @@ function Orb() {
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
 		renderer.toneMapping = THREE.ACESFilmicToneMapping;
-		rendererRef.current = renderer;
-
-		// Load environment
 
 		// Load environment map
 		async function loadEnvironment() {

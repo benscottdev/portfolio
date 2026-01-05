@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -19,6 +19,7 @@ export default function ProjectsBlock() {
 			created: "2025",
 			link: "https://overbeerpong.ccpromotions.com.au",
 			image: overBeerPongImage,
+			status: "Completed",
 		},
 		{
 			slug: "jerrycancreative",
@@ -26,6 +27,7 @@ export default function ProjectsBlock() {
 			created: "2025",
 			link: "/",
 			image: jerryCanCreativeImage,
+			status: "In Progress",
 		},
 		{
 			slug: "songworks",
@@ -33,6 +35,7 @@ export default function ProjectsBlock() {
 			created: "2024",
 			link: "https://songworks.com.au",
 			image: songWorksImage,
+			status: "Completed",
 		},
 		{
 			slug: "dexters",
@@ -40,6 +43,7 @@ export default function ProjectsBlock() {
 			created: "2026",
 			link: "https://dextersbookco.com.au",
 			image: dextersBookCo,
+			status: "In Progress",
 		},
 	];
 
@@ -134,7 +138,7 @@ export default function ProjectsBlock() {
 	return (
 		<div className="projects" ref={projectsRef}>
 			{projects.map((project) => (
-				<div key={project.slug} className={`project ${project.slug}`} onMouseEnter={onHover} onMouseLeave={onLeave} onMouseMove={onMouseMove}>
+				<div key={project.slug} className={`project ${project.slug}`} onMouseEnter={window.innerWidth > 800 ? onHover : null} onMouseLeave={window.innerWidth > 800 ? onLeave : null} onMouseMove={window.innerWidth > 800 ? onMouseMove : null}>
 					<a href={project.link} target="_blank">
 						<div className="projectCopy">
 							<p className="title">{project.title}</p>
@@ -142,9 +146,11 @@ export default function ProjectsBlock() {
 						</div>
 						<div className="backgroundHover"></div>
 					</a>
-					<div className="imageContainer">
-						<img src={project.image} alt={project.title} />
-					</div>
+					{window.innerWidth > 800 && (
+						<div className="imageContainer">
+							<img src={project.image} alt={project.title} />
+						</div>
+					)}
 				</div>
 			))}
 		</div>

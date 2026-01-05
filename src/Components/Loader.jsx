@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const LOADING_TIME = 3000;
 
-function Loader({ onComplete }) {
+function Loader() {
 	const [progress, setProgress] = useState(null);
 
 	useEffect(() => {
@@ -16,7 +17,12 @@ function Loader({ onComplete }) {
 			setProgress(percent);
 
 			if (percent === 100) {
-				const tl = gsap.timeline();
+				const tl = gsap.timeline({
+					onComplete: () => {
+						// Refresh ScrollTrigger after loader completes
+						ScrollTrigger.refresh();
+					},
+				});
 				tl.to(".percent", {
 					opacity: 0,
 				});
@@ -31,10 +37,7 @@ function Loader({ onComplete }) {
 					display: "none",
 				});
 
-				// document.querySelector(".percent").innerHTML = "";
-
 				clearInterval(interval);
-				onComplete?.();
 			}
 		}, 30);
 
@@ -43,15 +46,20 @@ function Loader({ onComplete }) {
 
 	return (
 		<div className="loader">
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
-			<div className="loaderPixel"></div>
+			{window.innerWidth > 800 && (
+				<>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+					<div className="loaderPixel"></div>
+				</>
+			)}
+
 			<div className="loaderPixel"></div>
 			<div className="loaderInner">
 				<div className="percent">{progress}%</div>
