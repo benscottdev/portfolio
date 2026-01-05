@@ -180,9 +180,11 @@ function Skills() {
 		// Override mouse element's event listeners to allow scroll when not dragging
 		mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
 		mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
-		mouse.element.removeEventListener("touchstart", mouse.mousedown);
-		mouse.element.removeEventListener("touchmove", mouse.mousemove);
-		mouse.element.removeEventListener("touchend", mouse.mouseup);
+
+		// Re-enable touch events with proper handling for mobile
+		mouse.element.addEventListener("touchstart", mouse.mousedown, { passive: false });
+		mouse.element.addEventListener("touchmove", mouse.mousemove, { passive: false });
+		mouse.element.addEventListener("touchend", mouse.mouseup, { passive: false });
 
 		// Run the engine and renderer
 		const runner = Runner.create();
@@ -276,6 +278,9 @@ function Skills() {
 			clearTimeout(resizeTimeout);
 			document.body.style.overflow = ""; // Restore scrolling
 			window.removeEventListener("resize", handleResize);
+			mouse.element.removeEventListener("touchstart", mouse.mousedown);
+			mouse.element.removeEventListener("touchmove", mouse.mousemove);
+			mouse.element.removeEventListener("touchend", mouse.mouseup);
 			Events.off(mouseConstraint, "startdrag");
 			Events.off(mouseConstraint, "enddrag");
 			Events.off(render, "afterRender", renderLabels);

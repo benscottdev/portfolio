@@ -34,9 +34,10 @@ function Home() {
 						trigger: heroRef.current,
 						start: "top top",
 						end: isMobile ? "bottom 50%" : "bottom 75%",
-						pin: !isMobile,
+						pin: true,
 						scrub: true,
-						anticipatePin: isMobile ? 0 : 1,
+						anticipatePin: 1,
+						pinSpacing: true,
 					},
 				});
 			});
