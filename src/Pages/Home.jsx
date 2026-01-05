@@ -44,7 +44,7 @@ function Home() {
 
 				// Mobile (768px and below)
 				mm.add("(max-width: 768px)", () => {
-					gsap.to([".logoOverlay", ".scrollTriggerSection"], {
+					gsap.to(".scrollTriggerSection", {
 						autoAlpha: 0,
 						ease: "none",
 						scrollTrigger: {
