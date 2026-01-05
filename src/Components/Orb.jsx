@@ -22,7 +22,7 @@ function Orb() {
 
 		const checkIfReady = () => {
 			if (assetsLoaded && sceneReady) {
-				console.log("Everything ready, hiding loader");
+				// console.log("Everything ready, hiding loader");
 				setTimeout(() => {
 					setIsLoaded(true);
 				}, 300);
@@ -33,7 +33,7 @@ function Orb() {
 		const loadingManager = new THREE.LoadingManager(
 			// onLoad
 			() => {
-				console.log("Assets loaded!");
+				// console.log("Assets loaded!");
 				assetsLoaded = true;
 				setLoadingProgress(100);
 				checkIfReady();
@@ -41,7 +41,7 @@ function Orb() {
 			// onProgress
 			(url, itemsLoaded, itemsTotal) => {
 				const progress = Math.round((itemsLoaded / itemsTotal) * 100);
-				console.log(`Loading: ${progress}%`);
+				// console.log(`Loading: ${progress}%`);
 				setLoadingProgress(progress);
 			},
 			// onError
@@ -209,7 +209,7 @@ function Orb() {
 
 			// Mark scene as ready after enough frames have rendered
 			if (renderCount === 30 && !sceneReady) {
-				console.log("Scene rendered and ready");
+				// console.log("Scene rendered and ready");
 				sceneReady = true;
 				checkIfReady();
 			}

@@ -86,8 +86,8 @@ function Skills() {
 		render.canvas.style.width = width + "px";
 		render.canvas.style.height = height + "px";
 
-		// Create boundaries (all four sides)
-		const thickness = 50;
+		// Create boundaries (all four sides) - thick walls to prevent escaping
+		const thickness = 200; // Increased from 50 to prevent pills escaping
 		const boundaries = [
 			// Bottom
 			Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, {
@@ -149,7 +149,7 @@ function Skills() {
 		// Add all bodies to the world
 		World.add(engine.world, [...boundaries, ...bubbles]);
 
-		// Create mouse control
+		// Create mouse control with limited throwing power
 		const mouse = Mouse.create(render.canvas);
 		const mouseConstraint = MouseConstraint.create(engine, {
 			mouse: mouse,
@@ -160,6 +160,21 @@ function Skills() {
 		});
 
 		World.add(engine.world, mouseConstraint);
+
+		// Limit maximum velocity to prevent pills escaping
+		Events.on(engine, "beforeUpdate", () => {
+			const maxSpeed = 20;
+			bubbles.forEach((bubble) => {
+				const speed = Math.sqrt(bubble.velocity.x ** 2 + bubble.velocity.y ** 2);
+				if (speed > maxSpeed) {
+					const scale = maxSpeed / speed;
+					Matter.Body.setVelocity(bubble, {
+						x: bubble.velocity.x * scale,
+						y: bubble.velocity.y * scale,
+					});
+				}
+			});
+		});
 
 		// Track dragging state
 		Events.on(mouseConstraint, "startdrag", () => {
