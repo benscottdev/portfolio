@@ -8,8 +8,9 @@ import About from "../Components/About";
 import Footer from "../Components/Footer";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function Home() {
 	const heroRef = useRef(null);
@@ -18,12 +19,24 @@ function Home() {
 
 	useEffect(() => {
 		let ctx;
+		let smoother;
 
 		// ScrollTrigger.matchMedia for responsive behavior
 		const mm = gsap.matchMedia();
 
 		// Small delay to ensure all components are mounted
 		const timer = setTimeout(() => {
+			// Initialize ScrollSmoother
+			// NOTE: Fixed elements (Header, Loader, Orb canvas) are outside #smooth-wrapper
+			// This prevents them from being affected by the smooth scroll transform
+			smoother = ScrollSmoother.create({
+				wrapper: "#smooth-wrapper",
+				content: "#smooth-content",
+				smooth: 1.5, // Smoothness amount (higher = smoother but can feel sluggish)
+				effects: true, // Enable data-speed and data-lag attributes
+				smoothTouch: 0.1, // Minimal smoothing on mobile to avoid conflicts with native scroll
+			});
+
 			ctx = gsap.context(() => {
 				// Desktop (larger than 768px)
 				mm.add("(min-width: 769px)", () => {
@@ -72,6 +85,9 @@ function Home() {
 
 		return () => {
 			clearTimeout(timer);
+			if (smoother) {
+				smoother.kill();
+			}
 			mm.revert(); // Properly revert matchMedia
 			if (ctx) {
 				ctx.revert();
@@ -82,7 +98,6 @@ function Home() {
 	return (
 		<div>
 			<div className="homeMain headerAdjustment" id="homeMain">
-				<Header />
 				<section ref={heroRef} className="scrollTriggerSection">
 					<div className="logoOverlay">
 						<Orb />

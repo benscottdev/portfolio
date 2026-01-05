@@ -50,6 +50,27 @@ body {
 	min-height: -webkit-fill-available;
 }
 
+// ScrollSmoother wrapper styles
+#smooth-wrapper {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+#smooth-content {
+	overflow: visible;
+	will-change: transform;
+}
+
+// Ensure fixed elements work with ScrollSmoother
+.header,
+.loader,
+.logoOverlay .webgl {
+	position: fixed !important;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
 h1 {
 	text-align: center;
 	color: $backgroundColor;

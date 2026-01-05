@@ -3,16 +3,21 @@ import "./style.css";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
 import { LoadingProvider } from "./contexts/LoadingContext";
+import Header from "./Components/Header";
 
 function App() {
 	return (
 		<LoadingProvider>
-			<div className="app">
-				<Loader />
-
-				<Routes>
-					<Route path="/" element={<Home />} />
-				</Routes>
+			{/* Fixed elements outside smooth scroll */}
+			<Loader />
+			<Header />
+			{/* ScrollSmoother wrapper structure */}
+			<div id="smooth-wrapper">
+				<div id="smooth-content">
+					<Routes>
+						<Route path="/" element={<Home />} />
+					</Routes>
+				</div>
 			</div>
 		</LoadingProvider>
 	);
