@@ -38,10 +38,16 @@ $smallBodyFontSize: 18px;
 	padding: 0px;
 }
 
+html {
+	height: -webkit-fill-available;
+}
+
 body {
 	color: $secondaryColor;
 	font-family: "Nohemi";
 	overflow-x: hidden;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
 }
 
 h1 {
@@ -195,12 +201,16 @@ h1 {
 	align-items: center;
 	justify-content: space-between;
 	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100dvw;
+	top: 0;
+	left: 0;
+	width: 100vw;
 	z-index: 999;
 	background-color: black;
 	padding: 0.25% 5px;
+
+	@media (max-width: 768px) {
+		padding: 5px;
+	}
 
 	.clockWrapper {
 		margin-top: 2px;
@@ -298,6 +308,14 @@ h1 {
 
 .scrollTriggerSection {
 	background-color: $backgroundColor;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+
+	@media (max-width: 768px) {
+		height: 100vh !important;
+		min-height: 100vh;
+		position: relative;
+	}
 }
 
 .aboutMe {

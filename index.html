@@ -3,8 +3,20 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="favicon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<title>BEN SCOTT</title>
+		<style>
+			html {
+				height: -webkit-fill-available;
+			}
+			body {
+				min-height: 100vh;
+				min-height: -webkit-fill-available;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="root"></div>
