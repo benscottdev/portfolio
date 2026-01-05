@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLoading } from "../contexts/LoadingContext";
@@ -6,25 +6,34 @@ import { useLoading } from "../contexts/LoadingContext";
 function Loader() {
 	const { loadingProgress, isLoaded } = useLoading();
 	const [displayProgress, setDisplayProgress] = useState(0);
+	const animationRef = useRef(null);
 
 	// Smoothly animate the displayed progress
 	useEffect(() => {
 		const target = loadingProgress;
 		const current = displayProgress;
 
-		// If progress increased, animate to new value
+		// Kill any existing animation
+		if (animationRef.current) {
+			animationRef.current.kill();
+		}
+
+		// Only animate if target is higher than current
 		if (target > current) {
 			const duration = target === 100 ? 500 : 1500; // Faster at 100%
-			gsap.to({ value: current }, {
-				value: target,
-				duration: duration / 1000,
-				ease: "power2.out",
-				onUpdate: function () {
-					setDisplayProgress(Math.round(this.targets()[0].value));
-				},
-			});
+			animationRef.current = gsap.to(
+				{ value: current },
+				{
+					value: target,
+					duration: duration / 1000,
+					ease: "power2.out",
+					onUpdate: function () {
+						setDisplayProgress(Math.round(this.targets()[0].value));
+					},
+				}
+			);
 		}
-	}, [loadingProgress]);
+	}, [loadingProgress, displayProgress]);
 
 	useEffect(() => {
 		if (isLoaded && displayProgress === 100) {

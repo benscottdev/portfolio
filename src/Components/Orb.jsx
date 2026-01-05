@@ -78,6 +78,9 @@ function Orb() {
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
 		renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
+		// Force initial render to establish proper positioning
+		renderer.render(scene, camera);
+
 		// Load environment map
 		async function loadEnvironment() {
 			const pmremGenerator = new PMREMGenerator(renderer);

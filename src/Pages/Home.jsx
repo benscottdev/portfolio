@@ -61,8 +61,13 @@ function Home() {
 				});
 			});
 
-			// Refresh ScrollTrigger after initialization
+			// Refresh ScrollTrigger after initialization and handle mobile address bar
 			ScrollTrigger.refresh();
+
+			// Additional refresh after a short delay to account for mobile browser UI
+			setTimeout(() => {
+				ScrollTrigger.refresh();
+			}, 500);
 		}, 100);
 
 		return () => {
