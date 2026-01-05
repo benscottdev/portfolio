@@ -71,8 +71,10 @@ function Orb() {
 		});
 		if (window.innerWidth > 2400) {
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 0.85));
-		} else {
+		} else if (window.innerWidth > 1000) {
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+		} else {
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 		}
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
