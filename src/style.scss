@@ -216,8 +216,11 @@ h1 {
 		}
 
 		#top {
-			margin-bottom: 3px;
+			@media (max-width: 768px) {
+				margin-bottom: 3px;
+			}
 		}
+
 		#bottom {
 			margin-top: 0px;
 			@media (max-width: 768px) {

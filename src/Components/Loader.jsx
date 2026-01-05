@@ -1,48 +1,55 @@
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-const LOADING_TIME = 3000;
+import { useLoading } from "../contexts/LoadingContext";
 
 function Loader() {
-	const [progress, setProgress] = useState(null);
+	const { loadingProgress, isLoaded } = useLoading();
+	const [displayProgress, setDisplayProgress] = useState(0);
+
+	// Smoothly animate the displayed progress
+	useEffect(() => {
+		const target = loadingProgress;
+		const current = displayProgress;
+
+		// If progress increased, animate to new value
+		if (target > current) {
+			const duration = target === 100 ? 500 : 1500; // Faster at 100%
+			gsap.to({ value: current }, {
+				value: target,
+				duration: duration / 1000,
+				ease: "power2.out",
+				onUpdate: function () {
+					setDisplayProgress(Math.round(this.targets()[0].value));
+				},
+			});
+		}
+	}, [loadingProgress]);
 
 	useEffect(() => {
-		const start = Date.now();
+		if (isLoaded && displayProgress === 100) {
+			const tl = gsap.timeline({
+				onComplete: () => {
+					// Refresh ScrollTrigger after loader completes
+					ScrollTrigger.refresh();
+				},
+			});
+			tl.to(".percent", {
+				opacity: 0,
+				duration: 0.3,
+			});
 
-		const interval = setInterval(() => {
-			const elapsed = Date.now() - start;
-			const percent = Math.min(Math.round((elapsed / LOADING_TIME) * 100), 100);
-
-			setProgress(percent);
-
-			if (percent === 100) {
-				const tl = gsap.timeline({
-					onComplete: () => {
-						// Refresh ScrollTrigger after loader completes
-						ScrollTrigger.refresh();
-					},
-				});
-				tl.to(".percent", {
-					opacity: 0,
-				});
-
-				tl.to(".loaderPixel", {
-					autoAlpha: 0,
-					duration: 0.2,
-					ease: "power1.in",
-					stagger: 0.1,
-				});
-				tl.to(".loader", {
-					display: "none",
-				});
-
-				clearInterval(interval);
-			}
-		}, 30);
-
-		return () => clearInterval(interval);
-	}, []);
+			tl.to(".loaderPixel", {
+				autoAlpha: 0,
+				duration: 0.2,
+				ease: "power1.in",
+				stagger: 0.1,
+			});
+			tl.to(".loader", {
+				display: "none",
+			});
+		}
+	}, [isLoaded, displayProgress]);
 
 	return (
 		<div className="loader">
@@ -62,9 +69,9 @@ function Loader() {
 
 			<div className="loaderPixel"></div>
 			<div className="loaderInner">
-				<div className="percent">{progress}%</div>
+				<div className="percent">{displayProgress}%</div>
 				<div className="bar">
-					<div className="barFill" style={{ height: `${progress}%` }} />
+					<div className="barFill" style={{ height: `${displayProgress}%` }} />
 				</div>
 			</div>
 		</div>

@@ -4,16 +4,51 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { HDRLoader } from "three/examples/jsm/loaders/HDRLoader.js";
 import { PMREMGenerator } from "three";
 import gsap from "gsap";
+import { useLoading } from "../contexts/LoadingContext";
 
 function Orb() {
 	const canvasRef = useRef();
 	const orbRef = useRef(null);
 	const animationRef = useRef(null);
 	const gsapAnimRef = useRef(null);
+	const { setLoadingProgress, setIsLoaded } = useLoading();
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
 		if (!canvas) return;
+
+		let assetsLoaded = false;
+		let sceneReady = false;
+
+		const checkIfReady = () => {
+			if (assetsLoaded && sceneReady) {
+				console.log("Everything ready, hiding loader");
+				setTimeout(() => {
+					setIsLoaded(true);
+				}, 300);
+			}
+		};
+
+		// Create LoadingManager to track all asset loading
+		const loadingManager = new THREE.LoadingManager(
+			// onLoad
+			() => {
+				console.log("Assets loaded!");
+				assetsLoaded = true;
+				setLoadingProgress(100);
+				checkIfReady();
+			},
+			// onProgress
+			(url, itemsLoaded, itemsTotal) => {
+				const progress = Math.round((itemsLoaded / itemsTotal) * 100);
+				console.log(`Loading: ${progress}%`);
+				setLoadingProgress(progress);
+			},
+			// onError
+			(url) => {
+				console.warn(`Error loading: ${url}`);
+			}
+		);
 
 		// Initialize scene and camera once
 		const scene = new THREE.Scene();
@@ -35,9 +70,9 @@ function Orb() {
 			powerPreference: "high-performance",
 		});
 		if (window.innerWidth > 2400) {
-			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 0.85));
 		} else {
-			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 		}
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -48,7 +83,7 @@ function Orb() {
 			const pmremGenerator = new PMREMGenerator(renderer);
 			pmremGenerator.compileEquirectangularShader();
 
-			const hdrLoader = new HDRLoader();
+			const hdrLoader = new HDRLoader(loadingManager);
 			try {
 				const hdrTexture = await hdrLoader.loadAsync("/oilslick.hdr");
 				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
@@ -85,34 +120,26 @@ function Orb() {
 		scene.add(orbGroup);
 
 		// Load model
-		const gltfLoader = new GLTFLoader();
-		gltfLoader.load(
-			"/orb_shapekeyed.glb",
-			(model) => {
-				orb = model.scene;
-				orb.scale.set(0.25, 0.25, 0.25);
+		const gltfLoader = new GLTFLoader(loadingManager);
+		gltfLoader.load("/orb_shapekeyed.glb", (model) => {
+			orb = model.scene;
+			orb.scale.set(0.25, 0.25, 0.25);
 
-				orb.traverse((child) => {
-					if (child.isMesh) {
-						child.material = customOrbMat;
-						// Enable frustum culling
-						child.frustumCulled = true;
+			orb.traverse((child) => {
+				if (child.isMesh) {
+					child.material = customOrbMat;
+					// Enable frustum culling
+					child.frustumCulled = true;
+					// Set morph target to 0 by default
+					if (child.morphTargetInfluences) {
+						child.morphTargetInfluences[0] = 0;
 					}
-				});
+				}
+			});
 
-				orbGroup.add(orb);
-				orbRef.current = orb;
-			},
-			undefined,
-			(error) => {
-				console.warn("Model not found, using fallback sphere");
-				// Fallback sphere
-				const geometry = new THREE.SphereGeometry(1, 64, 64);
-				const sphere = new THREE.Mesh(geometry, customOrbMat);
-				scene.add(sphere);
-				orbRef.current = sphere;
-			}
-		);
+			orbGroup.add(orb);
+			orbRef.current = orb;
+		});
 
 		// Lighting
 		const ambientLight = new THREE.AmbientLight(0xffffff, 0);
@@ -170,9 +197,19 @@ function Orb() {
 		window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
 		// Optimized render loop
+		let renderCount = 0;
 		const tick = () => {
 			renderer.render(scene, camera);
 			animationRef.current = requestAnimationFrame(tick);
+
+			// Mark scene as ready after enough frames have rendered
+			if (renderCount === 30 && !sceneReady) {
+				console.log("Scene rendered and ready");
+				sceneReady = true;
+				checkIfReady();
+			}
+			renderCount++;
+
 			if (orb) {
 				orb.rotation.z += 0.003;
 				orb.rotation.y += 0.003;

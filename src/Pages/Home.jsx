@@ -19,26 +19,45 @@ function Home() {
 	useEffect(() => {
 		let ctx;
 
+		// ScrollTrigger.matchMedia for responsive behavior
+		const mm = gsap.matchMedia();
+
 		// Small delay to ensure all components are mounted
 		const timer = setTimeout(() => {
 			ctx = gsap.context(() => {
-				/**
-				 * HERO — Pin + Logo Fade
-				 */
-				const isMobile = window.innerWidth <= 768;
+				// Desktop (larger than 768px)
+				mm.add("(min-width: 769px)", () => {
+					gsap.to([".logoOverlay", ".scrollTriggerSection"], {
+						autoAlpha: 0,
+						ease: "none",
+						scrollTrigger: {
+							trigger: heroRef.current,
+							start: "top top",
+							end: "bottom 75%",
+							pin: true,
+							scrub: true,
+							anticipatePin: 1,
+							pinSpacing: true,
+						},
+					});
+				});
 
-				gsap.to([".logoOverlay", ".scrollTriggerSection"], {
-					autoAlpha: 0,
-					ease: "none",
-					scrollTrigger: {
-						trigger: heroRef.current,
-						start: "top top",
-						end: isMobile ? "bottom 50%" : "bottom 75%",
-						pin: true,
-						scrub: true,
-						anticipatePin: 1,
-						pinSpacing: true,
-					},
+				// Mobile (768px and below)
+				mm.add("(max-width: 768px)", () => {
+					gsap.to([".logoOverlay", ".scrollTriggerSection"], {
+						autoAlpha: 0,
+						ease: "none",
+						scrollTrigger: {
+							trigger: heroRef.current,
+							start: "top top",
+							end: "bottom 50%",
+							pin: true,
+							scrub: true,
+							pinSpacing: true,
+							anticipatePin: 1,
+							invalidateOnRefresh: true,
+						},
+					});
 				});
 			});
 
@@ -48,6 +67,7 @@ function Home() {
 
 		return () => {
 			clearTimeout(timer);
+			mm.revert(); // Properly revert matchMedia
 			if (ctx) {
 				ctx.revert();
 			}

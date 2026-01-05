@@ -195,8 +195,10 @@ h1 {
     margin-bottom: -4px;
   }
 }
-.header .clockWrapper #top {
-  margin-bottom: 3px;
+@media (max-width: 768px) {
+  .header .clockWrapper #top {
+    margin-bottom: 3px;
+  }
 }
 .header .clockWrapper #bottom {
   margin-top: 0px;
