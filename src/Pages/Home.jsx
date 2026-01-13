@@ -20,21 +20,15 @@ function Home() {
 	useEffect(() => {
 		let ctx;
 		let smoother;
-
-		// ScrollTrigger.matchMedia for responsive behavior
 		const mm = gsap.matchMedia();
-
-		// Small delay to ensure all components are mounted
 		const timer = setTimeout(() => {
-			// Initialize ScrollSmoother
-			// NOTE: Fixed elements (Header, Loader, Orb canvas) are outside #smooth-wrapper
-			// This prevents them from being affected by the smooth scroll transform
 			smoother = ScrollSmoother.create({
 				wrapper: "#smooth-wrapper",
 				content: "#smooth-content",
-				smooth: 1.5, // Smoothness amount (higher = smoother but can feel sluggish)
-				effects: true, // Enable data-speed and data-lag attributes
-				smoothTouch: 0.1, // Minimal smoothing on mobile to avoid conflicts with native scroll
+				smooth: 1,
+				effects: true,
+				smoothTouch: 0.1,
+				normalizeScroll: true,
 			});
 
 			ctx = gsap.context(() => {

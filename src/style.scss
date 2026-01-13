@@ -331,6 +331,12 @@ h1 {
 	align-items: center;
 	justify-content: center;
 	margin: 0px 20px;
+	// Fix rendering artifacts from ScrollSmoother
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 
 	p {
 		text-align: center;
@@ -339,6 +345,14 @@ h1 {
 		line-height: 60px;
 		font-size: 50px !important;
 		display: block;
+		transform: translateZ(0);
+		will-change: auto;
+		
+		.word {
+			display: inline-block;
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+		}
 
 		@media (max-width: 1200px) {
 			max-width: none;

@@ -14,6 +14,14 @@ export default function ProjectsBlock() {
 
 	const projects = [
 		{
+			slug: "confirmed",
+			title: "Confirmed (Releasing Feb 2026)",
+			created: "2026",
+			link: "",
+			image: null,
+			status: "In Progress",
+		},
+		{
 			slug: "overbeerpong",
 			title: "Over Beer Pong",
 			created: "2025",
