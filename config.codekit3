@@ -426,6 +426,19 @@
       "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff2",
       "oF" : 0
     },
+    "\/src\/static\/images\/confirmedApp.png" : {
+      "ft" : 32768,
+      "iS" : 38402,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/confirmedApp.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
     "\/src\/static\/images\/dexter.png" : {
       "ft" : 32768,
       "iS" : 4223136,

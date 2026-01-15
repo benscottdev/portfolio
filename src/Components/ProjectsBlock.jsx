@@ -8,6 +8,7 @@ import overBeerPongImage from "../static/images/overBeerPongImage.png";
 import jerryCanCreativeImage from "../static/images/jerrycancreative.png";
 import songWorksImage from "../static/images/songworks.png";
 import dextersBookCo from "../static/images/dexter.png";
+import confirmedAppImage from "../static/images/confirmedApp.png";
 
 export default function ProjectsBlock() {
 	const projectsRef = useRef(null);
@@ -20,7 +21,7 @@ export default function ProjectsBlock() {
 			title: "Confirmed",
 			created: "2026",
 			link: "",
-			image: null,
+			image: confirmedAppImage,
 			type: "ios app",
 			tech: "React Native",
 			status: "Coming Soon",
