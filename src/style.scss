@@ -22,21 +22,6 @@
 	font-display: swap;
 }
 
-// @font-face {
-// 	font-family: "Monument Extended";
-// 	src: url("./static/fonts/MonumentExtended-Ultrabold.woff2") format("woff2"), url("./static/fonts/MonumentExtended-Ultrabold.woff") format("woff");
-// 	font-weight: bold;
-// 	font-style: normal;
-// 	font-display: swap;
-// }
-// @font-face {
-// 	font-family: "Feature Mono";
-// 	src: url("./static/fonts/FeatureMono-Medium.woff2") format("woff2"), url("./static/fonts/FeatureMono-Medium.woff") format("woff");
-// 	font-weight: 500;
-// 	font-style: normal;
-// 	font-display: swap;
-// }
-
 $backgroundColor: #1b1b1b;
 $secondaryColor: #fff;
 
@@ -485,28 +470,27 @@ h1 {
 		}
 
 		.projectDetails {
-			display: grid;
-			grid-template-columns: 30% 1fr;
+			display: flex;
+			justify-content: flex-start;
 			gap: 30px;
-			padding: 0 10px 20px;
 			overflow: hidden;
+			object-fit: contain;
+			max-height: 50dvh;
 
 			@media (max-width: 768px) {
-				grid-template-columns: 1fr;
 				gap: 20px;
 				padding: 0 5px 15px;
 			}
 
 			.projectImage {
-				width: 100%;
+				object-fit: contain;
 				border-radius: 4px;
-				overflow: hidden;
+				// overflow: hidden;
 				background-color: rgba(0, 0, 0, 0.05);
 
 				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
+					max-height: 450px;
+					object-fit: contain;
 				}
 
 				.placeholderImage {
@@ -522,6 +506,7 @@ h1 {
 			}
 
 			.projectInfo {
+				width: 100%;
 				display: flex;
 				flex-direction: column;
 				gap: 15px;

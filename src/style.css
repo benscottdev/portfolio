@@ -430,29 +430,27 @@ h1 {
   }
 }
 .projects .project .projectDetails {
-  display: grid;
-  grid-template-columns: 30% 1fr;
+  display: flex;
+  justify-content: flex-start;
   gap: 30px;
-  padding: 0 10px 20px;
   overflow: hidden;
+  object-fit: contain;
+  max-height: 50dvh;
 }
 @media (max-width: 768px) {
   .projects .project .projectDetails {
-    grid-template-columns: 1fr;
     gap: 20px;
     padding: 0 5px 15px;
   }
 }
 .projects .project .projectDetails .projectImage {
-  width: 100%;
+  object-fit: contain;
   border-radius: 4px;
-  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.05);
 }
 .projects .project .projectDetails .projectImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-height: 450px;
+  object-fit: contain;
 }
 .projects .project .projectDetails .projectImage .placeholderImage {
   width: 100%;
@@ -465,6 +463,7 @@ h1 {
   opacity: 0.4;
 }
 .projects .project .projectDetails .projectInfo {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
