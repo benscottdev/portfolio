@@ -1,31 +1,46 @@
 @font-face {
-	font-family: "Nohemi";
-	src: url("./static/fonts/Nohemi-Light.woff2") format("woff2"), url("./static/fonts/Nohemi-Light.woff") format("woff");
+	font-family: "Feature Mono";
+	src: url("./static/fonts/Feature Mono-Light.woff2") format("woff2"), url("./static/fonts/Feature Mono-Light.woff") format("woff");
 	font-weight: 300;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Nohemi";
-	src: url("./static/fonts/Nohemi-Regular.woff2") format("woff2"), url("./static/fonts/Nohemi-Regular.woff") format("woff");
+	font-family: "Feature Mono";
+	src: url("./static/fonts/Feature Mono-Regular.woff2") format("woff2"), url("./static/fonts/Feature Mono-Regular.woff") format("woff");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Monument Extended";
-	src: url("./static/fonts/MonumentExtended-Ultrabold.woff2") format("woff2"), url("./static/fonts/MonumentExtended-Ultrabold.woff") format("woff");
+	font-family: "Eurostile Extended";
+	src: url("./static/fonts/EurostileExtended-Black.woff2") format("woff2"), url("./static/fonts/EurostileExtended-Black.woff") format("woff");
 	font-weight: bold;
 	font-style: normal;
 	font-display: swap;
 }
 
-$backgroundColor: rgb(0, 0, 225);
+// @font-face {
+// 	font-family: "Monument Extended";
+// 	src: url("./static/fonts/MonumentExtended-Ultrabold.woff2") format("woff2"), url("./static/fonts/MonumentExtended-Ultrabold.woff") format("woff");
+// 	font-weight: bold;
+// 	font-style: normal;
+// 	font-display: swap;
+// }
+// @font-face {
+// 	font-family: "Feature Mono";
+// 	src: url("./static/fonts/FeatureMono-Medium.woff2") format("woff2"), url("./static/fonts/FeatureMono-Medium.woff") format("woff");
+// 	font-weight: 500;
+// 	font-style: normal;
+// 	font-display: swap;
+// }
+
+$backgroundColor: #1b1b1b;
 $secondaryColor: #fff;
 
-$mainFont: "Monument Extended";
+$mainFont: "Feature Mono";
 
 $largeFontSize: 100px;
 $bodyFontSize: 30px;
@@ -44,10 +59,12 @@ html {
 
 body {
 	color: $secondaryColor;
-	font-family: "Nohemi";
+	text-transform: uppercase;
+	font-family: "Feature Mono";
 	overflow-x: hidden;
 	min-height: 100vh;
 	min-height: -webkit-fill-available;
+	background-color: $backgroundColor;
 }
 
 // ScrollSmoother wrapper styles
@@ -136,16 +153,20 @@ h1 {
 .sectionHeading {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: 25px;
 
 	h1 {
 		white-space: nowrap;
 		text-align: left;
-		font-size: 5dvw;
-		font-family: $mainFont;
+		font-size: 6dvw;
+		letter-spacing: -0.5dvw;
+		color: white;
+		// -webkit-text-stroke: 1px white;
+		font-family: "Eurostile Extended";
 		font-weight: normal;
 		text-transform: uppercase;
+
 		@media (max-width: 1000px) {
 			font-size: 10dvw;
 		}
@@ -153,8 +174,8 @@ h1 {
 }
 
 .section {
-	margin: 15% 0px;
-	height: 70dvh !important;
+	margin: 5% 0px;
+	height: 100dvh !important;
 }
 
 .logoOverlay {
@@ -180,14 +201,24 @@ h1 {
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			font-size: 11dvw;
+			font-size: 12dvw;
 			text-align: center;
-			font-family: "Monument Extended" !important;
+			font-family: "Eurostile Extended" !important;
+			font-weight: 900;
+			letter-spacing: -1dvw;
+			// transform-origin: center;
 		}
 
 		.fill {
 			z-index: -100;
 			color: white;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			// transform: translate(-50%, -50%) scaleY(2);
+			// transform-origin: center;
+			// width: 100%;
+			// text-align: center;
 		}
 
 		.stroke {
@@ -195,6 +226,13 @@ h1 {
 			-webkit-text-fill-color: transparent;
 			color: transparent;
 			z-index: -8;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			// transform: translate(-50%, -50%) scaleY(2);
+			// transform-origin: center;
+			// width: 100%;
+			// text-align: center;
 
 			@media (max-width: 768px) {
 				-webkit-text-stroke: 1px white;
@@ -213,7 +251,7 @@ h1 {
 	width: 100dvw;
 	z-index: 999;
 	background-color: black;
-	padding: 0.25% 5px;
+	padding: 0.1% 5px;
 
 	@media (max-width: 768px) {
 		padding: 5px;
@@ -248,6 +286,7 @@ h1 {
 
 		.clock {
 			font-size: $mediumBodyFontSize;
+			text-transform: uppercase;
 
 			@media (max-width: 768px) {
 				font-size: $smallBodyFontSize;
@@ -340,14 +379,23 @@ h1 {
 
 	p {
 		text-align: center;
-		max-width: 95%;
-		color: rgb(236, 236, 236);
-		line-height: 60px;
-		font-size: 50px !important;
+		max-width: 90%;
+		color: #292929;
+		line-height: 2.2dvw;
+		font-size: 2dvw !important;
 		display: block;
 		transform: translateZ(0);
 		will-change: auto;
-		
+		// font-weight: 900;
+		letter-spacing: -2px;
+		text-transform: uppercase;
+
+		@media (max-width: 1200px) {
+			font-size: 40px;
+			line-height: 45px;
+			letter-spacing: 0px;
+		}
+
 		.word {
 			display: inline-block;
 			backface-visibility: hidden;
@@ -374,73 +422,148 @@ h1 {
 
 .projects {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	flex-direction: column;
-	margin: 25px 5px 0px 5px;
+	align-items: center;
+	margin: 0px 5px 0 5px;
 
 	.project {
-		border-bottom: 1px dashed $backgroundColor;
-		padding: 5px 0px 0px 0px;
 		width: 100%;
-		transition: 0.2s ease-in-out;
-		position: relative;
-		overflow: hidden;
+		border-top: 1px solid white;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
 
-		.backgroundHover {
-			position: absolute;
-			top: 100%;
-			width: 100%;
-			height: 100%;
-			background-color: $backgroundColor;
-			z-index: -99;
+		&.active,
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.1);
 		}
 
-		a {
-			text-decoration: none !important;
-		}
-
-		&:first-child {
-			border-top: 1px dashed $backgroundColor;
-		}
-
-		.projectCopy {
+		.projectHeader {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 5px 0px;
+			padding: 15px 10px;
 
 			@media (max-width: 768px) {
-				padding: 10px 0px;
+				padding: 15px 5px;
 			}
 
-			p {
-				color: $backgroundColor;
-				font-size: $bodyFontSize;
-				z-index: 99;
+			.projectCopy {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex: 1;
+				gap: 20px;
+
+				p {
+					color: white;
+					font-size: $bodyFontSize;
+					margin: 0;
+
+					@media (max-width: 768px) {
+						font-size: $smallBodyFontSize;
+					}
+
+					&.created {
+						opacity: 0.6;
+						font-size: $mediumBodyFontSize;
+					}
+				}
+			}
+
+			.projectToggle {
+				color: white;
+				font-size: 24px;
+				font-weight: 300;
+				min-width: 30px;
+				text-align: center;
 
 				@media (max-width: 768px) {
-					font-size: $smallBodyFontSize;
+					font-size: 20px;
+					min-width: 25px;
 				}
 			}
 		}
 
-		.imageContainer {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 500px;
-			height: 300px;
-			pointer-events: none;
-			z-index: 9999;
-			opacity: 0;
+		.projectDetails {
+			display: grid;
+			grid-template-columns: 30% 1fr;
+			gap: 30px;
+			padding: 0 10px 20px;
 			overflow: hidden;
-			border-radius: 4px;
 
-			img {
+			@media (max-width: 768px) {
+				grid-template-columns: 1fr;
+				gap: 20px;
+				padding: 0 5px 15px;
+			}
+
+			.projectImage {
 				width: 100%;
-				height: 100%;
-				object-fit: contain;
+				aspect-ratio: 16 / 10;
+				border-radius: 4px;
+				overflow: hidden;
+				background-color: rgba(0, 0, 0, 0.05);
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+
+				.placeholderImage {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: $backgroundColor;
+					font-size: $bodyFontSize;
+					opacity: 0.4;
+				}
+			}
+
+			.projectInfo {
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				justify-content: flex-start;
+
+				.infoRow {
+					display: flex;
+					gap: 10px;
+					color: white;
+					font-size: $mediumBodyFontSize;
+					border-bottom: 1px solid rgba(48, 48, 48, 0.524);
+					max-width: 50%;
+
+					@media (max-width: 768px) {
+						font-size: $smallBodyFontSize;
+					}
+
+					.label {
+						opacity: 0.6;
+						min-width: 60px;
+					}
+				}
+
+				.projectLink {
+					display: inline-block;
+					width: fit-content;
+					color: white;
+					text-decoration: none;
+					font-size: $mediumBodyFontSize;
+					margin-top: 10px;
+					transition: all 0.3s ease;
+
+					@media (max-width: 768px) {
+						font-size: $smallBodyFontSize;
+						padding: 8px 16px;
+					}
+
+					&:hover {
+						background-color: $backgroundColor;
+					}
+				}
 			}
 		}
 	}
@@ -452,7 +575,7 @@ h1 {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	padding: 40px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	position: relative;
 
 	.skills-canvas-container {
@@ -460,7 +583,6 @@ h1 {
 		height: 400px;
 		min-height: 400px;
 		position: relative;
-		border-radius: 10px;
 		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -494,7 +616,7 @@ h1 {
 }
 
 .footer {
-	border-top: 1px solid $backgroundColor;
+	border-top: 1px solid white;
 	width: 100dvw;
 	height: 50px;
 	background-color: transparent;
@@ -509,8 +631,8 @@ h1 {
 	}
 
 	a {
-		color: $backgroundColor;
-		font-family: "Nohemi";
+		color: white;
+		font-family: "Feature Mono";
 		font-size: $smallBodyFontSize;
 		text-decoration: none;
 		font-weight: 100;

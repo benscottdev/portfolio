@@ -1,20 +1,20 @@
 @font-face {
-  font-family: "Nohemi";
-  src: url("./static/fonts/Nohemi-Light.woff2") format("woff2"), url("./static/fonts/Nohemi-Light.woff") format("woff");
+  font-family: "Feature Mono";
+  src: url("./static/fonts/Feature Mono-Light.woff2") format("woff2"), url("./static/fonts/Feature Mono-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Nohemi";
-  src: url("./static/fonts/Nohemi-Regular.woff2") format("woff2"), url("./static/fonts/Nohemi-Regular.woff") format("woff");
+  font-family: "Feature Mono";
+  src: url("./static/fonts/Feature Mono-Regular.woff2") format("woff2"), url("./static/fonts/Feature Mono-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Monument Extended";
-  src: url("./static/fonts/MonumentExtended-Ultrabold.woff2") format("woff2"), url("./static/fonts/MonumentExtended-Ultrabold.woff") format("woff");
+  font-family: "Eurostile Extended";
+  src: url("./static/fonts/EurostileExtended-Black.woff2") format("woff2"), url("./static/fonts/EurostileExtended-Black.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -31,10 +31,12 @@ html {
 
 body {
   color: #fff;
-  font-family: "Nohemi";
+  text-transform: uppercase;
+  font-family: "Feature Mono";
   overflow-x: hidden;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  background-color: #1b1b1b;
 }
 
 #smooth-wrapper {
@@ -58,7 +60,7 @@ body {
 
 h1 {
   text-align: center;
-  color: rgb(0, 0, 225);
+  color: #1b1b1b;
 }
 
 .app {
@@ -109,7 +111,7 @@ h1 {
   position: absolute;
   top: 0px;
   left: 0px;
-  background-color: rgb(0, 0, 225);
+  background-color: #1b1b1b;
   z-index: 1;
   height: 100%;
 }
@@ -117,14 +119,16 @@ h1 {
 .sectionHeading {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 25px;
 }
 .sectionHeading h1 {
   white-space: nowrap;
   text-align: left;
-  font-size: 5dvw;
-  font-family: "Monument Extended";
+  font-size: 6dvw;
+  letter-spacing: -0.5dvw;
+  color: white;
+  font-family: "Eurostile Extended";
   font-weight: normal;
   text-transform: uppercase;
 }
@@ -135,8 +139,8 @@ h1 {
 }
 
 .section {
-  margin: 15% 0px;
-  height: 70dvh !important;
+  margin: 5% 0px;
+  height: 100dvh !important;
 }
 
 .logoOverlay {
@@ -163,19 +167,27 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 11dvw;
+  font-size: 12dvw;
   text-align: center;
-  font-family: "Monument Extended" !important;
+  font-family: "Eurostile Extended" !important;
+  font-weight: 900;
+  letter-spacing: -1dvw;
 }
 .logoOverlay div .fill {
   z-index: -100;
   color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 .logoOverlay div .stroke {
   -webkit-text-stroke: 2px white;
   -webkit-text-fill-color: transparent;
   color: transparent;
   z-index: -8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 @media (max-width: 768px) {
   .logoOverlay div .stroke {
@@ -193,7 +205,7 @@ h1 {
   width: 100dvw;
   z-index: 999;
   background-color: black;
-  padding: 0.25% 5px;
+  padding: 0.1% 5px;
 }
 @media (max-width: 768px) {
   .header {
@@ -230,6 +242,7 @@ h1 {
 }
 .header .clockWrapper .clock {
   font-size: 22px;
+  text-transform: uppercase;
 }
 @media (max-width: 768px) {
   .header .clockWrapper .clock {
@@ -291,7 +304,7 @@ h1 {
 }
 
 .scrollTriggerSection {
-  background-color: rgb(0, 0, 225);
+  background-color: #1b1b1b;
   min-height: 100dvh !important;
   min-height: -webkit-fill-available;
 }
@@ -317,13 +330,22 @@ h1 {
 }
 .aboutMe p {
   text-align: center;
-  max-width: 95%;
-  color: rgb(236, 236, 236);
-  line-height: 60px;
-  font-size: 50px !important;
+  max-width: 90%;
+  color: #292929;
+  line-height: 2.2dvw;
+  font-size: 2dvw !important;
   display: block;
   transform: translateZ(0);
   will-change: auto;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+}
+@media (max-width: 1200px) {
+  .aboutMe p {
+    font-size: 40px;
+    line-height: 45px;
+    letter-spacing: 0px;
+  }
 }
 .aboutMe p .word {
   display: inline-block;
@@ -349,70 +371,140 @@ h1 {
 
 .projects {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  margin: 25px 5px 0px 5px;
+  align-items: center;
+  margin: 0px 5px 0 5px;
 }
 .projects .project {
-  border-bottom: 1px dashed rgb(0, 0, 225);
-  padding: 5px 0px 0px 0px;
   width: 100%;
-  transition: 0.2s ease-in-out;
-  position: relative;
-  overflow: hidden;
+  border-top: 1px solid white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-.projects .project .backgroundHover {
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0, 0, 225);
-  z-index: -99;
+.projects .project.active, .projects .project:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
-.projects .project a {
-  text-decoration: none !important;
-}
-.projects .project:first-child {
-  border-top: 1px dashed rgb(0, 0, 225);
-}
-.projects .project .projectCopy {
+.projects .project .projectHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 0px;
+  padding: 15px 10px;
 }
 @media (max-width: 768px) {
-  .projects .project .projectCopy {
-    padding: 10px 0px;
+  .projects .project .projectHeader {
+    padding: 15px 5px;
   }
 }
-.projects .project .projectCopy p {
-  color: rgb(0, 0, 225);
+.projects .project .projectHeader .projectCopy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 20px;
+}
+.projects .project .projectHeader .projectCopy p {
+  color: white;
   font-size: 30px;
-  z-index: 99;
+  margin: 0;
 }
 @media (max-width: 768px) {
-  .projects .project .projectCopy p {
+  .projects .project .projectHeader .projectCopy p {
     font-size: 18px;
   }
 }
-.projects .project .imageContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 500px;
-  height: 300px;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0;
-  overflow: hidden;
-  border-radius: 4px;
+.projects .project .projectHeader .projectCopy p.created {
+  opacity: 0.6;
+  font-size: 22px;
 }
-.projects .project .imageContainer img {
+.projects .project .projectHeader .projectToggle {
+  color: white;
+  font-size: 24px;
+  font-weight: 300;
+  min-width: 30px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .projects .project .projectHeader .projectToggle {
+    font-size: 20px;
+    min-width: 25px;
+  }
+}
+.projects .project .projectDetails {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 30px;
+  padding: 0 10px 20px;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .projects .project .projectDetails {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 5px 15px;
+  }
+}
+.projects .project .projectDetails .projectImage {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.projects .project .projectDetails .projectImage img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+}
+.projects .project .projectDetails .projectImage .placeholderImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1b1b1b;
+  font-size: 30px;
+  opacity: 0.4;
+}
+.projects .project .projectDetails .projectInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: flex-start;
+}
+.projects .project .projectDetails .projectInfo .infoRow {
+  display: flex;
+  gap: 10px;
+  color: white;
+  font-size: 22px;
+  border-bottom: 1px solid rgba(48, 48, 48, 0.524);
+  max-width: 50%;
+}
+@media (max-width: 768px) {
+  .projects .project .projectDetails .projectInfo .infoRow {
+    font-size: 18px;
+  }
+}
+.projects .project .projectDetails .projectInfo .infoRow .label {
+  opacity: 0.6;
+  min-width: 60px;
+}
+.projects .project .projectDetails .projectInfo .projectLink {
+  display: inline-block;
+  width: fit-content;
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+@media (max-width: 768px) {
+  .projects .project .projectDetails .projectInfo .projectLink {
+    font-size: 18px;
+    padding: 8px 16px;
+  }
+}
+.projects .project .projectDetails .projectInfo .projectLink:hover {
+  background-color: #1b1b1b;
 }
 
 .skills {
@@ -421,7 +513,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 40px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
   position: relative;
 }
 .skills .skills-canvas-container {
@@ -429,7 +521,6 @@ h1 {
   height: 400px;
   min-height: 400px;
   position: relative;
-  border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -460,7 +551,7 @@ h1 {
 }
 
 .footer {
-  border-top: 1px solid rgb(0, 0, 225);
+  border-top: 1px solid white;
   width: 100dvw;
   height: 50px;
   background-color: transparent;
@@ -476,8 +567,8 @@ h1 {
   }
 }
 .footer a {
-  color: rgb(0, 0, 225);
-  font-family: "Nohemi";
+  color: white;
+  font-family: "Feature Mono";
   font-size: 18px;
   text-decoration: none;
   font-weight: 100;

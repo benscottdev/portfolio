@@ -39,9 +39,9 @@ function About() {
 
 					words.forEach((word, index) => {
 						if (index < wordsToColor) {
-							word.style.color = "rgb(0, 0, 225)";
+							word.style.color = "rgb(225, 225, 225)";
 						} else {
-							word.style.color = "rgb(236, 236, 236)";
+							word.style.color = "#292929";
 						}
 					});
 				},

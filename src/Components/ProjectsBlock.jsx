@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -11,15 +11,19 @@ import dextersBookCo from "../static/images/dexter.png";
 
 export default function ProjectsBlock() {
 	const projectsRef = useRef(null);
+	const [openProject, setOpenProject] = useState(null);
+	const prevOpenProject = useRef(null);
 
 	const projects = [
 		{
 			slug: "confirmed",
-			title: "Confirmed (Releasing Feb 2026)",
+			title: "Confirmed",
 			created: "2026",
 			link: "",
 			image: null,
-			status: "In Progress",
+			type: "ios app",
+			tech: "React Native",
+			status: "Coming Soon",
 		},
 		{
 			slug: "overbeerpong",
@@ -27,7 +31,9 @@ export default function ProjectsBlock() {
 			created: "2025",
 			link: "https://overbeerpong.ccpromotions.com.au",
 			image: overBeerPongImage,
-			status: "Completed",
+			type: "web hosted video game",
+			tech: "Unity, C#, HTML",
+			status: "With Client",
 		},
 		{
 			slug: "jerrycancreative",
@@ -35,6 +41,8 @@ export default function ProjectsBlock() {
 			created: "2025",
 			link: "/",
 			image: jerryCanCreativeImage,
+			type: "Website",
+			tech: "React, ThreeJS",
 			status: "In Progress",
 		},
 		{
@@ -43,6 +51,8 @@ export default function ProjectsBlock() {
 			created: "2024",
 			link: "https://songworks.com.au",
 			image: songWorksImage,
+			type: "Website",
+			tech: "React",
 			status: "Completed",
 		},
 		{
@@ -51,73 +61,62 @@ export default function ProjectsBlock() {
 			created: "2026",
 			link: "https://dextersbookco.com.au",
 			image: dextersBookCo,
+			type: "Ecommerce Store",
+			tech: "Wordpress, Woocoomerce",
 			status: "In Progress",
 		},
 	];
 
-	const onHover = (e) => {
-		const imageContainer = e.currentTarget.querySelector(".imageContainer");
-		const imageHeight = imageContainer.offsetHeight;
-
-		// Set initial position immediately before showing
-		gsap.set(imageContainer, {
-			x: e.clientX + 10,
-			y: e.clientY - imageHeight / 2,
-		});
-
-		gsap.to(e.currentTarget.querySelector(".backgroundHover"), {
-			yPercent: -100,
-			duration: 0.2,
-			ease: "power2.out",
-		});
-		gsap.to(e.currentTarget.querySelectorAll(".projectCopy p"), {
-			color: "white",
-			duration: 0.4,
-			ease: "power2.out",
-		});
-
-		// Show the image
-		gsap.to(imageContainer, {
-			opacity: 1,
-			duration: 0.3,
-			ease: "power2.out",
-		});
+	const toggleProject = (slug) => {
+		// If clicking the same project, close it. Otherwise, open the new one
+		if (openProject === slug) {
+			setOpenProject(null);
+		} else {
+			setOpenProject(slug);
+		}
 	};
 
-	const onLeave = (e) => {
-		const imageContainer = e.currentTarget.querySelector(".imageContainer");
+	useEffect(() => {
+		// Animate closing the previous project
+		if (prevOpenProject.current && prevOpenProject.current !== openProject) {
+			const prevProjectElement = document.querySelector(`.project.${prevOpenProject.current}`);
+			const prevDetailsPanel = prevProjectElement?.querySelector(".projectDetails");
 
-		gsap.to(e.currentTarget.querySelector(".backgroundHover"), {
-			yPercent: 100,
-			duration: 0.2,
-			ease: "power2.out",
-		});
-		gsap.to(e.currentTarget.querySelectorAll(".projectCopy p"), {
-			color: "rgb(0,0,225)",
-			duration: 0.4,
-			ease: "power2.out",
-		});
+			if (prevDetailsPanel) {
+				gsap.to(prevDetailsPanel, {
+					height: 0,
+					opacity: 0,
+					duration: 0.3,
+					ease: "power2.in",
+				});
+			}
+		}
 
-		// Hide the image
-		gsap.to(imageContainer, {
-			opacity: 0,
-			duration: 0.3,
-			ease: "power2.out",
-		});
-	};
+		// Animate opening the new project
+		if (openProject) {
+			const projectElement = document.querySelector(`.project.${openProject}`);
+			const detailsPanel = projectElement?.querySelector(".projectDetails");
 
-	const onMouseMove = (e) => {
-		const imageContainer = e.currentTarget.querySelector(".imageContainer");
-		const imageHeight = imageContainer.offsetHeight;
+			if (detailsPanel) {
+				gsap.fromTo(
+					detailsPanel,
+					{
+						height: 0,
+						opacity: 0,
+					},
+					{
+						height: "auto",
+						opacity: 1,
+						duration: 0.4,
+						ease: "power2.out",
+					}
+				);
+			}
+		}
 
-		// Position image 10px to the right of cursor and vertically centered
-		gsap.to(imageContainer, {
-			x: e.clientX + 10,
-			y: e.clientY - imageHeight / 2,
-			duration: 0.1,
-			ease: "power2.out",
-		});
-	};
+		// Update the previous project ref
+		prevOpenProject.current = openProject;
+	}, [openProject]);
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
@@ -146,17 +145,41 @@ export default function ProjectsBlock() {
 	return (
 		<div className="projects" ref={projectsRef}>
 			{projects.map((project) => (
-				<div key={project.slug} className={`project ${project.slug}`} onMouseEnter={window.innerWidth > 800 ? onHover : null} onMouseLeave={window.innerWidth > 800 ? onLeave : null} onMouseMove={window.innerWidth > 800 ? onMouseMove : null}>
-					<a href={project.link} target="_blank">
+				<div key={project.slug} className={`project ${project.slug} ${openProject === project.slug ? "active" : ""}`} onClick={() => toggleProject(project.slug)}>
+					<div className="projectHeader">
 						<div className="projectCopy">
 							<p className="title">{project.title}</p>
 							<p className="created">{project.created}</p>
 						</div>
-						<div className="backgroundHover"></div>
-					</a>
-					{window.innerWidth > 800 && (
-						<div className="imageContainer">
-							<img src={project.image} alt={project.title} />
+						<div className="projectToggle">{openProject === project.slug ? "−" : "+"}</div>
+					</div>
+
+					{openProject === project.slug && (
+						<div className="projectDetails">
+							<div className="projectImage">{project.image ? <img src={project.image} alt={project.title} /> : <div className="placeholderImage">Coming Soon</div>}</div>
+							<div className="projectInfo">
+								<div className="infoRow">
+									<span className="label">Status:</span>
+									<span className="value">{project.status}</span>
+								</div>
+								<div className="infoRow">
+									<span className="label">Project Type:</span>
+									<span className="value">{project.type}</span>
+								</div>
+								<div className="infoRow">
+									<span className="label">Tech: </span>
+									<span className="value">{project.tech}</span>
+								</div>
+								<div className="infoRow">
+									<span className="label">Year:</span>
+									<span className="value">{project.created}</span>
+								</div>
+								{project.link && project.link !== "/" && (
+									<a href={project.link} target="_blank" rel="noopener noreferrer" className="projectLink" onClick={(e) => e.stopPropagation()}>
+										Visit Site →
+									</a>
+								)}
+							</div>
 						</div>
 					)}
 				</div>

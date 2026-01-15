@@ -131,6 +131,35 @@
       "oO" : 1,
       "oS" : 1
     },
+    "\/public\/oilslick_B_W.hdr" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/oilslick_B_W.hdr",
+      "oF" : 0
+    },
+    "\/public\/oilslick_B&W.png" : {
+      "ft" : 32768,
+      "iS" : 2047389,
+      "oA" : 0,
+      "oAP" : "\/public\/oilslick_B&W.png",
+      "oF" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/public\/oilslick_dark.hdr" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/oilslick_dark.hdr",
+      "oF" : 0
+    },
     "\/public\/oilslick.hdr" : {
       "cB" : 0,
       "ft" : 8192,
@@ -316,6 +345,38 @@
       "oF" : 1,
       "sC" : 3,
       "tS" : 0
+    },
+    "\/src\/static\/fonts\/EurostileExtended-Black.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/EurostileExtended-Black.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/EurostileExtended-Black.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/EurostileExtended-Black.woff2",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/FeatureMono-Medium.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/FeatureMono-Medium.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/FeatureMono-Medium.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/FeatureMono-Medium.woff2",
+      "oF" : 0
     },
     "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff" : {
       "cB" : 0,

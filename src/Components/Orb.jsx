@@ -11,6 +11,10 @@ function Orb() {
 	const orbRef = useRef(null);
 	const animationRef = useRef(null);
 	const gsapAnimRef = useRef(null);
+	const needsRender = useRef(true);
+	const meshCache = useRef([]);
+	const isVisible = useRef(true);
+	const lastMouseMove = useRef(0);
 	const { setLoadingProgress, setIsLoaded } = useLoading();
 
 	useEffect(() => {
@@ -55,9 +59,9 @@ function Orb() {
 		const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
 
 		if (window.innerWidth > 1000) {
-			camera.position.set(0, 0, 4);
+			camera.position.set(0, 0, 3);
 		} else {
-			camera.position.set(0, 0, 6);
+			camera.position.set(0, 0, 4);
 		}
 
 		scene.add(camera);
@@ -69,11 +73,13 @@ function Orb() {
 			alpha: true,
 			powerPreference: "high-performance",
 		});
+		// Optimize pixel ratio based on screen size
 		if (window.innerWidth > 2400) {
-			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 0.85));
-		} else if (window.innerWidth > 1000) {
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+		} else if (window.innerWidth > 1000) {
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 		} else {
+			// Mobile: lower pixel ratio for better performance
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 		}
 		renderer.setSize(window.innerWidth, window.innerHeight);
@@ -90,7 +96,7 @@ function Orb() {
 
 			const hdrLoader = new HDRLoader(loadingManager);
 			try {
-				const hdrTexture = await hdrLoader.loadAsync("/oilslick.hdr");
+				const hdrTexture = await hdrLoader.loadAsync("/oilslick_dark.hdr");
 				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
 
 				hdrTexture.dispose();
@@ -103,20 +109,18 @@ function Orb() {
 		}
 
 		// Optimized materials (reused, not recreated)
-		const customOrbMat = new THREE.MeshPhysicalMaterial({
-			metalness: 0.9,
-			roughness: 0,
-			transmission: 1,
-			thickness: 1,
-			envMapIntensity: 1.0,
-			clearcoat: 1.0,
-			clearcoatRoughness: 0.1,
+
+		const chromeMaterial = new THREE.MeshStandardMaterial({
+			// Metallic properties
+			metalness: 1, // Fully metallic
+			roughness: 0.1, // Very smooth for chrome (0.05-0.15)
 			ior: 3,
-			reflectivity: 1.0,
-			iridescence: 1.0,
-			iridescenceIOR: 2.0,
-			iridescenceThicknessRange: [50, 1200],
-			color: 0xffffff,
+			// Color
+			color: 0xffffff, // Pure white for bright chrome
+
+			// Environment map (essential for chrome look)
+			// envMap: yourEnvironmentMap, // Your HDR environment map
+			envMapIntensity: 2, // Strong reflections (1.5-3)
 		});
 
 		// Orb Group for transforms
@@ -132,18 +136,21 @@ function Orb() {
 
 			orb.traverse((child) => {
 				if (child.isMesh) {
-					child.material = customOrbMat;
+					child.material = chromeMaterial;
 					// Enable frustum culling
 					child.frustumCulled = true;
 					// Set morph target to 0 by default
 					if (child.morphTargetInfluences) {
 						child.morphTargetInfluences[0] = 0;
+						// Cache meshes with morph targets for performance
+						meshCache.current.push(child);
 					}
 				}
 			});
 
 			orbGroup.add(orb);
 			orbRef.current = orb;
+			needsRender.current = true;
 		});
 
 		// Lighting
@@ -156,56 +163,95 @@ function Orb() {
 
 		loadEnvironment();
 
-		// Throttled mouse movement with GSAP
-		const handleMouseMove = (e) => {
+		// Throttled pointer movement with GSAP
+		const handlePointerMove = (e) => {
 			if (!orbRef.current) return;
+
+			// Throttle to max 60fps (16ms)
+			const now = performance.now();
+			if (now - lastMouseMove.current < 16) return;
+			lastMouseMove.current = now;
 
 			const x = (e.clientX / window.innerWidth) * 2 - 1;
 			const y = (e.clientY / window.innerHeight) * 2 - 1;
 
-			if (!orbRef.current) return;
-
-			// Normalized X (-1 to 1)
-			const xNorm = (e.clientX / window.innerWidth) * 2 - 1;
-
 			// Remap: middle = 0, sides = 1
-			const morphTarget = Math.abs(xNorm); // 0 at center, 1 at sides
+			const morphTarget = Math.abs(x); // 0 at center, 1 at sides
 
-			orbRef.current.traverse((child) => {
-				if (!child.isMesh) return;
-
-				gsap.to(child.morphTargetInfluences, {
+			// Use cached meshes instead of traversing
+			meshCache.current.forEach((mesh) => {
+				gsap.to(mesh.morphTargetInfluences, {
 					0: morphTarget - 0.2,
 					duration: 0.3,
 					ease: "power2.out",
+					onUpdate: () => {
+						needsRender.current = true;
+					},
 				});
 			});
+
 			// Kill previous animation to prevent stacking
 			if (gsapAnimRef.current) {
 				gsapAnimRef.current.kill();
 			}
 
-			gsapAnimRef.current = gsap.to(orbGroup.rotation, {
-				x: y * 3,
-				y: x * 3,
-				duration: 2,
-				ease: "power2.out",
+			// Combine both animations into a single timeline for better performance
+			gsapAnimRef.current = gsap.timeline({
+				onUpdate: () => {
+					needsRender.current = true;
+				},
 			});
-			gsapAnimRef.current = gsap.to(orbGroup.position, {
-				x: x * 0.1,
-				y: -y * 0.1,
-				duration: 1,
-				ease: "power2.out",
-			});
+
+			gsapAnimRef.current
+				.to(
+					orbGroup.rotation,
+					{
+						x: y * 3,
+						y: x * 3,
+						duration: 2,
+						ease: "power2.out",
+					},
+					0
+				)
+				.to(
+					orbGroup.position,
+					{
+						x: x * 0.1,
+						y: -y * 0.1,
+						duration: 1,
+						ease: "power2.out",
+					},
+					0
+				);
 		};
 
-		window.addEventListener("mousemove", handleMouseMove, { passive: true });
+		window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
-		// Optimized render loop
+		// Visibility detection for performance
+		const handleVisibilityChange = () => {
+			isVisible.current = !document.hidden;
+			if (isVisible.current) {
+				needsRender.current = true;
+			}
+		};
+		document.addEventListener("visibilitychange", handleVisibilityChange);
+
+		// Optimized render loop with on-demand rendering
 		let renderCount = 0;
+		let frameCount = 0;
 		const tick = () => {
-			renderer.render(scene, camera);
 			animationRef.current = requestAnimationFrame(tick);
+
+			// Only render when necessary and tab is visible
+			if (!isVisible.current) return;
+
+			// Always render during initial setup
+			const shouldRender = renderCount < 30 || needsRender.current;
+
+			if (shouldRender) {
+				renderer.render(scene, camera);
+				needsRender.current = false;
+			}
 
 			// Mark scene as ready after enough frames have rendered
 			if (renderCount === 30 && !sceneReady) {
@@ -215,11 +261,18 @@ function Orb() {
 			}
 			renderCount++;
 
+			// Continuous rotation and environment updates
 			if (orb) {
 				orb.rotation.z += 0.003;
 				orb.rotation.y += 0.003;
+				needsRender.current = true;
 			}
-			scene.environmentRotation -= 0.03;
+
+			// Update environment rotation every 2 frames instead of every frame
+			if (frameCount % 2 === 0) {
+				scene.environmentRotation -= 0.03;
+			}
+			frameCount++;
 		};
 		tick();
 
@@ -234,6 +287,7 @@ function Orb() {
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
 				renderer.setSize(width, height);
+				needsRender.current = true;
 			}, 100);
 		};
 
@@ -241,8 +295,9 @@ function Orb() {
 
 		// Cleanup
 		return () => {
-			window.removeEventListener("mousemove", handleMouseMove);
+			window.removeEventListener("pointermove", handlePointerMove);
 			window.removeEventListener("resize", handleResize);
+			document.removeEventListener("visibilitychange", handleVisibilityChange);
 
 			if (animationRef.current) {
 				cancelAnimationFrame(animationRef.current);
@@ -251,6 +306,9 @@ function Orb() {
 			if (gsapAnimRef.current) {
 				gsapAnimRef.current.kill();
 			}
+
+			// Clear cached meshes
+			meshCache.current = [];
 
 			// Dispose of Three.js resources
 			scene.traverse((object) => {

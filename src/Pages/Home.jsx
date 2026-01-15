@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import Orb from "../Components/Orb";
 import ProjectsBlock from "../Components/ProjectsBlock";
 import Skills from "../Components/Skills";
-import Header from "../Components/Header";
 import SectionHeading from "../Components/SectionHeading";
 import About from "../Components/About";
 import Footer from "../Components/Footer";
@@ -35,7 +34,7 @@ function Home() {
 				// Desktop (larger than 768px)
 				mm.add("(min-width: 769px)", () => {
 					gsap.to([".logoOverlay", ".scrollTriggerSection"], {
-						autoAlpha: 0,
+						scale: "1000%",
 						ease: "none",
 						scrollTrigger: {
 							trigger: heroRef.current,
@@ -45,6 +44,10 @@ function Home() {
 							scrub: true,
 							anticipatePin: 1,
 							pinSpacing: true,
+						},
+						onComplete: {
+							autoAlpha: 0,
+							duration: 0.5,
 						},
 					});
 				});
@@ -106,7 +109,7 @@ function Home() {
 				<div className="overtop">
 					{/* ===== WORK ===== */}
 					<section className="selectedProjects section" ref={workRef}>
-						<SectionHeading projectTitle="The Work" />
+						<SectionHeading projectTitle="SELECTED" />
 						<ProjectsBlock />
 					</section>
 

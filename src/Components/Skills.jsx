@@ -32,23 +32,23 @@ function Skills() {
 	// ===================================
 
 	const skillsArray = [
-		{ skillName: "REACT JS", skillTypes: ["development"], color: "#1e3a8a" },
-		{ skillName: "JAVASCRIPT", skillTypes: ["development"], color: "#2563eb" },
-		{ skillName: "HTML", skillTypes: ["development"], color: "#3b82f6" },
-		{ skillName: "CSS", skillTypes: ["development"], color: "#60a5fa" },
-		{ skillName: "THREE.JS", skillTypes: ["development", "3D"], color: "#93c5fd" },
-		{ skillName: "SQL", skillTypes: ["development"], color: "#1e40af" },
-		{ skillName: "GSAP", skillTypes: ["development"], color: "#1d4ed8" },
-		{ skillName: "PHP", skillTypes: ["development"], color: "#2563eb" },
-		{ skillName: "WORDPRESS", skillTypes: ["development"], color: "#3b82f6" },
-		{ skillName: "C#", skillTypes: ["development"], color: "#60a5fa" },
-		{ skillName: "UNITY", skillTypes: ["development", "3D"], color: "#93c5fd" },
-		{ skillName: "BLENDER", skillTypes: ["3D"], color: "#1e40af" },
-		{ skillName: "AFTER EFFECTS", skillTypes: ["3D"], color: "#1d4ed8" },
-		{ skillName: "FIGMA", skillTypes: ["design"], color: "#2563eb" },
-		{ skillName: "PHOTOSHOP", skillTypes: ["design"], color: "#3b82f6" },
-		{ skillName: "ILLUSTRATOR", skillTypes: ["design"], color: "#60a5fa" },
-		{ skillName: "REACT NATIVE", skillTypes: ["development"], color: "#93c5fd" },
+		{ skillName: "REACT JS", skillTypes: ["development"], color: "#2d2d2d" },
+		{ skillName: "JAVASCRIPT", skillTypes: ["development"], color: "#505050" },
+		{ skillName: "HTML", skillTypes: ["development"], color: "#242424" },
+		{ skillName: "CSS", skillTypes: ["development"], color: "#2d2d2d" },
+		{ skillName: "THREE.JS", skillTypes: ["development", "3D"], color: "#242424" },
+		{ skillName: "SQL", skillTypes: ["development"], color: "#3f3f3f" },
+		{ skillName: "GSAP", skillTypes: ["development"], color: "#242424" },
+		{ skillName: "PHP", skillTypes: ["development"], color: "#2d2d2d" },
+		{ skillName: "WORDPRESS", skillTypes: ["development"], color: "#3f3f3f" },
+		{ skillName: "C#", skillTypes: ["development"], color: "#505050" },
+		{ skillName: "UNITY", skillTypes: ["development", "3D"], color: "#2d2d2d" },
+		{ skillName: "BLENDER", skillTypes: ["3D"], color: "#3f3f3f" },
+		{ skillName: "AFTER EFFECTS", skillTypes: ["3D"], color: "#2d2d2d" },
+		{ skillName: "FIGMA", skillTypes: ["design"], color: "#3f3f3f" },
+		{ skillName: "PHOTOSHOP", skillTypes: ["design"], color: "#2d2d2d" },
+		{ skillName: "ILLUSTRATOR", skillTypes: ["design"], color: "#505050" },
+		{ skillName: "REACT NATIVE", skillTypes: ["development"], color: "#505050" },
 	];
 
 	useEffect(() => {
@@ -112,12 +112,12 @@ function Skills() {
 		];
 
 		// Get current sizing based on viewport width
-		const currentSize = width < 480 ? SIZING.mobile : width < 768 ? SIZING.tablet : SIZING.desktop;
+		const currentSize = width < 480 ? SIZING.mobile : width < 1300 ? SIZING.tablet : SIZING.desktop;
 
 		// Measure text to size pills correctly
 		const tempCanvas = document.createElement("canvas");
 		const tempContext = tempCanvas.getContext("2d");
-		tempContext.font = `normal ${currentSize.fontSize}px Nohemi, sans-serif`;
+		tempContext.font = `normal ${currentSize.fontSize}px Feature Mono, sans-serif`;
 
 		// Create skill bubbles (pill-shaped) with proper text sizing
 		const bubbles = skillsArray.map((skill, index) => {
@@ -134,7 +134,7 @@ function Skills() {
 				restitution: 0.6,
 				friction: 1,
 				density: 1,
-				chamfer: { radius: 15 }, // Makes it pill-shaped
+				// chamfer: { radius: 15 }, // Makes it pill-shaped
 				render: {
 					fillStyle: skill.color,
 					strokeStyle: "#fff",
@@ -210,7 +210,7 @@ function Skills() {
 		const renderLabels = () => {
 			const context = render.canvas.getContext("2d");
 			// Get current sizing for text rendering
-			const renderSize = width < 480 ? SIZING.mobile : width < 768 ? SIZING.tablet : SIZING.desktop;
+			const renderSize = width < 480 ? SIZING.mobile : width < 1300 ? SIZING.tablet : SIZING.desktop;
 
 			bubbles.forEach((bubble) => {
 				context.save();
@@ -226,7 +226,7 @@ function Skills() {
 				context.shadowBlur = 2;
 
 				context.fillStyle = "#fff";
-				context.font = `normal ${renderSize.fontSize}px Nohemi, sans-serif`;
+				context.font = `normal ${renderSize.fontSize}px Feature Mono, sans-serif`;
 				context.fillText(bubble.label, 0, 0);
 				context.restore();
 			});
