@@ -34,8 +34,8 @@ function Home() {
 				// Desktop (larger than 768px)
 				mm.add("(min-width: 769px)", () => {
 					gsap.to([".logoOverlay", ".scrollTriggerSection"], {
-						scale: "1000%",
 						ease: "none",
+						autoAlpha: 0,
 						scrollTrigger: {
 							trigger: heroRef.current,
 							start: "top top",
@@ -44,10 +44,6 @@ function Home() {
 							scrub: true,
 							anticipatePin: 1,
 							pinSpacing: true,
-						},
-						onComplete: {
-							autoAlpha: 0,
-							duration: 0.5,
 						},
 					});
 				});

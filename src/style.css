@@ -167,7 +167,7 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 12dvw;
+  font-size: 10dvw;
   text-align: center;
   font-family: "Eurostile Extended" !important;
   font-weight: 900;
@@ -445,7 +445,6 @@ h1 {
 }
 .projects .project .projectDetails .projectImage {
   width: 100%;
-  aspect-ratio: 16/10;
   border-radius: 4px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.05);
