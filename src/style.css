@@ -1,13 +1,13 @@
 @font-face {
   font-family: "Feature Mono";
-  src: url("./static/fonts/Feature Mono-Light.woff2") format("woff2"), url("./static/fonts/Feature Mono-Light.woff") format("woff");
+  src: url("./static/fonts/FeatureMono-Medium.woff2") format("woff2"), url("./static/fonts/FeatureMono-Medium.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Feature Mono";
-  src: url("./static/fonts/Feature Mono-Regular.woff2") format("woff2"), url("./static/fonts/Feature Mono-Regular.woff") format("woff");
+  src: url("./static/fonts/FeatureMono-Medium.woff2") format("woff2"), url("./static/fonts/FeatureMono-Medium.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
