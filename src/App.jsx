@@ -11,7 +11,7 @@ function App() {
 			{/* Fixed elements outside smooth scroll */}
 			<Loader />
 			<Header />
-			{/* ScrollSmoother wrapper structure */}
+			{/* ScrollSmoother wrapper struscture */}
 			<div id="smooth-wrapper">
 				<div id="smooth-content">
 					<Routes>
