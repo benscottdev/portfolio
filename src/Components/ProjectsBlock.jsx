@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,8 +12,6 @@ import confirmedAppImage from "../static/images/confirmedApp.png";
 
 export default function ProjectsBlock() {
 	const projectsRef = useRef(null);
-	const [openProject, setOpenProject] = useState(null);
-	const prevOpenProject = useRef(null);
 
 	const projects = [
 		{
@@ -24,7 +22,8 @@ export default function ProjectsBlock() {
 			image: confirmedAppImage,
 			type: "ios app",
 			tech: "React Native",
-			status: "Coming Soon",
+			status: "In Development",
+			description: "A mobile event management app built with React Native. Features include event creation, guest management, and real-time updates. Currently in active development.",
 		},
 		{
 			slug: "overbeerpong",
@@ -35,16 +34,7 @@ export default function ProjectsBlock() {
 			type: "web hosted video game",
 			tech: "Unity, C#, HTML",
 			status: "With Client",
-		},
-		{
-			slug: "jerrycancreative",
-			title: "Jerry Can Creative",
-			created: "2025",
-			link: "/",
-			image: jerryCanCreativeImage,
-			type: "Website",
-			tech: "React, ThreeJS",
-			status: "In Progress",
+			description: "Interactive web-based beer pong game developed for Canadian Club's promotional campaign. Built with Unity and exported for web, featuring physics-based gameplay and custom branding.",
 		},
 		{
 			slug: "songworks",
@@ -55,6 +45,7 @@ export default function ProjectsBlock() {
 			type: "Website",
 			tech: "React",
 			status: "Completed",
+			description: "Modern website for SongWorks music studio showcasing services, portfolio, and booking system. Built with React for smooth interactions and responsive design.",
 		},
 		{
 			slug: "dexters",
@@ -65,72 +56,23 @@ export default function ProjectsBlock() {
 			type: "Ecommerce Store",
 			tech: "Wordpress, Woocoomerce",
 			status: "In Progress",
+			description: "Full-featured ecommerce bookstore built on WordPress and WooCommerce. Custom theme development with integrated inventory management and secure payment processing.",
 		},
 	];
-
-	const toggleProject = (slug) => {
-		// If clicking the same project, close it. Otherwise, open the new one
-		if (openProject === slug) {
-			setOpenProject(null);
-		} else {
-			setOpenProject(slug);
-		}
-	};
-
-	useEffect(() => {
-		// Animate closing the previous project
-		if (prevOpenProject.current && prevOpenProject.current !== openProject) {
-			const prevProjectElement = document.querySelector(`.project.${prevOpenProject.current}`);
-			const prevDetailsPanel = prevProjectElement?.querySelector(".projectDetails");
-
-			if (prevDetailsPanel) {
-				gsap.to(prevDetailsPanel, {
-					height: 0,
-					opacity: 0,
-					duration: 0.3,
-					ease: "power2.in",
-				});
-			}
-		}
-
-		// Animate opening the new project
-		if (openProject) {
-			const projectElement = document.querySelector(`.project.${openProject}`);
-			const detailsPanel = projectElement?.querySelector(".projectDetails");
-
-			if (detailsPanel) {
-				gsap.fromTo(
-					detailsPanel,
-					{
-						height: 0,
-						opacity: 0,
-					},
-					{
-						height: "auto",
-						opacity: 1,
-						duration: 0.4,
-						ease: "power2.out",
-					}
-				);
-			}
-		}
-
-		// Update the previous project ref
-		prevOpenProject.current = openProject;
-	}, [openProject]);
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
 			gsap.delayedCall(0.1, () => {
 				gsap.fromTo(
 					".project",
-					{ opacity: 0 },
+					{ opacity: 0, y: 30 },
 					{
 						delay: 0.2,
 						opacity: 1,
-						duration: 0,
-						stagger: 0.1,
-						ease: "none",
+						y: 0,
+						duration: 0.6,
+						stagger: 0.15,
+						ease: "power2.out",
 						scrollTrigger: {
 							trigger: ".projects",
 							start: "top center",
@@ -143,46 +85,44 @@ export default function ProjectsBlock() {
 
 		return () => ctx.revert();
 	}, []);
+
 	return (
 		<div className="projects" ref={projectsRef}>
 			{projects.map((project) => (
-				<div key={project.slug} className={`project ${project.slug} ${openProject === project.slug ? "active" : ""}`} onClick={() => toggleProject(project.slug)}>
-					<div className="projectHeader">
-						<div className="projectCopy">
-							<p className="title">{project.title}</p>
-							<p className="created">{project.created}</p>
-						</div>
-						<div className="projectToggle">{openProject === project.slug ? "−" : "+"}</div>
+				<div key={project.slug} className={`project project-tab ${project.slug}`}>
+					<div className="projectImage">
+						{project.image ? (
+							<img src={project.image} alt={project.title} />
+						) : (
+							<div className="placeholderImage">Coming Soon</div>
+						)}
 					</div>
-
-					{openProject === project.slug && (
-						<div className="projectDetails">
-							<div className="projectImage">{project.image ? <img src={project.image} alt={project.title} /> : <div className="placeholderImage">Coming Soon</div>}</div>
-							<div className="projectInfo">
-								<div className="infoRow">
-									<span className="label">Status:</span>
-									<span className="value">{project.status}</span>
-								</div>
-								<div className="infoRow">
-									<span className="label">Project Type:</span>
-									<span className="value">{project.type}</span>
-								</div>
-								<div className="infoRow">
-									<span className="label">Tech: </span>
-									<span className="value">{project.tech}</span>
-								</div>
-								<div className="infoRow">
-									<span className="label">Year:</span>
-									<span className="value">{project.created}</span>
-								</div>
-								{project.link && project.link !== "/" && (
-									<a href={project.link} target="_blank" rel="noopener noreferrer" className="projectLink" onClick={(e) => e.stopPropagation()}>
-										Visit Site →
-									</a>
-								)}
+					<div className="projectContent">
+						<div className="projectHeader">
+							<h3 className="projectTitle">{project.title}</h3>
+							<span className="projectYear">{project.created}</span>
+						</div>
+						<p className="projectDescription">{project.description}</p>
+						<div className="projectMeta">
+							<div className="metaItem">
+								<span className="metaLabel">Status</span>
+								<span className="metaValue">{project.status}</span>
+							</div>
+							<div className="metaItem">
+								<span className="metaLabel">Type</span>
+								<span className="metaValue">{project.type}</span>
+							</div>
+							<div className="metaItem">
+								<span className="metaLabel">Tech</span>
+								<span className="metaValue">{project.tech}</span>
 							</div>
 						</div>
-					)}
+						{project.link && project.link !== "/" && (
+							<a href={project.link} target="_blank" rel="noopener noreferrer" className="projectLink">
+								Visit Site →
+							</a>
+						)}
+					</div>
 				</div>
 			))}
 		</div>

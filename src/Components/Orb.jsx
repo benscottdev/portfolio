@@ -96,13 +96,14 @@ function Orb() {
 
 			const hdrLoader = new HDRLoader(loadingManager);
 			try {
-				const hdrTexture = await hdrLoader.loadAsync("/oilslick_dark.hdr");
+				const hdrTexture = await hdrLoader.loadAsync("/Vector.hdr");
 				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
 
 				hdrTexture.dispose();
 				pmremGenerator.dispose();
 
 				scene.environment = envMap;
+				scene.environmentIntensity = 2;
 			} catch (error) {
 				console.warn("HDR texture not found, using default environment");
 			}
@@ -111,17 +112,22 @@ function Orb() {
 		// Optimized materials (reused, not recreated)
 
 		const chromeMaterial = new THREE.MeshStandardMaterial({
-			// Metallic properties
-			metalness: 1, // Fully metallic
-			roughness: 0.1, // Very smooth for chrome (0.05-0.15)
+			metalness: 1,
+			roughness: 0.1,
 			ior: 3,
-			// Color
-			color: 0xffffff, // Pure white for bright chrome
-
-			// Environment map (essential for chrome look)
-			// envMap: yourEnvironmentMap, // Your HDR environment map
-			envMapIntensity: 2, // Strong reflections (1.5-3)
+			color: 0xffffff,
+			envMapIntensity: 3,
 		});
+
+		// const glassMaterial = new THREE.MeshPhysicalMaterial({
+		// 	color: 0xffffff,
+		// 	transmission: 0.1,
+		// 	opacity: 1,
+		// 	metalness: 0.5,
+		// 	roughness: 0.05,
+		// 	ior: 3,
+		// 	thickness: 0.5,
+		// });
 
 		// Orb Group for transforms
 		let orb;
@@ -132,17 +138,15 @@ function Orb() {
 		const gltfLoader = new GLTFLoader(loadingManager);
 		gltfLoader.load("/orb_shapekeyed.glb", (model) => {
 			orb = model.scene;
-			orb.scale.set(0.25, 0.25, 0.25);
+			orb.scale.set(0.2, 0.2, 0.2);
+			orb.rotation.y = Math.PI / 2;
 
 			orb.traverse((child) => {
 				if (child.isMesh) {
 					child.material = chromeMaterial;
-					// Enable frustum culling
 					child.frustumCulled = true;
-					// Set morph target to 0 by default
 					if (child.morphTargetInfluences) {
 						child.morphTargetInfluences[0] = 0;
-						// Cache meshes with morph targets for performance
 						meshCache.current.push(child);
 					}
 				}
@@ -179,16 +183,16 @@ function Orb() {
 			const morphTarget = Math.abs(x); // 0 at center, 1 at sides
 
 			// Use cached meshes instead of traversing
-			meshCache.current.forEach((mesh) => {
-				gsap.to(mesh.morphTargetInfluences, {
-					0: morphTarget - 0.2,
-					duration: 0.3,
-					ease: "power2.out",
-					onUpdate: () => {
-						needsRender.current = true;
-					},
-				});
-			});
+			// meshCache.current.forEach((mesh) => {
+			// 	gsap.to(mesh.morphTargetInfluences, {
+			// 		0: morphTarget - 0.1,
+			// 		duration: 0.3,
+			// 		ease: "power2.out",
+			// 		onUpdate: () => {
+			// 			needsRender.current = true;
+			// 		},
+			// 	});
+			// });
 
 			// Kill previous animation to prevent stacking
 			if (gsapAnimRef.current) {
@@ -206,23 +210,14 @@ function Orb() {
 				.to(
 					orbGroup.rotation,
 					{
-						x: y * 3,
-						y: x * 3,
+						x: y * 2,
+						y: x * 2,
 						duration: 2,
 						ease: "power2.out",
 					},
 					0
 				)
-				.to(
-					orbGroup.position,
-					{
-						x: x * 0.1,
-						y: -y * 0.1,
-						duration: 1,
-						ease: "power2.out",
-					},
-					0
-				);
+			// 
 		};
 
 		window.addEventListener("pointermove", handlePointerMove, { passive: true });

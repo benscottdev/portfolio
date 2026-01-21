@@ -43,10 +43,7 @@ function Loader() {
 					ScrollTrigger.refresh();
 				},
 			});
-			tl.to(".percent", {
-				opacity: 0,
-				duration: 0.3,
-			});
+		
 
 			tl.to(".loaderPixel", {
 				autoAlpha: 0,
@@ -54,6 +51,10 @@ function Loader() {
 				ease: "power1.in",
 				stagger: 0.1,
 			});
+			tl.to(".percent", {
+				opacity: 0,
+				duration: 0.1,
+			}, "-=0.62");
 			tl.to(".loader", {
 				display: "none",
 			});

@@ -35,7 +35,7 @@ function Home() {
 				mm.add("(min-width: 769px)", () => {
 					gsap.to([".logoOverlay", ".scrollTriggerSection"], {
 						ease: "none",
-						autoAlpha: 0,
+						// autoAlpha: 0,
 						scrollTrigger: {
 							trigger: heroRef.current,
 							start: "top top",
@@ -51,7 +51,7 @@ function Home() {
 				// Mobile (768px and below)
 				mm.add("(max-width: 768px)", () => {
 					gsap.to(".scrollTriggerSection", {
-						autoAlpha: 0,
+						// autoAlpha: 0,
 						ease: "none",
 						scrollTrigger: {
 							trigger: heroRef.current,

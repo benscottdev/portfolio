@@ -9,14 +9,6 @@
   ],
   "creatorBuild" : "34892",
   "files" : {
-    "\/.gitignore" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/.gitignore",
-      "oF" : 0
-    },
     "\/android-chrome-192x192.png" : {
       "ft" : 32768,
       "iS" : 20997,
@@ -131,26 +123,13 @@
       "oO" : 1,
       "oS" : 1
     },
-    "\/public\/oilslick_B_W.hdr" : {
+    "\/public\/hdr.hdr" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/public\/oilslick_B_W.hdr",
+      "oAP" : "\/public\/hdr.hdr",
       "oF" : 0
-    },
-    "\/public\/oilslick_B&W.png" : {
-      "ft" : 32768,
-      "iS" : 2047389,
-      "oA" : 0,
-      "oAP" : "\/public\/oilslick_B&W.png",
-      "oF" : 0,
-      "oIPL" : 1,
-      "opt" : 1,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
     },
     "\/public\/oilslick_dark.hdr" : {
       "cB" : 0,
@@ -160,20 +139,20 @@
       "oAP" : "\/public\/oilslick_dark.hdr",
       "oF" : 0
     },
-    "\/public\/oilslick.hdr" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/oilslick.hdr",
-      "oF" : 0
-    },
     "\/public\/orb_shapekeyed.glb" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/public\/orb_shapekeyed.glb",
+      "oF" : 0
+    },
+    "\/public\/Vector.hdr" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/Vector.hdr",
       "oF" : 0
     },
     "\/README.html" : {
@@ -202,6 +181,14 @@
       "pME" : 1,
       "rFN" : 0,
       "uCM" : 0
+    },
+    "\/site.webmanifest" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/site.webmanifest",
+      "oF" : 0
     },
     "\/src\/App.jsx" : {
       "bF" : 0,
@@ -452,11 +439,11 @@
       "q" : 90,
       "rq" : 75
     },
-    "\/src\/static\/images\/jerryCanCreative.png" : {
+    "\/src\/static\/images\/jerrycancreative.png" : {
       "ft" : 32768,
       "iS" : 454206,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/jerryCanCreative.png",
+      "oAP" : "\/src\/static\/images\/jerrycancreative.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
