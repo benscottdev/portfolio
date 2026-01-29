@@ -9,6 +9,7 @@ import { useLoading } from "../contexts/LoadingContext";
 function Orb() {
 	const canvasRef = useRef();
 	const orbRef = useRef(null);
+
 	const animationRef = useRef(null);
 	const gsapAnimRef = useRef(null);
 	const needsRender = useRef(true);
@@ -59,11 +60,11 @@ function Orb() {
 		const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
 
 		if (window.innerWidth > 1000) {
-			camera.position.set(0, 0, 3);
+			camera.position.set(0, 0, 5);
 		} else {
-			camera.position.set(0, 0, 4);
+			camera.position.set(0, 0, 6);
 		}
-
+		camera.lookAt(0, 0, 0)
 		scene.add(camera);
 
 		// Renderer with optimized settings
@@ -96,38 +97,32 @@ function Orb() {
 
 			const hdrLoader = new HDRLoader(loadingManager);
 			try {
-				const hdrTexture = await hdrLoader.loadAsync("/Vector.hdr");
+				const hdrTexture = await hdrLoader.loadAsync("/oilslick_dark.hdr");
 				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
 
 				hdrTexture.dispose();
 				pmremGenerator.dispose();
-
-				scene.environment = envMap;
-				scene.environmentIntensity = 2;
+				scene.environment = envMap
 			} catch (error) {
 				console.warn("HDR texture not found, using default environment");
 			}
 		}
 
-		// Optimized materials (reused, not recreated)
 
-		const chromeMaterial = new THREE.MeshStandardMaterial({
+		const chromeMat = new THREE.MeshPhysicalMaterial({
 			metalness: 1,
-			roughness: 0.1,
+			transmission: 1,
+			thickness: 1,
+			roughness: 0,
 			ior: 3,
-			color: 0xffffff,
-			envMapIntensity: 3,
+			envMapIntensity: 1.2,
 		});
 
-		// const glassMaterial = new THREE.MeshPhysicalMaterial({
-		// 	color: 0xffffff,
-		// 	transmission: 0.1,
-		// 	opacity: 1,
-		// 	metalness: 0.5,
-		// 	roughness: 0.05,
-		// 	ior: 3,
-		// 	thickness: 0.5,
-		// });
+		// const bgPlaneGeom = new THREE.PlaneGeometry(20, 20)
+		// const bgPlaneMat = new THREE.MeshBasicMaterial({ color: 0x1b1b1b });
+		// const bgMesh = new THREE.Mesh(bgPlaneGeom, bgPlaneMat)
+		// bgMesh.position.set(0, 0, -2)
+		// scene.add(bgMesh)
 
 		// Orb Group for transforms
 		let orb;
@@ -136,14 +131,14 @@ function Orb() {
 
 		// Load model
 		const gltfLoader = new GLTFLoader(loadingManager);
-		gltfLoader.load("/orb_shapekeyed.glb", (model) => {
+		gltfLoader.load("/Orb1.glb", (model) => {
 			orb = model.scene;
-			orb.scale.set(0.2, 0.2, 0.2);
+			orb.scale.set(1, 1, 1);
 			orb.rotation.y = Math.PI / 2;
 
 			orb.traverse((child) => {
 				if (child.isMesh) {
-					child.material = chromeMaterial;
+					child.material = chromeMat;
 					child.frustumCulled = true;
 					if (child.morphTargetInfluences) {
 						child.morphTargetInfluences[0] = 0;
@@ -157,11 +152,15 @@ function Orb() {
 			needsRender.current = true;
 		});
 
-		// Lighting
-		const ambientLight = new THREE.AmbientLight(0xffffff, 0);
-		scene.add(ambientLight);
 
-		const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+
+		const orbLight2 = new THREE.DirectionalLight(0xffffff, 1000)
+		orbLight2.position.set(0, 1, 1)
+		const orbLightHelper2 = new THREE.DirectionalLightHelper(orbLight2)
+		// scene.add(orbLightHelper2)
+		scene.add(orbLight2)
+
+		const directionalLight = new THREE.DirectionalLight(0xffffff, 0);
 		directionalLight.position.set(1, 0, 4);
 		scene.add(directionalLight);
 
@@ -169,7 +168,7 @@ function Orb() {
 
 		// Throttled pointer movement with GSAP
 		const handlePointerMove = (e) => {
-			if (!orbRef.current) return;
+			if (!camera) return;
 
 			// Throttle to max 60fps (16ms)
 			const now = performance.now();
@@ -183,16 +182,16 @@ function Orb() {
 			const morphTarget = Math.abs(x); // 0 at center, 1 at sides
 
 			// Use cached meshes instead of traversing
-			// meshCache.current.forEach((mesh) => {
-			// 	gsap.to(mesh.morphTargetInfluences, {
-			// 		0: morphTarget - 0.1,
-			// 		duration: 0.3,
-			// 		ease: "power2.out",
-			// 		onUpdate: () => {
-			// 			needsRender.current = true;
-			// 		},
-			// 	});
-			// });
+			meshCache.current.forEach((mesh) => {
+				gsap.to(mesh.morphTargetInfluences, {
+					0: morphTarget - 0.1,
+					duration: 0.3,
+					ease: "power2.out",
+					onUpdate: () => {
+						needsRender.current = true;
+					},
+				});
+			});
 
 			// Kill previous animation to prevent stacking
 			if (gsapAnimRef.current) {
@@ -210,14 +209,25 @@ function Orb() {
 				.to(
 					orbGroup.rotation,
 					{
-						x: y * 2,
-						y: x * 2,
+						x: y * 6,
+						y: x * 6,
 						duration: 2,
 						ease: "power2.out",
 					},
 					0
 				)
-			// 
+			// gsapAnimRef.current
+			// 	.to(
+			// 		orbGroup.position,
+			// 		{
+			// 			x: x * 0.25,
+			// 			y: -y * 0.25,
+			// 			duration: 2,
+			// 			ease: "power2.out",
+			// 		},
+			// 		0
+			// 	)
+
 		};
 
 		window.addEventListener("pointermove", handlePointerMove, { passive: true });
@@ -229,6 +239,7 @@ function Orb() {
 				needsRender.current = true;
 			}
 		};
+
 		document.addEventListener("visibilitychange", handleVisibilityChange);
 
 		// Optimized render loop with on-demand rendering
@@ -258,8 +269,8 @@ function Orb() {
 
 			// Continuous rotation and environment updates
 			if (orb) {
-				orb.rotation.z += 0.003;
-				orb.rotation.y += 0.003;
+				orb.rotation.z += 0.007;
+				orb.rotation.y += 0.007;
 				needsRender.current = true;
 			}
 
@@ -323,7 +334,7 @@ function Orb() {
 
 	return (
 		<div style={{ width: "100dvw", height: "100dvh", overflow: "hidden" }}>
-			<canvas className="webgl" ref={canvasRef} style={{ display: "block" }} />
+			<canvas className="webgl orbScene" ref={canvasRef} style={{ display: "block" }} />
 		</div>
 	);
 }

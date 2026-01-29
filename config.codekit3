@@ -123,6 +123,22 @@
       "oO" : 1,
       "oS" : 1
     },
+    "\/public\/Frame.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/Frame.glb",
+      "oF" : 0
+    },
+    "\/public\/Ground.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/Ground.glb",
+      "oF" : 0
+    },
     "\/public\/hdr.hdr" : {
       "cB" : 0,
       "ft" : 8192,
@@ -147,12 +163,60 @@
       "oAP" : "\/public\/orb_shapekeyed.glb",
       "oF" : 0
     },
+    "\/public\/Orb.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/Orb.glb",
+      "oF" : 0
+    },
+    "\/public\/Orb1.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/Orb1.glb",
+      "oF" : 0
+    },
+    "\/public\/StandBase.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/StandBase.glb",
+      "oF" : 0
+    },
+    "\/public\/StandGlass.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/StandGlass.glb",
+      "oF" : 0
+    },
+    "\/public\/Tree.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/Tree.glb",
+      "oF" : 0
+    },
     "\/public\/Vector.hdr" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/public\/Vector.hdr",
+      "oF" : 0
+    },
+    "\/public\/WebsiteFrame.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/public\/WebsiteFrame.glb",
       "oF" : 0
     },
     "\/README.html" : {
@@ -219,6 +283,17 @@
       "mi" : 1,
       "oA" : 0,
       "oAP" : "\/src\/Components\/Footer-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/src\/Components\/FrameWall.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/FrameWall-min.js",
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
@@ -349,6 +424,22 @@
       "oAP" : "\/src\/static\/fonts\/EurostileExtended-Black.woff2",
       "oF" : 0
     },
+    "\/src\/static\/fonts\/Fayte-Regular.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/Fayte-Regular.woff",
+      "oF" : 0
+    },
+    "\/src\/static\/fonts\/Fayte-Regular.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/fonts\/Fayte-Regular.woff2",
+      "oF" : 0
+    },
     "\/src\/static\/fonts\/FeatureMono-Medium.woff" : {
       "cB" : 0,
       "ft" : 8192,
@@ -413,6 +504,19 @@
       "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff2",
       "oF" : 0
     },
+    "\/src\/static\/images\/confirmedapp.jpg" : {
+      "ft" : 16384,
+      "iS" : 6551,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/confirmedapp.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/src\/static\/images\/confirmedApp.png" : {
       "ft" : 32768,
       "iS" : 38402,
@@ -439,6 +543,45 @@
       "q" : 90,
       "rq" : 75
     },
+    "\/src\/static\/images\/dexters.jpg" : {
+      "ft" : 16384,
+      "iS" : 4055,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/dexters.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/halftone-.png" : {
+      "ft" : 32768,
+      "iS" : 19840,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/halftone-.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/halftone.png" : {
+      "ft" : 32768,
+      "iS" : 17670,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/halftone.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
     "\/src\/static\/images\/jerrycancreative.png" : {
       "ft" : 32768,
       "iS" : 454206,
@@ -452,6 +595,45 @@
       "q" : 90,
       "rq" : 75
     },
+    "\/src\/static\/images\/overbeerpong_render.jpg" : {
+      "ft" : 16384,
+      "iS" : 125137,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/overbeerpong_render.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/overbeerpong_render.png" : {
+      "ft" : 32768,
+      "iS" : 2056679,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/overbeerpong_render.png",
+      "oF" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/overbeerpong.jpg" : {
+      "ft" : 16384,
+      "iS" : 14064,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/overbeerpong.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/src\/static\/images\/overBeerPongImage.png" : {
       "ft" : 32768,
       "iS" : 216771,
@@ -463,6 +645,58 @@
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/pattern.png" : {
+      "ft" : 32768,
+      "iS" : 44747,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/pattern.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/songWorks_render.jpg" : {
+      "ft" : 16384,
+      "iS" : 170519,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/songWorks_render.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/songworks_render.png" : {
+      "ft" : 32768,
+      "iS" : 1910276,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/songworks_render.png",
+      "oF" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/src\/static\/images\/songworks.jpg" : {
+      "ft" : 16384,
+      "iS" : 11018,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/static\/images\/songworks.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
       "rq" : 75
     },
     "\/src\/static\/images\/songworks.png" : {

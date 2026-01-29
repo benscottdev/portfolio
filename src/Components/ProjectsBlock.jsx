@@ -4,11 +4,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-import overBeerPongImage from "../static/images/overBeerPongImage.png";
-import jerryCanCreativeImage from "../static/images/jerrycancreative.png";
-import songWorksImage from "../static/images/songworks.png";
-import dextersBookCo from "../static/images/dexter.png";
-import confirmedAppImage from "../static/images/confirmedApp.png";
+import overBeerPongImage from "../static/images/overbeerpong_render.jpg";
+import songWorksImage from "../static/images/songWorks_render.jpg";
+import dextersBookCo from "../static/images/dexters.jpg";
+import confirmedAppImage from "../static/images/confirmedapp.jpg";
 
 export default function ProjectsBlock() {
 	const projectsRef = useRef(null);
@@ -26,6 +25,17 @@ export default function ProjectsBlock() {
 			description: "A mobile event management app built with React Native. Features include event creation, guest management, and real-time updates. Currently in active development.",
 		},
 		{
+			slug: "dexters",
+			title: "Dexter's Book Co.",
+			created: "2026",
+			link: null,
+			image: dextersBookCo,
+			type: "Ecommerce Store",
+			tech: "Wordpress, Woocoomerce",
+			status: "In Progress",
+			description: "Full-featured ecommerce bookstore built on WordPress and WooCommerce. Custom theme development with integrated inventory management and secure payment processing.",
+		},
+		{
 			slug: "overbeerpong",
 			title: "Over Beer Pong",
 			created: "2025",
@@ -33,7 +43,7 @@ export default function ProjectsBlock() {
 			image: overBeerPongImage,
 			type: "web hosted video game",
 			tech: "Unity, C#, HTML",
-			status: "With Client",
+			status: "In Progress",
 			description: "Interactive web-based beer pong game developed for Canadian Club's promotional campaign. Built with Unity and exported for web, featuring physics-based gameplay and custom branding.",
 		},
 		{
@@ -47,17 +57,7 @@ export default function ProjectsBlock() {
 			status: "Completed",
 			description: "Modern website for SongWorks music studio showcasing services, portfolio, and booking system. Built with React for smooth interactions and responsive design.",
 		},
-		{
-			slug: "dexters",
-			title: "Dexter's Book Co.",
-			created: "2026",
-			link: "https://dextersbookco.com.au",
-			image: dextersBookCo,
-			type: "Ecommerce Store",
-			tech: "Wordpress, Woocoomerce",
-			status: "In Progress",
-			description: "Full-featured ecommerce bookstore built on WordPress and WooCommerce. Custom theme development with integrated inventory management and secure payment processing.",
-		},
+
 	];
 
 	useEffect(() => {
@@ -83,47 +83,83 @@ export default function ProjectsBlock() {
 			});
 		});
 
+
 		return () => ctx.revert();
 	}, []);
+
+	const hover = (e) => {
+		const card = e.currentTarget;
+
+		// Kill any ongoing animation
+		gsap.killTweensOf(card);
+
+		gsap.to(card, {
+			rotate: "2deg",
+			// scale: 1.02,
+			duration: 0.3,
+			ease: "power2.out"
+		});
+	}
+
+	const leave = (e) => {
+		const card = e.currentTarget;
+
+		// Kill any ongoing animation
+		gsap.killTweensOf(card);
+
+		// Swing back with momentum
+		gsap.to(card, {
+			rotate: "0deg",
+			duration: 1,
+			ease: "elastic.out(1, 0.4)"
+		});
+	}
 
 	return (
 		<div className="projects" ref={projectsRef}>
 			{projects.map((project) => (
-				<div key={project.slug} className={`project project-tab ${project.slug}`}>
-					<div className="projectImage">
-						{project.image ? (
-							<img src={project.image} alt={project.title} />
-						) : (
-							<div className="placeholderImage">Coming Soon</div>
-						)}
+				<div key={project.slug} className={`project ${project.slug}`}>
+					<div className="frameContainer" onMouseEnter={hover} onMouseLeave={leave} >
+						<div className="frameWireWrapper">
+							<svg className="frameWire" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160.28 96.69">
+
+								<polyline class="cls-1" points=".37 96.35 85.08 1.38 159.88 96.35" />
+								<circle class="cls-2" cx="85.2" cy="1.38" r="1.38" />
+							</svg>
+						</div>
+						<div className="projectItem">
+
+							<div className="frame" >
+								<div className="projectImage">
+									<img src={project.image} alt={project.title} />
+								</div>
+							</div>
+						</div>
 					</div>
-					<div className="projectContent">
+					<div className="projectInfo">
 						<div className="projectHeader">
-							<h3 className="projectTitle">{project.title}</h3>
-							<span className="projectYear">{project.created}</span>
+							<h1 className="projectTitle">{project.title}</h1>
+							<p className="projectCreated" >[{project.created}]</p>
 						</div>
-						<p className="projectDescription">{project.description}</p>
 						<div className="projectMeta">
-							<div className="metaItem">
-								<span className="metaLabel">Status</span>
-								<span className="metaValue">{project.status}</span>
+							<div className="projectStack">
+								<p className="metaTitle">STACK</p>
+								<p className="metaContent">{project.tech}</p>
 							</div>
-							<div className="metaItem">
-								<span className="metaLabel">Type</span>
-								<span className="metaValue">{project.type}</span>
+							<div className="projectStatus">
+								<p className="metaTitle">STATUS</p>
+								<p className="metaContent">{project.status}</p>
 							</div>
-							<div className="metaItem">
-								<span className="metaLabel">Tech</span>
-								<span className="metaValue">{project.tech}</span>
-							</div>
+							{project.link && (
+								<div className="projectLink">
+									<a className="metaLink" href={project.link}>SEE MORE</a>
+								</div>
+							)}
 						</div>
-						{project.link && project.link !== "/" && (
-							<a href={project.link} target="_blank" rel="noopener noreferrer" className="projectLink">
-								Visit Site →
-							</a>
-						)}
 					</div>
 				</div>
+
+
 			))}
 		</div>
 	);

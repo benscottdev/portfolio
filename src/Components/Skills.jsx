@@ -1,45 +1,68 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 
 function Skills() {
 	const skillsRef = useRef(null);
+	const [expandedCluster, setExpandedCluster] = useState(null);
 
-	const skillMatrix = {
-		"React JS": { proficiency: 70, experience: 3, lastProject: 'Portfolio' },
-		"JavaScript": { proficiency: 80, experience: 4, lastProject: 'Portfolio' },
-		"HTML/CSS": { proficiency: 90, experience: 4, lastProject: "Portfolio" },
-		"GSAP": { proficiency: 65, experience: 2, lastProject: "Portfolio" },
-		"Three.js": { proficiency: 80, experience: 1, lastProject: "Portfolio" },
-		"React Native": { proficiency: 75, experience: 1, lastProject: "Confirmed" },
-		"Unity": { proficiency: 75, experience: 0.5, lastProject: "Over Beer Pong" },
-		"Blender": { proficiency: 60, experience: 1, lastProject: "Jerry Can Creative" },
-		"After Effects": { proficiency: 70, experience: 2, lastProject: "Canadian Club" },
-		"Figma": { proficiency: 70, experience: 2, lastProject: "Fusion Telemetry" },
-		"Photoshop": { proficiency: 75, experience: 4, lastProject: "Portfolio" },
-		"Illustrator": { proficiency: 60, experience: 4, lastProject: "Confirmed" },
-		"PHP": { proficiency: 70, experience: 2, lastProject: "Promotional Website" },
-		"SQL": { proficiency: 60, experience: 2, lastProject: "Promotional Website" },
-		"WordPress": { proficiency: 75, experience: 2, lastProject: "Fuel Sydney" },
-		"C#": { proficiency: 30, experience: 0.5, lastProject: "Over Beer Pong" },
-	};
-
-	const dimensions = [
-		{ key: "proficiency", label: "Proficiency" },
-		{ key: "experience", label: "Experience (Yrs)" },
-		// { key: "lastProject", label: "lastProject" },
+	const skillClusters = [
+		{
+			category: "Web",
+			skills: [
+				{ name: "HTML/CSS", proficiency: 90 },
+				{ name: "JavaScript", proficiency: 85 },
+				{ name: "React JS", proficiency: 75 },
+				{ name: "GSAP", proficiency: 75 },
+				{ name: "Three.js", proficiency: 60 },
+			],
+		},
+		{
+			category: "3D & Animation",
+			skills: [
+				{ name: "Blender", proficiency: 60 },
+				{ name: "After Effects", proficiency: 70 },
+				{ name: "Premiere", proficiency: 40 },
+				{ name: "Unity", proficiency: 75 },
+			],
+		},
+		{
+			category: "Design",
+			skills: [
+				{ name: "Figma", proficiency: 70 },
+				{ name: "Photoshop", proficiency: 75 },
+				{ name: "Illustrator", proficiency: 60 },
+			],
+		},
+		{
+			category: "Backend",
+			skills: [
+				{ name: "PHP", proficiency: 60 },
+				{ name: "SQL", proficiency: 60 },
+				{ name: "WordPress", proficiency: 65 },
+				{ name: "C#", proficiency: 30 },
+			],
+		},
+		{
+			category: "Mobile",
+			skills: [{ name: "React Native", proficiency: 65 }],
+		},
 	];
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
-			// Animate matrix rows
-			gsap.from(".matrix-row", {
-				opacity: 0,
-				x: -20,
-				duration: 0.5,
-				stagger: 0.05,
-				delay: 0.2,
-				ease: "power2.out",
-			});
+			// Animate clusters on load
+			gsap.fromTo(
+				".skill-cluster",
+				{ opacity: 0, y: 30 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.6,
+					stagger: 0.1,
+					delay: 0.2,
+					ease: "power2.out",
+				}
+			);
 		}, skillsRef);
 
 		return () => ctx.revert();
@@ -47,24 +70,32 @@ function Skills() {
 
 	return (
 		<div className="skills" ref={skillsRef}>
-			<div className="skills-matrix">
-				<div className="matrix-header">
-					<div className="cell label-cell">Skill</div>
-					{dimensions.map((dim) => (
-						<div key={dim.key} className="cell header-cell">
-							{dim.label}
+			<div className="skills-clusters">
+				{skillClusters.map((cluster, clusterIndex) => (
+					<div
+						key={clusterIndex}
+						className={`skill-cluster expanded`}
+						onMouseEnter={() => setExpandedCluster(clusterIndex)}
+						onMouseLeave={() => setExpandedCluster(null)}
+					>
+						<div className="cluster-header">
+							<h3>{cluster.category}</h3>
+							<span className="skill-count">[{cluster.skills.length}]</span>
 						</div>
-					))}
-				</div>
-				{Object.entries(skillMatrix).map(([skill, values]) => (
-					<div key={skill} className="matrix-row">
-						<div className="cell label-cell">{skill}</div>
-						{dimensions.map((dim) => (
-							<div key={dim.key} className="cell value-cell" data-intensity={Math.ceil(values[dim.key] / 20)}>
-								{values[dim.key]}
-								{dim.key === "proficiency" && "%"}
-							</div>
-						))}
+						<div className="cluster-skills">
+							{cluster.skills.map((skill, skillIndex) => (
+								<div key={skillIndex} className="cluster-skill">
+									<span className="skill-name">{skill.name}</span>
+									<div className="proficiency-bar">
+										<div
+											className="proficiency-fill"
+											style={{ width: `${skill.proficiency}%` }}
+										/>
+									</div>
+									<span className="proficiency-value">{skill.proficiency}%</span>
+								</div>
+							))}
+						</div>
 					</div>
 				))}
 			</div>
