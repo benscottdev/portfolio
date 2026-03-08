@@ -11,7 +11,7 @@
   "files" : {
     "\/android-chrome-192x192.png" : {
       "ft" : 32768,
-      "iS" : 20997,
+      "iS" : 1554,
       "oA" : 0,
       "oAP" : "\/android-chrome-192x192.png",
       "oF" : 0,
@@ -24,7 +24,7 @@
     },
     "\/android-chrome-512x512.png" : {
       "ft" : 32768,
-      "iS" : 141894,
+      "iS" : 7120,
       "oA" : 0,
       "oAP" : "\/android-chrome-512x512.png",
       "oF" : 0,
@@ -37,7 +37,7 @@
     },
     "\/apple-touch-icon.png" : {
       "ft" : 32768,
-      "iS" : 18603,
+      "iS" : 1419,
       "oA" : 0,
       "oAP" : "\/apple-touch-icon.png",
       "oF" : 0,
@@ -47,6 +47,214 @@
       "ou" : "lpckwebp-none",
       "q" : 90,
       "rq" : 75
+    },
+    "\/dist\/assets\/confirmedapp-DyEAOddY.jpg" : {
+      "ft" : 16384,
+      "iS" : 6551,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/confirmedapp-DyEAOddY.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/dexters-BOdUVSoo.jpg" : {
+      "ft" : 16384,
+      "iS" : 5757,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/dexters-BOdUVSoo.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/EurostileExtended-Black-0Xc0u5ZB.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/EurostileExtended-Black-0Xc0u5ZB.woff",
+      "oF" : 0
+    },
+    "\/dist\/assets\/EurostileExtended-Black-DaRBOIM6.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/EurostileExtended-Black-DaRBOIM6.woff2",
+      "oF" : 0
+    },
+    "\/dist\/assets\/favicon-CGa2ZvOP.ico" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/favicon-CGa2ZvOP.ico",
+      "oF" : 0
+    },
+    "\/dist\/assets\/Fayte-Regular-BuSlpECf.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/Fayte-Regular-BuSlpECf.woff",
+      "oF" : 0
+    },
+    "\/dist\/assets\/Fayte-Regular-Dn_HweWr.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/Fayte-Regular-Dn_HweWr.woff2",
+      "oF" : 0
+    },
+    "\/dist\/assets\/FeatureMono-Medium-aetCrdOq.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/FeatureMono-Medium-aetCrdOq.woff2",
+      "oF" : 0
+    },
+    "\/dist\/assets\/FeatureMono-Medium-CeZ7ldQp.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/FeatureMono-Medium-CeZ7ldQp.woff",
+      "oF" : 0
+    },
+    "\/dist\/assets\/index-C2N1KNrZ.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/index-C2N1KNrZ-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/dist\/assets\/index-CeKvDM6Y.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/index-CeKvDM6Y-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/dist\/assets\/MonumentExtended-Ultrabold-Bg-8OW1T.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/MonumentExtended-Ultrabold-Bg-8OW1T.woff2",
+      "oF" : 0
+    },
+    "\/dist\/assets\/Nohemi-Light-CdaKa9ik.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/Nohemi-Light-CdaKa9ik.woff2",
+      "oF" : 0
+    },
+    "\/dist\/assets\/Nohemi-Regular-C2RZwNF0.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/Nohemi-Regular-C2RZwNF0.woff2",
+      "oF" : 0
+    },
+    "\/dist\/assets\/overbeerpong_render-PsxGY8U0.jpg" : {
+      "ft" : 16384,
+      "iS" : 123835,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/overbeerpong_render-PsxGY8U0.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/pattern-7IRVS-Qi.png" : {
+      "ft" : 32768,
+      "iS" : 44747,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/pattern-7IRVS-Qi.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/dist\/assets\/songWorks_render-CJCRxiHC.jpg" : {
+      "ft" : 16384,
+      "iS" : 170519,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/songWorks_render-CJCRxiHC.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/index.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/index.html",
+      "oF" : 0
+    },
+    "\/dist\/oilslick_dark.hdr" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/oilslick_dark.hdr",
+      "oF" : 0
+    },
+    "\/dist\/Orb.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/Orb.glb",
+      "oF" : 0
+    },
+    "\/dist\/Orb1.glb" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/Orb1.glb",
+      "oF" : 0
+    },
+    "\/dist\/Vector.hdr" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/Vector.hdr",
+      "oF" : 0
     },
     "\/eslint.config.js" : {
       "bF" : 0,
@@ -61,7 +269,7 @@
     },
     "\/favicon-16x16.png" : {
       "ft" : 32768,
-      "iS" : 403,
+      "iS" : 118,
       "oA" : 0,
       "oAP" : "\/favicon-16x16.png",
       "oF" : 0,
@@ -74,7 +282,7 @@
     },
     "\/favicon-32x32.png" : {
       "ft" : 32768,
-      "iS" : 978,
+      "iS" : 131,
       "oA" : 0,
       "oAP" : "\/favicon-32x32.png",
       "oF" : 0,
@@ -123,28 +331,12 @@
       "oO" : 1,
       "oS" : 1
     },
-    "\/public\/Frame.glb" : {
+    "\/public\/oilslick_dark_green.hdr" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/public\/Frame.glb",
-      "oF" : 0
-    },
-    "\/public\/Ground.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/Ground.glb",
-      "oF" : 0
-    },
-    "\/public\/hdr.hdr" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/hdr.hdr",
+      "oAP" : "\/public\/oilslick_dark_green.hdr",
       "oF" : 0
     },
     "\/public\/oilslick_dark.hdr" : {
@@ -153,14 +345,6 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/public\/oilslick_dark.hdr",
-      "oF" : 0
-    },
-    "\/public\/orb_shapekeyed.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/orb_shapekeyed.glb",
       "oF" : 0
     },
     "\/public\/Orb.glb" : {
@@ -177,46 +361,6 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/public\/Orb1.glb",
-      "oF" : 0
-    },
-    "\/public\/StandBase.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/StandBase.glb",
-      "oF" : 0
-    },
-    "\/public\/StandGlass.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/StandGlass.glb",
-      "oF" : 0
-    },
-    "\/public\/Tree.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/Tree.glb",
-      "oF" : 0
-    },
-    "\/public\/Vector.hdr" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/Vector.hdr",
-      "oF" : 0
-    },
-    "\/public\/WebsiteFrame.glb" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/public\/WebsiteFrame.glb",
       "oF" : 0
     },
     "\/README.html" : {
@@ -272,6 +416,17 @@
       "mi" : 1,
       "oA" : 0,
       "oAP" : "\/src\/Components\/About-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/src\/Components\/CustomCursor.jsx" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/src\/Components\/CustomCursor-min.js",
       "oF" : 0,
       "sC" : 3,
       "tS" : 0
@@ -408,36 +563,36 @@
       "sC" : 3,
       "tS" : 0
     },
-    "\/src\/static\/fonts\/EurostileExtended-Black.woff" : {
+    "\/src\/static\/fonts\/FeatureMono-Bold.woff" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/EurostileExtended-Black.woff",
+      "oAP" : "\/src\/static\/fonts\/FeatureMono-Bold.woff",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/EurostileExtended-Black.woff2" : {
+    "\/src\/static\/fonts\/FeatureMono-Bold.woff2" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/EurostileExtended-Black.woff2",
+      "oAP" : "\/src\/static\/fonts\/FeatureMono-Bold.woff2",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/Fayte-Regular.woff" : {
+    "\/src\/static\/fonts\/FeatureMono-Light.woff" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/Fayte-Regular.woff",
+      "oAP" : "\/src\/static\/fonts\/FeatureMono-Light.woff",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/Fayte-Regular.woff2" : {
+    "\/src\/static\/fonts\/FeatureMono-Light.woff2" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/Fayte-Regular.woff2",
+      "oAP" : "\/src\/static\/fonts\/FeatureMono-Light.woff2",
       "oF" : 0
     },
     "\/src\/static\/fonts\/FeatureMono-Medium.woff" : {
@@ -456,60 +611,28 @@
       "oAP" : "\/src\/static\/fonts\/FeatureMono-Medium.woff2",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff" : {
+    "\/src\/static\/fonts\/GlufFreeVersion-Regular.woff" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff",
+      "oAP" : "\/src\/static\/fonts\/GlufFreeVersion-Regular.woff",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff2" : {
+    "\/src\/static\/fonts\/GlufFreeVersion-Regular.woff2" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/MonumentExtended-Ultrabold.woff2",
+      "oAP" : "\/src\/static\/fonts\/GlufFreeVersion-Regular.woff2",
       "oF" : 0
     },
-    "\/src\/static\/fonts\/Nohemi-Light.woff" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/Nohemi-Light.woff",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/Nohemi-Light.woff2" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/Nohemi-Light.woff2",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/Nohemi-Regular.woff" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff",
-      "oF" : 0
-    },
-    "\/src\/static\/fonts\/Nohemi-Regular.woff2" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/fonts\/Nohemi-Regular.woff2",
-      "oF" : 0
-    },
-    "\/src\/static\/images\/confirmedapp.jpg" : {
+    "\/src\/static\/images\/AnchorRender.jpg" : {
       "ft" : 16384,
-      "iS" : 6551,
+      "iS" : 182890,
       "jF" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/confirmedapp.jpg",
+      "oAP" : "\/src\/static\/images\/AnchorRender.jpg",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -517,11 +640,11 @@
       "q" : 100,
       "rq" : 75
     },
-    "\/src\/static\/images\/confirmedApp.png" : {
+    "\/src\/static\/images\/ben-scott.png" : {
       "ft" : 32768,
-      "iS" : 38402,
+      "iS" : 326620,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/confirmedApp.png",
+      "oAP" : "\/src\/static\/images\/ben-scott.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -530,103 +653,12 @@
       "q" : 90,
       "rq" : 75
     },
-    "\/src\/static\/images\/dexter.png" : {
-      "ft" : 32768,
-      "iS" : 4223136,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/dexter.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/dexters.jpg" : {
+    "\/src\/static\/images\/confirmedRender.jpg" : {
       "ft" : 16384,
-      "iS" : 4055,
+      "iS" : 78665,
       "jF" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/dexters.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/halftone-.png" : {
-      "ft" : 32768,
-      "iS" : 19840,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/halftone-.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/halftone.png" : {
-      "ft" : 32768,
-      "iS" : 17670,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/halftone.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/jerrycancreative.png" : {
-      "ft" : 32768,
-      "iS" : 454206,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/jerrycancreative.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/overbeerpong_render.jpg" : {
-      "ft" : 16384,
-      "iS" : 125137,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/overbeerpong_render.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/overbeerpong_render.png" : {
-      "ft" : 32768,
-      "iS" : 2056679,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/overbeerpong_render.png",
-      "oF" : 0,
-      "oIPL" : 1,
-      "opt" : 1,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/overbeerpong.jpg" : {
-      "ft" : 16384,
-      "iS" : 14064,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/overbeerpong.jpg",
+      "oAP" : "\/src\/static\/images\/confirmedRender.jpg",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -634,38 +666,12 @@
       "q" : 100,
       "rq" : 75
     },
-    "\/src\/static\/images\/overBeerPongImage.png" : {
-      "ft" : 32768,
-      "iS" : 216771,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/overBeerPongImage.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/pattern.png" : {
-      "ft" : 32768,
-      "iS" : 44747,
-      "oA" : 0,
-      "oAP" : "\/src\/static\/images\/pattern.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 90,
-      "rq" : 75
-    },
-    "\/src\/static\/images\/songWorks_render.jpg" : {
+    "\/src\/static\/images\/dextersRender.jpg" : {
       "ft" : 16384,
-      "iS" : 170519,
+      "iS" : 120321,
       "jF" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/songWorks_render.jpg",
+      "oAP" : "\/src\/static\/images\/dextersRender.jpg",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -673,25 +679,25 @@
       "q" : 100,
       "rq" : 75
     },
-    "\/src\/static\/images\/songworks_render.png" : {
+    "\/src\/static\/images\/gridpattern.png" : {
       "ft" : 32768,
-      "iS" : 1910276,
+      "iS" : 15617,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/songworks_render.png",
+      "oAP" : "\/src\/static\/images\/gridpattern.png",
       "oF" : 0,
-      "oIPL" : 1,
-      "opt" : 1,
+      "oIPL" : 0,
+      "opt" : 0,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 90,
       "rq" : 75
     },
-    "\/src\/static\/images\/songworks.jpg" : {
+    "\/src\/static\/images\/overbeerRender.jpg" : {
       "ft" : 16384,
-      "iS" : 11018,
+      "iS" : 152735,
       "jF" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/songworks.jpg",
+      "oAP" : "\/src\/static\/images\/overbeerRender.jpg",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -699,17 +705,17 @@
       "q" : 100,
       "rq" : 75
     },
-    "\/src\/static\/images\/songworks.png" : {
-      "ft" : 32768,
-      "iS" : 7359605,
+    "\/src\/static\/images\/songworksRender.jpg" : {
+      "ft" : 16384,
+      "iS" : 297619,
+      "jF" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/static\/images\/songworks.png",
+      "oAP" : "\/src\/static\/images\/songworksRender.jpg",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
-      "oT" : 1,
       "ou" : "lpckwebp-none",
-      "q" : 90,
+      "q" : 100,
       "rq" : 75
     },
     "\/src\/style.css" : {

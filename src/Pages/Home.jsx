@@ -53,26 +53,17 @@ function Home() {
 				<section ref={heroRef} className="scrollTriggerSection">
 					<Orb />
 					<div className="logoOverlay">
-						<h1 className="benScott">BEN SCOTT</h1>
-						<p>[dev]</p>
+						<h1 className="benScott" id="logoFill">BEN SCOTT</h1>
+					</div>
+					<div className="logoOverlayStroke">
+						<h1 className="benScott" id="logoStroke">BEN SCOTT</h1>
 					</div>
 				</section>
-				{/* ===== ABOUT ===== */}
 				<About />
-				<div className="overtop">
-					{/* ===== WORK ===== */}
-					<section className="selectedProjects section" ref={workRef}>
-						<SectionHeading projectTitle="SELECTED" subHeading="PROJECTS" />
-						<ProjectsBlock />
-						{/* <FrameWall /> */}
-					</section>
-
-					{/* ===== STACK ===== */}
-					<section className="skillLevels section" ref={stackRef}>
-						<SectionHeading projectTitle="STACK" subHeading="SKILLS" />
-						{/* <Skills /> */}
-					</section>
-				</div>
+				<section className="selectedProjects section" ref={workRef}>
+					<span className="divider"></span>
+					<ProjectsBlock />
+				</section>
 			</div>
 			<Footer />
 		</div>

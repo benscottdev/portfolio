@@ -4,10 +4,12 @@ import { Route, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
 import { LoadingProvider } from "./contexts/LoadingContext";
 import Header from "./Components/Header";
+import CustomCursor from "./Components/CustomCursor";
 
 function App() {
 	return (
 		<LoadingProvider>
+			<CustomCursor />
 			<Loader />
 			<Header />
 			<Routes>

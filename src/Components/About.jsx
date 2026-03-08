@@ -1,67 +1,84 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import benscottImage from '../static/images/ben-scott.png'
 
 gsap.registerPlugin(ScrollTrigger);
 
 function About() {
-	const aboutContainerRef = useRef(null);
-	const aboutTextRef = useRef(null);
+	const sectionRef = useRef(null);
 
 	useEffect(() => {
-		// Ensure refs are ready
-		if (!aboutContainerRef.current || !aboutTextRef.current) return;
-
-		// Manually split text into words
-		const text = aboutTextRef.current.textContent;
-		aboutTextRef.current.innerHTML = text
-			.split(" ")
-			.map((word) => `<span class="word">${word}</span>`)
-			.join(" ");
-
-		const words = aboutTextRef.current.querySelectorAll(".word");
-		let scrollTrigger;
-
-		// Small delay to ensure layout is stable
-		const timer = setTimeout(() => {
-			// Single ScrollTrigger for both pinning and animation
-			scrollTrigger = ScrollTrigger.create({
-				trigger: aboutContainerRef.current,
-				start: "top top",
-				end: "+=200%",
-				pin: true,
-				scrub: true,
-				anticipatePin: 1,
-				onUpdate: (self) => {
-					// Calculate how many words should be blue based on progress
-					const progress = self.progress;
-					const wordsToColor = Math.floor(progress * words.length);
-
-					words.forEach((word, index) => {
-						if (index < wordsToColor) {
-							word.style.color = "red";
-						} else {
-							word.style.color = "#ecebeb";
-						}
-					});
+		const ctx = gsap.context(() => {
+			gsap.from(".aboutAnimate", {
+				opacity: 0,
+				y: 28,
+				duration: 0.8,
+				stagger: 0.1,
+				ease: "power2.out",
+				scrollTrigger: {
+					trigger: sectionRef.current,
+					start: "top 72%",
+					once: true,
 				},
 			});
-		}, 150);
+		}, sectionRef);
 
-		return () => {
-			clearTimeout(timer);
-			if (scrollTrigger) {
-				scrollTrigger.kill();
-			}
-		};
+		return () => ctx.revert();
 	}, []);
 
 	return (
-		<div ref={aboutContainerRef} className="aboutMe section">
-			<p className="splitMe" ref={aboutTextRef}>
-				I design and build immersive websites that don't just look good, they move, respond, and feel alive. From smooth interactions to real-time 3D experiences, I turn ideas into digital spaces people actually want to explore. I work across design, development, and motion to create sites that are fast, expressive, and technically solid. Whether it's a bold marketing site, an interactive product experience, or something a bit experimental, I focus on clarity, performance, and detail. The goal is simple: make the web feel less static, and a lot more memorable.
-			</p>
-		</div>
+		<section ref={sectionRef} className="aboutSection">
+			<div className="aboutInner">
+
+				{/* LEFT — photo + quick stats */}
+				<div className="aboutImageCol">
+					{/* <div className="aboutPhoto aboutAnimate"> */}
+					{/* <div className="aboutPhotoInner"> */}
+					{/* <img src={benscottImage} alt="ben scott" /> */}
+					{/* </div> */}
+					{/* </div> */}
+
+					<div className="aboutStats aboutAnimate">
+						<div className="aboutStat">
+							<span className="aboutStatLabel">Based</span>
+							<span className="aboutStatValue">Sydney, AU</span>
+						</div>
+						<div className="aboutStat">
+							<span className="aboutStatLabel">Status</span>
+							<span className="aboutStatValue aboutStatAvailable">
+								<span className="aboutAvailableDot" />
+								Available
+							</span>
+						</div>
+						<div className="aboutStat">
+							<span className="aboutStatLabel">Focus</span>
+							<span className="aboutStatValue">Web · Apps · Mobile · 3D</span>
+						</div>
+					</div>
+				</div>
+
+				{/* RIGHT — copy */}
+				<div className="aboutContent">
+					{/* <h2 className="aboutHeading aboutAnimate">
+						Creative developer
+					</h2> */}
+
+					<div className="aboutBody aboutAnimate">
+						<p>
+							Hey, I’m Ben. I’m a developer and designer obsessed with smooth animations, clean code, and the little details that make experiences feel effortless.
+						</p>
+						<p>
+							I create fast, interactive websites and apps that merge sleek design with solid engineering, from 3D web experiences and branded campaigns to full ecommerce stores and iOS apps.
+						</p>
+						<p>
+							If you can imagine it, I’m already figuring out how to build it.
+						</p>
+					</div>
+				</div>
+
+			</div >
+		</section >
 	);
 }
 

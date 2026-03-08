@@ -60,9 +60,9 @@ function Orb() {
 		const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
 
 		if (window.innerWidth > 1000) {
-			camera.position.set(0, 0, 5);
-		} else {
 			camera.position.set(0, 0, 6);
+		} else {
+			camera.position.set(0, 0, 7);
 		}
 		camera.lookAt(0, 0, 0)
 		scene.add(camera);
@@ -97,7 +97,7 @@ function Orb() {
 
 			const hdrLoader = new HDRLoader(loadingManager);
 			try {
-				const hdrTexture = await hdrLoader.loadAsync("/oilslick_dark.hdr");
+				const hdrTexture = await hdrLoader.loadAsync("/oilslick_dark_green.hdr");
 				const envMap = pmremGenerator.fromEquirectangular(hdrTexture).texture;
 
 				hdrTexture.dispose();
