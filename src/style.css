@@ -173,7 +173,7 @@ body {
   justify-content: center;
 }
 .loader .loaderInner .percent {
-  font-family: "Gluf";
+  font-family: "Feature Mono", sans-serif;
   font-size: 30px;
   color: #91ff00;
 }
