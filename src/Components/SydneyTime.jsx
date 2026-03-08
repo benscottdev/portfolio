@@ -72,7 +72,8 @@ function SydneyTime() {
 				SYD {time}
 			</div>
 			<div className="availability" id="bottom">
-				<span className="availabilityIcon"></span>FREELANCE AVAILABLE
+				{/* <span className="availabilityIcon"></span> */}
+				FREELANCE AVAILABLE
 			</div>
 		</div>
 	);

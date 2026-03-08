@@ -185,7 +185,7 @@ body {
 		position: relative;
 		width: 50%;
 		z-index: 9999;
-		background-color: #1b1b1b;
+		background-color: black;
 
 		@media (max-width: 768px) {
 			width: 100%;
@@ -204,9 +204,9 @@ body {
 		justify-content: center;
 
 		.percent {
-			font-family: $bodyFont;
+			font-family: $headingFont;
 			font-size: $bodyFontSize;
-			color: white;
+			color: $featureColor;
 		}
 
 		.bar {
@@ -505,7 +505,7 @@ body {
 					width: 7px;
 					height: 7px;
 					border-radius: 50%;
-					background-color: #2fff00;
+					background-color: $featureColor;
 					flex-shrink: 0;
 				}
 			}
@@ -702,7 +702,7 @@ body {
 
 			&.isSelected {
 				color: #000;
-				background: rgba(145, 255, 0, 1);
+				background: $featureColor;
 				border-left-color: $featureColor;
 
 				.projectsListNum {
@@ -853,7 +853,7 @@ body {
 					position: absolute;
 					width: 28px;
 					height: 28px;
-					border-color: rgba(145, 255, 0, 1);
+					border-color: $featureColor;
 					border-style: solid;
 
 					&.tl {

@@ -154,7 +154,7 @@ body {
   position: relative;
   width: 50%;
   z-index: 9999;
-  background-color: #1b1b1b;
+  background-color: black;
 }
 @media (max-width: 768px) {
   .loader .loaderPixel {
@@ -173,9 +173,9 @@ body {
   justify-content: center;
 }
 .loader .loaderInner .percent {
-  font-family: "Feature Mono", sans-serif;
+  font-family: "Gluf";
   font-size: 30px;
-  color: white;
+  color: #91ff00;
 }
 .loader .loaderInner .bar {
   position: relative;
@@ -448,7 +448,7 @@ body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #2fff00;
+  background-color: #91ff00;
   flex-shrink: 0;
 }
 .aboutSection .aboutContent {
@@ -623,7 +623,7 @@ body {
 }
 .projectsLayout .projectsList .projectsListItem.isSelected {
   color: #000;
-  background: rgb(145, 255, 0);
+  background: #91ff00;
   border-left-color: #91ff00;
 }
 .projectsLayout .projectsList .projectsListItem.isSelected .projectsListNum {
@@ -752,7 +752,7 @@ body {
   position: absolute;
   width: 28px;
   height: 28px;
-  border-color: rgb(145, 255, 0);
+  border-color: #91ff00;
   border-style: solid;
 }
 .projectsLayout .projectsDetail .projectsDetailImage .imgCorners .c.tl {
