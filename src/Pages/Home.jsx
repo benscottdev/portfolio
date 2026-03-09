@@ -17,35 +17,35 @@ function Home() {
 	const workRef = useRef(null);
 	const stackRef = useRef(null);
 
-	useEffect(() => {
-		let ctx;
+	// useEffect(() => {
+	// let ctx;
 
 
-		ctx = gsap.context(() => {
-			gsap.to(".scrollTriggerSection", {
-				ease: "none",
-				scrollTrigger: {
-					trigger: heroRef.current,
-					start: "top top",
-					end: "bottom bottom",
-					pin: true,
-					scrub: true,
-					pinSpacing: true,
-					anticipatePin: 1,
-					invalidateOnRefresh: true,
-				},
-			});
-		});
+	// ctx = gsap.context(() => {
+	// 	gsap.to(".scrollTriggerSection", {
+	// 		ease: "none",
+	// 		scrollTrigger: {
+	// 			trigger: heroRef.current,
+	// 			start: "top top",
+	// 			end: "bottom bottom",
+	// 			pin: true,
+	// 			scrub: true,
+	// 			pinSpacing: true,
+	// 			anticipatePin: 1,
+	// 			invalidateOnRefresh: true,
+	// 		},
+	// 	});
+	// });
 
-		// Refresh ScrollTrigger after initialization
-		ScrollTrigger.refresh();
+	// Refresh ScrollTrigger after initialization
+	// ScrollTrigger.refresh();
 
-		return () => {
-			if (ctx) {
-				ctx.revert();
-			}
-		};
-	}, []);
+	// return () => {
+	// 	if (ctx) {
+	// 		ctx.revert();
+	// 	}
+	// };
+	// }, []);
 
 	return (
 		<div>
