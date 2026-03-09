@@ -83,6 +83,7 @@ body {
 }
 
 .logoOverlay {
+	// pointer-events: none;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -117,6 +118,7 @@ body {
 }
 
 .logoOverlayStroke {
+	pointer-events: none;
 	position: absolute;
 	top: 50%;
 	left: 50%;
