@@ -66,6 +66,7 @@ body {
 	background-color: white;
 	position: relative;
 	min-height: 100dvh;
+	box-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.5);
 
 	@media (max-width: 768px) {
 		height: 100dvh;
@@ -79,9 +80,9 @@ body {
 		position: fixed;
 		top: 0;
 		left: 0;
-		opacity: 0.5;
-		filter: grayscale(1);
-		background-image: url("./static/images/gridpattern.png");
+		opacity: 0.1;
+		// filter: grayscale(1);
+		background-image: url("./static/images/bg.png");
 	}
 }
 
@@ -142,9 +143,15 @@ body {
 
 	#logoStroke {
 		position: absolute;
-		-webkit-text-stroke: 2px white;
+		-webkit-text-stroke: 1px white;
+		paint-order: stroke fill;
+
 		z-index: 99999;
 		color: transparent;
+
+		@media (min-width: 1600px) {
+			-webkit-text-stroke: 2px white;
+		}
 	}
 }
 
@@ -185,7 +192,7 @@ body {
 		position: relative;
 		width: 50%;
 		z-index: 9999;
-		background-color: black;
+		background-color: $featureColor;
 
 		@media (max-width: 768px) {
 			width: 100%;
@@ -206,7 +213,7 @@ body {
 		.percent {
 			font-family: $bodyFont;
 			font-size: $bodyFontSize;
-			color: $featureColor;
+			color: black;
 		}
 
 		.bar {

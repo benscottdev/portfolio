@@ -1,7 +1,7 @@
 const skillClusters = [
-	{ category: "Web", skills: ["HTML/CSS", "JavaScript", "React", "GSAP", "Three.js"] },
-	{ category: "3D & Animation", skills: ["Blender", "After Effects", "Premiere", "Unity"] },
-	{ category: "Design", skills: ["Figma", "Photoshop", "Illustrator"] },
+	{ category: "Web", skills: ["HTML", "CSS & SCSS", "JavaScript", "TypeScript", "React", "GSAP", "Three.js"] },
+	{ category: "3D & Animation", skills: ["Blender", "After Effects", "Unity"] },
+	{ category: "Design", skills: ["Figma", "Adobe Suite"] },
 	{ category: "Backend", skills: ["PHP", "SQL", "WordPress", "C#"] },
 	{ category: "Mobile", skills: ["React Native"] },
 ];

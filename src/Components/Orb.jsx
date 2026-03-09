@@ -60,7 +60,7 @@ function Orb() {
 		const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
 
 		if (window.innerWidth > 1000) {
-			camera.position.set(0, 0, 6);
+			camera.position.set(0, 0, 5.5);
 		} else {
 			camera.position.set(0, 0, 7);
 		}
@@ -216,17 +216,17 @@ function Orb() {
 					},
 					0
 				)
-			// gsapAnimRef.current
-			// 	.to(
-			// 		orbGroup.position,
-			// 		{
-			// 			x: x * 0.25,
-			// 			y: -y * 0.25,
-			// 			duration: 2,
-			// 			ease: "power2.out",
-			// 		},
-			// 		0
-			// 	)
+			gsapAnimRef.current
+				.to(
+					orbGroup.position,
+					{
+						x: x * 0.1,
+						y: -y * 0.1,
+						duration: 0.5,
+						ease: "power2.out",
+					},
+					0
+				)
 
 		};
 

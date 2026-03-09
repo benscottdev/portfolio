@@ -50,7 +50,9 @@ function Home() {
 	return (
 		<div>
 			<div className="homeMain headerAdjustment" id="homeMain">
+
 				<section ref={heroRef} className="scrollTriggerSection">
+
 					<Orb />
 					<div className="logoOverlay">
 						<h1 className="benScott" id="logoFill">BEN SCOTT</h1>
@@ -58,7 +60,9 @@ function Home() {
 					<div className="logoOverlayStroke">
 						<h1 className="benScott" id="logoStroke">BEN SCOTT</h1>
 					</div>
+					<Skills />
 				</section>
+
 				<About />
 				<section className="selectedProjects section" ref={workRef}>
 					<span className="divider"></span>
