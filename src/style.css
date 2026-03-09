@@ -44,6 +44,7 @@ body {
   max-height: 100dvh;
 }
 .scrollTriggerSection::before {
+  pointer-events: none !important;
   content: "";
   background-size: cover;
   width: 100%;
@@ -67,6 +68,11 @@ body {
   align-items: center;
   text-transform: none;
   z-index: -10;
+}
+@media (max-width: 768px) {
+  .logoOverlay {
+    transform: translate(-50%, -59%);
+  }
 }
 .logoOverlay h1 {
   margin: 0;
@@ -101,6 +107,11 @@ body {
   text-transform: none;
   z-index: 0;
 }
+@media (max-width: 768px) {
+  .logoOverlayStroke {
+    transform: translate(-50%, -59%);
+  }
+}
 .logoOverlayStroke h1 {
   margin: 0;
   padding: 0;
@@ -122,9 +133,8 @@ body {
 }
 
 .webgl {
-  width: 100dvw;
-  height: 100dvh;
-  z-index: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .orbScene {

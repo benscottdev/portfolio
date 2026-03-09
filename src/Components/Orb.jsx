@@ -283,27 +283,18 @@ function Orb() {
 		tick();
 
 		// Efficient resize handler — skips mobile toolbar show/hide (height-only change)
-		let resizeTimeout;
-		let prevWidth = window.innerWidth;
-		const handleResize = () => {
-			clearTimeout(resizeTimeout);
-			resizeTimeout = setTimeout(() => {
-				const width = window.innerWidth;
-				const height = window.innerHeight;
+		function handleResize() {
+			const width = window.innerWidth
+			const height = window.innerHeight
 
-				// Mobile Chrome fires resize when its toolbar shows/hides — only the
-				// height changes while width stays the same. Skip those events so the
-				// canvas never jumps. True resizes (orientation flip, desktop window
-				// drag) always change the width, so those still go through.
-				if (width === prevWidth && width < 1024) return;
-				prevWidth = width;
+			camera.aspect = width / height
+			camera.updateProjectionMatrix()
 
-				camera.aspect = width / height;
-				camera.updateProjectionMatrix();
-				renderer.setSize(width, height);
-				needsRender.current = true;
-			}, 1);
-		};
+			renderer.setSize(width, height)
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+		}
+		handleResize()
+
 
 		window.addEventListener("resize", handleResize, { passive: true });
 
