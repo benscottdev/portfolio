@@ -41,13 +41,6 @@ body {
 .scrollTriggerSection {
   background-color: white;
   position: relative;
-  min-height: 100dvh;
-  box-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.5);
-}
-@media (max-width: 768px) {
-  .scrollTriggerSection {
-    height: 100dvh;
-  }
 }
 .scrollTriggerSection::before {
   content: "";

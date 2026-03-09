@@ -60,7 +60,7 @@ function Home() {
 					<div className="logoOverlayStroke">
 						<h1 className="benScott" id="logoStroke">BEN SCOTT</h1>
 					</div>
-					<Skills />
+					{/* <Skills /> */}
 				</section>
 
 				<About />
